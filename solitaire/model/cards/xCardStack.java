@@ -25,7 +25,7 @@ public class xCardStack extends xCardDeck implements CardStack {
 		return super.size();
 	}
 
-	
+	//at the beginning we dont control the rewuirements
         public boolean putEmpty(Card card){
             return super.put(card);
         }

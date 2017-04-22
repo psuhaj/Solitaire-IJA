@@ -20,6 +20,10 @@ public class Solitaire {
     /**
      * @param args the command line arguments
      */
+    
+    
+    
+    
     public static void main(String[] args) {
         // TODO code application logic here
 
@@ -239,5 +243,76 @@ public class Solitaire {
         }
 
     }
+    
+    //methods for moving cards
+    public static void workingToTarget(CardStack working,CardDeck target){
+        Card tmp = working.pop();
+        boolean success = target.put(tmp);
+        //if cant put card on target
+        if(!success){
+            working.putEmpty(tmp);
+        }
+    }
+    
+    public static void targetToWorking(CardStack working,CardDeck target){
+        Card tmp = target.pop();
+        boolean success = working.put(tmp);
+        //if cant put card on target
+        if(!success){
+            target.put(tmp);
+        }
+    }
 
+    public static void gameDeckUpToTarget(CardDeck up,CardDeck target){
+        Card tmp = up.pop();
+        boolean success = target.put(tmp);
+        //if cant put card on target
+        if(!success){
+            up.put(tmp);
+        }
+    }
+    
+    public static void gameDeckUpToWorking(CardStack working,CardDeck up){
+        Card tmp = up.pop();
+        boolean success = working.put(tmp);
+        //if cant put card on target
+        if(!success){
+            working.putEmpty(tmp);
+        }
+    }
+    
+    public static void TargetToTarget(CardDeck target1,CardDeck target2){
+        Card tmp = target1.pop();
+        boolean success = target2.put(tmp);
+        //if cant put card on target
+        if(!success){
+            target1.put(tmp);
+        }
+    }
+    
+    public static void WorkingToWorking(CardStack working1,CardStack working2,Card card){
+        CardStack tmp = working1.pop(card);
+        boolean success = working2.put(tmp);
+        //if cant put card on target
+        if(!success){
+            working1.put(tmp);
+        }
+    }
+    
+    public static void deckToUp(CardDeck gameDeck,CardDeck up){
+        //if deck is empty
+        if(gameDeck.isEmpty()){
+            for(int i = 0; i<up.size();i++){
+                Card tmp2 = up.pop();
+                tmp2.turnFaceDown();
+                gameDeck.put(tmp2);
+            }
+        }
+        else{
+            Card tmp = gameDeck.pop();
+            tmp.turnFaceUp();
+            up.put(tmp);
+        }
+        
+    }
 }

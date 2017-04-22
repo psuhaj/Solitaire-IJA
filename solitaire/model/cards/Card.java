@@ -20,6 +20,7 @@ public interface Card {
 	public int value();
 	public boolean face();
 	public boolean turnFaceUp();
+        public boolean turnFaceDown();
 	public int compareValue(Card c);
 	public boolean similarColorTo(Card c);
 	public String toString();

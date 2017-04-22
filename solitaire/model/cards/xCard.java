@@ -44,6 +44,15 @@ public class xCard implements Card {
         }
     }
 
+    public boolean turnFaceDown() {
+        if (this.face == true) {
+            this.face = false;
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
     // return the value difference of cards with the same color
     @Override
     public int compareValue(Card c) {
