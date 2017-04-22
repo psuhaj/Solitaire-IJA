@@ -28,7 +28,7 @@ public class xCard implements Card {
 
     // GET FACE
     @Override
-    public boolean isTurnedFaceUp() {
+    public boolean face() {
         return this.face;
     }
 
