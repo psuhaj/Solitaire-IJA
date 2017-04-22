@@ -58,6 +58,8 @@ public class Solitaire {
 
 
         print_game(workingArray, targetArray, GameDeck, GameDeckUp);
+        System.out.println("=============================================");
+        print_game_all(workingArray, targetArray, GameDeck, GameDeckUp);
     }
 
     public static void  print_game(CardStack[] Working, CardDeck[] Target, CardDeck GD, CardDeck GDUP) {
@@ -73,7 +75,7 @@ public class Solitaire {
         for(int c=0; c<4; c++) {
 
             deck = Target[c];
-            str   = "TARGET  [" + String.valueOf(c+1) + "] = ";
+            str   = "TARGET[" + String.valueOf(c+1) + "] {"+String.valueOf(deck.size())+"}\t= ";
 
             if (deck.isEmpty()==false) {
                 size     = deck.size();
@@ -94,7 +96,7 @@ public class Solitaire {
         for(int c=0; c<7; c++) {
 
             stack = Working[c];
-            str   = "WORKING [" + String.valueOf(c+1) + "] = ";
+            str   = "WORKING[" + String.valueOf(c+1) + "] {"+String.valueOf(stack.size())+"}\t= ";
 
             if (stack.isEmpty()==false) {
                 size     = stack.size();
@@ -116,11 +118,11 @@ public class Solitaire {
 
             if (c==0) {
                 deck = GD;
-                str   = "GD          = ";
+                str   = "GD    {"+String.valueOf(deck.size())+"}\t= ";
             }
             else {
                 deck = GDUP;
-                str   = "GD-UP       = ";
+                str   = "GD-UP {"+String.valueOf(deck.size())+"}\t= ";
             }
 
             if (deck.isEmpty()==false) {
@@ -130,6 +132,93 @@ public class Solitaire {
                     str = str + "(X) ";
                 }
                 str = str + "(" + top_card.toString() + ")\n";
+            }
+            else {
+                str = str + "empty\n";
+            }
+
+            data[11+c] = str;
+        }
+
+        // print out data
+        for(int c=0; c<13; c++) {
+            if (c==4 || c==11) System.out.println();
+            System.out.print(data[c]);
+        }
+
+    }
+
+
+    public static void  print_game_all(CardStack[] Working, CardDeck[] Target, CardDeck GD, CardDeck GDUP) {
+
+        Card top_card;
+        int size;
+        String[] data = new String[13];
+        String str;
+        CardDeck deck;
+        CardStack stack;
+
+        // TARGET decks
+        for(int c=0; c<4; c++) {
+
+            deck = Target[c];
+            str   = "TARGET[" + String.valueOf(c+1) + "] {"+String.valueOf(deck.size())+"}\t= ";
+
+            if (deck.isEmpty()==false) {
+                size     = deck.size();
+                top_card = deck.get();
+                for(int i=0; i<size-1; i++) {
+                    str = str + "(" + (deck.get(i)).print_log() + ") ";
+                }
+                str = str + "(" + top_card.print_log() + ")\n";
+            }
+            else {
+                str = str + "empty\n";
+            }
+
+            data[c] = str;
+        }
+
+         // WORKING stacks
+        for(int c=0; c<7; c++) {
+
+            stack = Working[c];
+            str   = "WORKING[" + String.valueOf(c+1) + "] {"+String.valueOf(stack.size())+"}\t= ";
+
+            if (stack.isEmpty()==false) {
+                size     = stack.size();
+                top_card = stack.get();
+                for(int i=0; i<size-1; i++) {
+                    str = str + "(" + stack.get(i).print_log() + ") ";
+                }
+                str = str + "(" + top_card.print_log() + ")\n";
+            }
+            else {
+                str = str + "empty\n";
+            }
+
+            data[4+c] = str;
+        }
+
+        // GD, GDUP decks
+        for(int c=0; c<2; c++) {
+
+            if (c==0) {
+                deck = GD;
+                str   = "GD    {"+String.valueOf(deck.size())+"}\t= ";
+            }
+            else {
+                deck = GDUP;
+                str   = "GD-UP {"+String.valueOf(deck.size())+"}\t= ";
+            }
+
+            if (deck.isEmpty()==false) {
+                size     = deck.size();
+                top_card = deck.get();
+                for(int i=0; i<size-1; i++) {
+                    str = str + "(" + deck.get(i).print_log() + ") ";
+                }
+                str = str + "(" + top_card.print_log() + ")\n";
             }
             else {
                 str = str + "empty\n";

@@ -66,6 +66,51 @@ public class xCard implements Card {
         }
     }
 
+    // print card for log
+    public String print_log() {
+        String str;
+        switch (this.value) {
+            case 1 :
+                str = " A";
+                break;
+            case 11 :
+                str = " J";
+                break;
+            case 12 :
+                str = " Q";
+                break;
+            case 13 :
+                str = " K";
+                break;
+            default :
+            	if (this.value != 10 ) str = " "+String.valueOf(this.value);
+            	else str = String.valueOf(this.value);
+                break;
+        }
+        switch (this.color) {
+            case HEARTS: {
+                str = str+"_Heart__";
+                break;
+                }
+            case SPADES:
+                str = str+"_Spade__";
+                break;
+            case DIAMONDS:
+                str = str+"_Diamond";
+                break;
+            default:
+                str = str+"_Club___";
+                break;
+        }
+        if (face) {
+        	str = str+"_U ";
+        }
+        else {
+        	str = str+"__ ";
+        }
+        return str;
+    }
+
     // print card
     @Override
     public String toString(){
