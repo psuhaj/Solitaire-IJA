@@ -22,7 +22,6 @@ public class Solitaire {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        //System.out.println("Hello, World");
 
         //create card factory
         AbstractFactorySolitaire factory = new FactoryKlondike();
@@ -46,7 +45,7 @@ public class Solitaire {
                if(i==j){
                     Card tmp=workingArray[i].pop();
                     tmp.turnFaceUp();
-                    workingArray[i].put(tmp);
+                    workingArray[i].putEmpty(tmp);
                 }
             }
         }
