@@ -30,6 +30,24 @@ public class Solitaire {
         //Create deck for game
         CardDeck GameDeck = factory.createCardDeck();
         
+        //for cards which are get from GameDeck
+        CardDeck GameDeckUp = new xCardDeck();
+        
+        //create working stacks
+        CardDeck[] targetArray = new CardDeck[4];
+        CardStack[] workingArray = new CardStack[7];
+        
+        //create working stacks
+        for(int i = 0; i<7;i++){
+            workingArray[i] = factory.createWorkingPack();
+        }
+        
+        
+        
+        //create target packs
+        for(int i = 0; i<4;i++){
+            targetArray[i] = factory.createWorkingPack();
+        }
         
         
         
