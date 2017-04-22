@@ -28,7 +28,7 @@ public class xCard implements Card {
 
     // GET FACE
     @Override
-    public boolean face() {
+    public boolean isTurnedFaceUp() {
         return this.face;
     }
 
@@ -89,24 +89,24 @@ public class xCard implements Card {
         }
         switch (this.color) {
             case HEARTS: {
-                str = str+"(Heart)";
+                str = str+"_Heart";
                 break;
                 }
             case SPADES:
-                str = str+"(Spade)";
+                str = str+"_Spade";
                 break;
             case DIAMONDS:
-                str = str+"(Diamond)";
+                str = str+"_Diamond";
                 break;
             default:
-                str = str+"(Club)";
+                str = str+"_Club";
                 break;
         }
         if (face) {
-        	str = str+"-UP";
+        	str = str+"_UP";
         }
         else {
-        	str = str+"-DOWN";
+        	str = str+"_DOWN";
         }
         return str;
     }
