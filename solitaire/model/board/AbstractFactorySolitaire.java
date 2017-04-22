@@ -12,6 +12,6 @@ abstract public class AbstractFactorySolitaire {
 
 	public abstract CardDeck createCardDeck();
 	public abstract Card createCard(Card.Color color, int value);
-	public abstract CardDeck createTargetPack(Card.Color color);
+	public abstract CardDeck createTargetPack();
 	public abstract CardStack createWorkingPack();
 }

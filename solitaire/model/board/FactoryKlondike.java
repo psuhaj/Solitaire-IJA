@@ -33,9 +33,8 @@ public class FactoryKlondike extends AbstractFactorySolitaire {
 	}
 
 	@Override
-	public CardDeck createTargetPack(Card.Color color) {
-		if (!(color == Card.Color.HEARTS || color == Card.Color.SPADES || color == Card.Color.DIAMONDS || color == Card.Color.CLUBS)) return null;
-		return new xCardStackColor(color);
+	public CardDeck createTargetPack() {
+		return new xCardStackColor();
 	}
 
 	@Override
