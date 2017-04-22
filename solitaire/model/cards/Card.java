@@ -18,7 +18,7 @@ public interface Card {
 
 	public Card.Color color();
 	public int value();
-	public boolean isTurnedFaceUp();
+	public boolean face();
 	public boolean turnFaceUp();
 	public int compareValue(Card c);
 	public boolean similarColorTo(Card c);

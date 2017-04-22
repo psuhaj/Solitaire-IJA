@@ -40,13 +40,21 @@ public class Solitaire {
         //create working stacks
         for(int i = 0; i<7;i++){
             workingArray[i] = factory.createWorkingPack();
+            for(int j=0;j<=i;j++){
+                workingArray[i].putEmpty(GameDeck.pop());
+                //put face up
+               if(i==j){                    
+                    Card tmp=workingArray[i].pop();
+                    tmp.turnFaceUp();
+                    workingArray[i].put(tmp);
+                }
+            }
         }
-        
         
         
         //create target packs
         for(int i = 0; i<4;i++){
-            targetArray[i] = factory.createWorkingPack();
+            targetArray[i] = factory.createTargetPack();
         }
         
         

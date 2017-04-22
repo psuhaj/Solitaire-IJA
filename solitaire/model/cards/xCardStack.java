@@ -25,7 +25,12 @@ public class xCardStack extends xCardDeck implements CardStack {
 		return super.size();
 	}
 
-	@Override
+	
+        public boolean putEmpty(Card card){
+            return super.put(card);
+        }
+        
+        @Override
 	public boolean put(Card card) {
 		if (this.isEmpty()) { // is empty
 			if (13 == card.value()) { // is king
