@@ -11,6 +11,8 @@ import solitaire.model.cards.*;
 import java.util.Stack;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+import java.util.regex.*;
 /**
  *
  * @author adrian and peto
@@ -65,8 +67,67 @@ public class Solitaire {
             targetArray[i] = factory.createTargetPack();
         }
 
-
+        Scanner scan = new Scanner(System.in);
+        String str, val1, val2, val3, val4;
+        int num1, num2, num3;
+        char c;
+        Pattern regex = Pattern.compile("[\\s]*([ABCDEFG])[\\s]+(\\d+)[\\s]+(\\d+)[\\s]*[\\s]+(\\d+)[\\s]*");
+        Matcher matcher;
+        
         print_game(workingArray, targetArray, GameDeck, GameDeckUp);
+        while(scan.hasNextLine()) {
+        	str = scan.nextLine();
+        	matcher = regex.matcher(str);        	
+        	if (matcher.matches()) {
+	        	val1 = matcher.group(1); // A-G
+	        	val2 = matcher.group(2); // number 1
+	        	val3 = matcher.group(3); // number 2
+	        	val4 = matcher.group(4); // number 3
+	        	num1 = Integer.parseInt(val2);
+	        	num2 = Integer.parseInt(val3);
+	        	num3 = Integer.parseInt(val4);
+	        	c = val1.charAt(0); 
+	        	switch (c) {
+	        		case 'A':
+	        			workingToTarget(workingArray[num1], targetArray[num2]);
+	        			break;
+	        		case 'B':
+	        			targetToWorking(workingArray[num1], targetArray[num2]);
+	        			break;
+	        		case 'C':
+	        			gameDeckUpToTarget(GameDeckUp, targetArray[num1]);
+	        			break;
+	        		case 'D':
+	        			gameDeckUpToWorking(workingArray[num1], GameDeckUp);
+	        			break;
+	        		case 'E':
+	        			TargetToTarget(targetArray[num1], targetArray[num2]);
+	        			break;
+	        		case 'F':
+	        			//WorkingToWorking(workingArray[num1], workingArray[num2], num3);
+	        			System.out.println();
+	        			break;
+	        		default: // G
+	        			deckToUp(GameDeck, GameDeckUp);
+	        			break;
+	        	}
+		    }
+		    else {
+		        System.out.println("Wrong input repeat again");
+		    }
+		    print_game(workingArray, targetArray, GameDeck, GameDeckUp);
+    	}
+
+
+
+
+
+
+
+
+
+
+        //print_game(workingArray, targetArray, GameDeck, GameDeckUp);
         //System.out.println("=============================================");
         //print_game_all(workingArray, targetArray, GameDeck, GameDeckUp);
     }
@@ -84,7 +145,7 @@ public class Solitaire {
         for(int c=0; c<4; c++) {
 
             deck = Target[c];
-            str   = "TARGET[" + String.valueOf(c+1) + "] {"+String.valueOf(deck.size())+"}\t= ";
+            str   = "TARGET[" + String.valueOf(c) + "] {"+String.valueOf(deck.size())+"}\t= ";
 
             if (deck.isEmpty()==false) {
                 size     = deck.size();
@@ -105,7 +166,7 @@ public class Solitaire {
         for(int c=0; c<7; c++) {
 
             stack = Working[c];
-            str   = "WORKING[" + String.valueOf(c+1) + "] {"+String.valueOf(stack.size())+"}\t= ";
+            str   = "WORKING[" + String.valueOf(c) + "] {"+String.valueOf(stack.size())+"}\t= ";
 
             if (stack.isEmpty()==false) {
                 size     = stack.size();
@@ -171,7 +232,7 @@ public class Solitaire {
         for(int c=0; c<4; c++) {
 
             deck = Target[c];
-            str   = "TARGET[" + String.valueOf(c+1) + "] {"+String.valueOf(deck.size())+"}\t= ";
+            str   = "TARGET[" + String.valueOf(c) + "] {"+String.valueOf(deck.size())+"}\t= ";
 
             if (deck.isEmpty()==false) {
                 size     = deck.size();
@@ -192,7 +253,7 @@ public class Solitaire {
         for(int c=0; c<7; c++) {
 
             stack = Working[c];
-            str   = "WORKING[" + String.valueOf(c+1) + "] {"+String.valueOf(stack.size())+"}\t= ";
+            str   = "WORKING[" + String.valueOf(c) + "] {"+String.valueOf(stack.size())+"}\t= ";
 
             if (stack.isEmpty()==false) {
                 size     = stack.size();
