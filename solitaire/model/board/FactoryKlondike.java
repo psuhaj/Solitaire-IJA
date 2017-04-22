@@ -1,6 +1,7 @@
 package solitaire.model.board;
 
 import solitaire.model.cards.*;
+import java.util.Collections;
 
 public class FactoryKlondike extends AbstractFactorySolitaire {
 
@@ -19,6 +20,8 @@ public class FactoryKlondike extends AbstractFactorySolitaire {
 		for(int i=1; i<=13; i++) {
 			array.put(createCard(Card.Color.CLUBS, i));
 		}
+                //shuffle the deck
+                Collections.shuffle(array.stack);
 		return array;
 	}
 

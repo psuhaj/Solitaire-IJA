@@ -5,9 +5,15 @@
  */
 package solitaire;
 
+import java.util.Collections;
+import solitaire.model.board.*;
+import solitaire.model.cards.*;
+import java.util.Stack;
+import java.util.ArrayList;
+import java.util.List;
 /**
  *
- * @author adrian
+ * @author adrian & peto
  */
 public class Solitaire {
 
@@ -16,6 +22,17 @@ public class Solitaire {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        //System.out.println("Hello, World");
+        
+        //create card factory
+        AbstractFactorySolitaire factory = new FactoryKlondike();
+        
+        //Create deck for game
+        CardDeck GameDeck = factory.createCardDeck();
+        
+        
+        
+        
     }
     
 }

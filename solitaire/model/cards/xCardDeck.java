@@ -4,8 +4,8 @@ import java.util.Stack;
 
 public class xCardDeck implements CardDeck {
 
-	protected Stack<Card> stack;
-	protected int stack_size;
+	public Stack<Card> stack;
+	public int stack_size;
 
 	// constructor
 	public xCardDeck() {
