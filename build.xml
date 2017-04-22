@@ -2,7 +2,7 @@
 
 <project name="Solitaire" basedir="." default="main">
 
-	<!-- variables -->
+    <!-- variables -->
     <property name="build.dir"       value="build"/>
     <property name="dest-client.dir" value="dest-client"/>
     <property name="dest-server.dir" value="dest-server"/>
@@ -15,30 +15,30 @@
     <property name="main-class"      value="solitaire.Solitaire"/>
 
     <!-- remove warning message -->
-	<property name="build.sysclasspath" value="last"/>
+    <property name="build.sysclasspath" value="last"/>
 
-	<!-- remove folder content: build, dest-client, dest-server, doc -->
+    <!-- remove folder content: build, dest-client, dest-server, doc -->
     <target name="clean">
         <delete includeEmptyDirs="true">
-			<fileset dir="${build.dir}">
-				<include name="*/**"/>
-			</fileset>
-			<fileset dir="${dest-client.dir}">
-				<include name="*/**"/>
-			</fileset>
-			<fileset dir="${dest-server.dir}">
-				<include name="*/**"/>
-			</fileset>
-			<fileset dir="${doc.dir}">
-				<include name="*/**"/>
-			</fileset>
-		</delete>
+            <fileset dir="${build.dir}">
+                <include name="*/**"/>
+            </fileset>
+            <fileset dir="${dest-client.dir}">
+                <include name="*/**"/>
+            </fileset>
+            <fileset dir="${dest-server.dir}">
+                <include name="*/**"/>
+            </fileset>
+            <fileset dir="${doc.dir}">
+                <include name="*/**"/>
+            </fileset>
+        </delete>
     </target>
 
     <!-- make documentation -->
     <target name="doc">
-    	<javadoc sourcepath="${src.dir}" destdir="${doc.dir}"/>
-  	</target>
+        <javadoc sourcepath="${src.dir}" destdir="${doc.dir}"/>
+    </target>
 
     <!-- compile and generate a java archiv -->
     <target name="compile">
