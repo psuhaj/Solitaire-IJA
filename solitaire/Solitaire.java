@@ -39,17 +39,22 @@ public class Solitaire {
         //create working stacks
         for(int i = 0; i<7;i++){
             workingArray[i] = factory.createWorkingPack();
-            for(int j=0;j<=i;j++){
-                workingArray[i].putEmpty(GameDeck.pop());
-                //put face up
-               if(i==j){
-                    Card tmp=workingArray[i].pop();
-                    tmp.turnFaceUp();
-                    workingArray[i].putEmpty(tmp);
-                }
+        }
+        
+        //add cards to working stacks
+        for(int i=0;i<7;i++){
+            for(int j=i;j<7;j++){
+                workingArray[j].putEmpty(GameDeck.pop());
             }
         }
-
+              
+        //turn face up
+        for(int i=0;i<7;i++){
+            Card tmp=workingArray[i].pop();
+            tmp.turnFaceUp();
+            workingArray[i].putEmpty(tmp);
+        }
+        
 
         //create target packs
         for(int i = 0; i<4;i++){
@@ -58,8 +63,8 @@ public class Solitaire {
 
 
         print_game(workingArray, targetArray, GameDeck, GameDeckUp);
-        System.out.println("=============================================");
-        print_game_all(workingArray, targetArray, GameDeck, GameDeckUp);
+        //System.out.println("=============================================");
+        //print_game_all(workingArray, targetArray, GameDeck, GameDeckUp);
     }
 
     public static void  print_game(CardStack[] Working, CardDeck[] Target, CardDeck GD, CardDeck GDUP) {
