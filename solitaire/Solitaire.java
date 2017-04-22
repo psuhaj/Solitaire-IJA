@@ -73,7 +73,7 @@ public class Solitaire {
         for(int c=0; c<4; c++) {
 
             deck = Target[c];
-            str   = "TARGET  [" + String.valueOf(c+1) + "] = ";
+            str   = "TARGET[" + String.valueOf(c+1) + "] {"+String.valueOf(deck.size())+"}\t= ";
 
             if (deck.isEmpty()==false) {
                 size     = deck.size();
@@ -94,7 +94,7 @@ public class Solitaire {
         for(int c=0; c<7; c++) {
 
             stack = Working[c];
-            str   = "WORKING [" + String.valueOf(c+1) + "] = ";
+            str   = "WORKING[" + String.valueOf(c+1) + "] {"+String.valueOf(stack.size())+"}\t= ";
 
             if (stack.isEmpty()==false) {
                 size     = stack.size();
@@ -116,11 +116,11 @@ public class Solitaire {
 
             if (c==0) {
                 deck = GD;
-                str   = "GD          = ";
+                str   = "GD    {"+String.valueOf(deck.size())+"}\t= ";
             }
             else {
                 deck = GDUP;
-                str   = "GD-UP       = ";
+                str   = "GD-UP {"+String.valueOf(deck.size())+"}\t= ";
             }
 
             if (deck.isEmpty()==false) {
