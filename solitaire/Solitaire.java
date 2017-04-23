@@ -260,7 +260,7 @@ public class Solitaire {
                 for(int i=0; i<size; i++) {
                     tmp = deck.get(i).print_log();
                     if (tmp.charAt(tmp.length()-2) == 'U') {
-                        str = str + "(" + tmp + ")";
+                        str = str + "(" + tmp + ") ";
                     }
                     else str = str + "(X) ";
                     tmp = "";
@@ -288,7 +288,7 @@ public class Solitaire {
                 for(int i=0; i<size; i++) {
                     tmp = stack.get(i).print_log();
                     if (tmp.charAt(tmp.length()-2) == 'U') {
-                        str = str + "(" + tmp + ")";
+                        str = str + "(" + tmp + ") ";
                     }
                     else str = str + "(X) ";
                     tmp = "";
@@ -314,7 +314,7 @@ public class Solitaire {
             for(int i=0; i<size; i++) {
                 str = str + "(X) ";
             }
-            str = str + "(" + top_card.print_log() + ")";
+            str = str + "(" + top_card.print_log() + ") ";
         }
         else {
             str = str + "empty";
@@ -501,6 +501,18 @@ public class Solitaire {
         if(!card.face()){
             return;//do nothing if the card we want to move from is down
         }
+        boolean success = working2.put(card);
+        if(success){
+        	working2.pop();
+        	CardStack tmp = working1.pop(card);
+        	working2.put(tmp);
+        	Card tmp2 = working1.pop();
+            tmp2.turnFaceUp();
+            working1.putEmpty(tmp2);
+        }
+
+/*
+
         CardStack tmp = working1.pop(card);
         boolean success = working2.put(tmp);
         //if cant put card on target
@@ -511,7 +523,7 @@ public class Solitaire {
             Card tmp2 = working1.pop();
             tmp2.turnFaceUp();
             working1.put(tmp2);
-        }
+        }*/
     }
 
     public static void deckToUp(CardDeck gameDeck,CardDeck up){
