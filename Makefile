@@ -17,7 +17,11 @@ dir:
 	mkdir -p $(folders)
 
 zip: dir clean
-	zip -r $(archiv_name).zip $(folders) $(files)
+	mkdir $(archiv_name)
+	ant doc
+	cp -r -t $(archiv_name) $(folders) $(files)
+	zip -q -r $(archiv_name).zip $(archiv_name)
+	rm -rf $(archiv_name)
 
 clean:
 	ant clean
