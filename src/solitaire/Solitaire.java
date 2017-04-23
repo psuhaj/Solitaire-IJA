@@ -485,7 +485,7 @@ public class Solitaire {
         boolean success = working.put(tmp);
         //if cant put card on target
         if(!success){
-            working.putEmpty(tmp);
+            up.put(tmp);
         }
     }
 
