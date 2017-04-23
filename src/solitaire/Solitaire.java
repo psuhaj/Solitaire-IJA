@@ -454,9 +454,11 @@ public class Solitaire {
             working.putEmpty(tmp);
         }
         else{//turn the top card on the working stack up
-            Card tmp2 = working.pop();
-            tmp2.turnFaceUp();
-            working.putEmpty(tmp2);
+            if (!working.isEmpty()) {
+            	Card tmp2 = working.pop();
+            	tmp2.turnFaceUp();
+            	working.putEmpty(tmp2);
+            }
         }
     }
 
@@ -506,9 +508,11 @@ public class Solitaire {
         	working2.pop();
         	CardStack tmp = working1.pop(card);
         	working2.put(tmp);
-        	Card tmp2 = working1.pop();
-            tmp2.turnFaceUp();
-            working1.putEmpty(tmp2);
+        	if(!working1.isEmpty()) {
+        		Card tmp2 = working1.pop();
+            	tmp2.turnFaceUp();
+            	working1.putEmpty(tmp2);
+            }
         }
 
 /*
