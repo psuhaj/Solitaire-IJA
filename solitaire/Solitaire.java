@@ -365,6 +365,11 @@ public class Solitaire {
         if(!success){
             working.putEmpty(tmp);
         }
+        else{//turn the top card on the working stack up
+            Card tmp2 = working.pop();
+            tmp2.turnFaceUp();
+            working.put(tmp2);
+        }
     }
     
     public static void targetToWorking(CardStack working,CardDeck target){
@@ -404,18 +409,28 @@ public class Solitaire {
     }
     
     public static void WorkingToWorking(CardStack working1,CardStack working2,int number){
-        /*CardStack tmp = working1.pop(card);
+        Card card = working1.get(number);
+        if(!card.face()){
+            return;//do nothing if the card we want to move from is down
+        }
+        CardStack tmp = working1.pop(card);
         boolean success = working2.put(tmp);
         //if cant put card on target
         if(!success){
             working1.put(tmp);
-        }*/
+        }
+        else{//turn the to card up on the stack from where cards were moved
+            Card tmp2 = working1.pop();
+            tmp2.turnFaceUp();
+            working1.put(tmp2);
+        }
     }
     
     public static void deckToUp(CardDeck gameDeck,CardDeck up){
         //if deck is empty
         if(gameDeck.isEmpty()){
-            for(int i = 0; i<up.size();i++){
+            int size=up.size();
+            for(int i = 0; i<size;i++){
                 Card tmp2 = up.pop();
                 tmp2.turnFaceDown();
                 gameDeck.put(tmp2);
