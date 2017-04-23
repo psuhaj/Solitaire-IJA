@@ -332,6 +332,7 @@ public class Solitaire {
             top_card = deck.get();
             for(int i=0; i<size; i++) {
                str = str + "(" + deck.get(i).print_log() + ") ";
+            }
         }
         else {
             str = str + "empty";
