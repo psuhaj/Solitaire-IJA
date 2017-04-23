@@ -71,7 +71,6 @@ public class Solitaire {
         String str, val1, val2, val3, val4;
         int num1, num2, num3;
         boolean n1, n2, n3;
-        n1=n2=n3=false;
         char c;
         Pattern regex = Pattern.compile("[\\s]*([ABCDEFG])(?:[\\s]+(\\d+))?(?:[\\s]+(\\d+))?(?:[\\s]+(\\d+))?[\\s]*");
         Matcher matcher;
@@ -80,6 +79,7 @@ public class Solitaire {
         System.out.println("================================");
 
         while(scan.hasNextLine()) {
+        	n1=n2=n3=false;
             str = scan.nextLine();
             matcher = regex.matcher(str);
             if (matcher.matches()) {
@@ -111,27 +111,27 @@ public class Solitaire {
                 switch (c) {
                     case 'A':
                         if (n1 && n2) workingToTarget(workingArray[num1], targetArray[num2]);
-                        else System.out.println("workingToTarget(workingArray[num1], targetArray[num2])");
+                        else System.out.println("ERROR: enter number/s, workingToTarget(workingArray[num1], targetArray[num2])");
                         break;
                     case 'B':
                         if (n1 && n2) targetToWorking(workingArray[num1], targetArray[num2]);
-                        else System.out.println("targetToWorking(workingArray[num1], targetArray[num2])");
+                        else System.out.println("ERROR: enter number/s, targetToWorking(workingArray[num1], targetArray[num2])");
                         break;
                     case 'C':
                         if (n1) gameDeckUpToTarget(GameDeckUp, targetArray[num1]);
-                        else System.out.println("gameDeckUpToTarget(GameDeckUp, targetArray[num1])");
+                        else System.out.println("ERROR: enter number/s, gameDeckUpToTarget(GameDeckUp, targetArray[num1])");
                         break;
                     case 'D':
                         if (n1) gameDeckUpToWorking(workingArray[num1], GameDeckUp);
-                        else System.out.println("gameDeckUpToWorking(workingArray[num1], GameDeckUp)");
+                        else System.out.println("ERROR: enter number/s, gameDeckUpToWorking(workingArray[num1], GameDeckUp)");
                         break;
                     case 'E':
                         if (n1 && n2) TargetToTarget(targetArray[num1], targetArray[num2]);
-                        else System.out.println("TargetToTarget(targetArray[num1], targetArray[num2])");
+                        else System.out.println("ERROR: enter number/s, TargetToTarget(targetArray[num1], targetArray[num2])");
                         break;
                     case 'F':
                         if (n1 && n2 && n3) WorkingToWorking(workingArray[num1], workingArray[num2], num3);
-                        else System.out.println("WorkingToWorking(workingArray[num1], workingArray[num2], num3)");
+                        else System.out.println("ERROR: enter number/s, WorkingToWorking(workingArray[num1], workingArray[num2], num3)");
                         break;
                     default: // G
                         deckToUp(GameDeck, GameDeckUp);
