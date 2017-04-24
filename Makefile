@@ -1,8 +1,6 @@
 archiv_name=xsuhaj02
 folders=build dest-client dest-server doc examples lib src
 files=build.xml readme.txt rozdeleni.txt
-lib_script=get-libs.sh
-archiv_cards=cards
 
 .PHONY: make run doc dir lib zip clean
 

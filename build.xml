@@ -13,7 +13,7 @@
 
     <property name="jar.dir"         value="${dest-client.dir}"/>
     <property name="jar_name"         value="ija-client"/>
-    
+
     <property name="script_libs"       value="get-libs.sh"/>
 
     <property name="main-class"      value="solitaire.Solitaire"/>
@@ -21,6 +21,7 @@
     <!-- remove warning message -->
     <property name="build.sysclasspath" value="last"/>
 
+    <!-- create necessary directories -->
     <target name="dir">
         <mkdir dir="${build.dir}"/>
         <mkdir dir="${dest-client.dir}"/>
@@ -31,8 +32,18 @@
         <mkdir dir="${src.dir}"/>
     </target>
 
+    <!-- remove lib content except "get-libs.sh" -->
+    <target name="clean-lib">
+        <delete includeEmptyDirs="true">
+            <fileset dir="${lib.dir}">
+                <exclude name="**/get-libs.sh"/>
+                <include name="*/**"/>
+            </fileset>
+        </delete>
+    </target>
+
     <!-- remove content of directories -->
-    <target name="clean">
+    <target name="clean" depends="clean-lib">
         <delete includeEmptyDirs="true">
             <fileset dir="${build.dir}">
                 <include name="*/**"/>
@@ -44,20 +55,6 @@
                 <include name="*/**"/>
             </fileset>
             <fileset dir="${doc.dir}">
-                <include name="*/**"/>
-            </fileset>
-            <fileset dir="${lib.dir}">
-                <exclude name="**/get-libs.sh"/>
-                <include name="*/**"/>
-            </fileset>
-        </delete>
-    </target>
-
-    <!-- remove lib content except "get-libs.sh" -->
-    <target name="clean-lib">
-        <delete includeEmptyDirs="true">
-            <fileset dir="${lib.dir}">
-                <exclude name="**/get-libs.sh"/>
                 <include name="*/**"/>
             </fileset>
         </delete>
@@ -73,7 +70,7 @@
         <exec executable="/bin/sh">
             <arg value="${lib.dir}/${script_libs}"/>
         </exec>
-    </target> 
+    </target>
 
     <!-- compile and generate a java archiv -->
     <target name="compile" depends="lib">
