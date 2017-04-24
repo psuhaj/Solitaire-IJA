@@ -7,17 +7,31 @@
     <property name="dest-client.dir" value="dest-client"/>
     <property name="dest-server.dir" value="dest-server"/>
     <property name="doc.dir"         value="doc"/>
+    <property name="example.dir"     value="example"/>
+    <property name="lib.dir"         value="lib"/>
     <property name="src.dir"         value="src"/>
 
     <property name="jar.dir"         value="${dest-client.dir}"/>
-    <property name="jarname"         value="ija-client"/>
+    <property name="jar_name"         value="ija-client"/>
+    
+    <property name="script_libs"       value="get-libs.sh"/>
 
     <property name="main-class"      value="solitaire.Solitaire"/>
 
     <!-- remove warning message -->
     <property name="build.sysclasspath" value="last"/>
 
-    <!-- remove folder content: build, dest-client, dest-server, doc -->
+    <target name="dir">
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${dest-client.dir}"/>
+        <mkdir dir="${dest-server.dir}"/>
+        <mkdir dir="${doc.dir}"/>
+        <mkdir dir="${example.dir}"/>
+        <mkdir dir="${lib.dir}"/>
+        <mkdir dir="${src.dir}"/>
+    </target>
+
+    <!-- remove content of directories -->
     <target name="clean">
         <delete includeEmptyDirs="true">
             <fileset dir="${build.dir}">
@@ -32,6 +46,20 @@
             <fileset dir="${doc.dir}">
                 <include name="*/**"/>
             </fileset>
+            <fileset dir="${lib.dir}">
+                <exclude name="**/get-libs.sh"/>
+                <include name="*/**"/>
+            </fileset>
+        </delete>
+    </target>
+
+    <!-- remove lib content except "get-libs.sh" -->
+    <target name="clean-lib">
+        <delete includeEmptyDirs="true">
+            <fileset dir="${lib.dir}">
+                <exclude name="**/get-libs.sh"/>
+                <include name="*/**"/>
+            </fileset>
         </delete>
     </target>
 
@@ -40,11 +68,18 @@
         <javadoc sourcepath="${src.dir}" destdir="${doc.dir}"/>
     </target>
 
+    <!-- download lib directory content -->
+    <target name="lib" depends="clean-lib">
+        <exec executable="/bin/sh">
+            <arg value="${lib.dir}/${script_libs}"/>
+        </exec>
+    </target> 
+
     <!-- compile and generate a java archiv -->
-    <target name="compile">
+    <target name="compile" depends="lib">
         <javac srcdir="${src.dir}" destdir="${build.dir}"/>
         <mkdir dir="${jar.dir}"/>
-        <jar destfile="${jar.dir}/${jarname}.jar" basedir="${build.dir}">
+        <jar destfile="${jar.dir}/${jar_name}.jar" basedir="${build.dir}">
             <manifest>
                 <attribute name="Main-Class" value="${main-class}"/>
             </manifest>
@@ -53,7 +88,7 @@
 
     <!-- run the program -->
     <target name="run" depends="compile">
-        <java jar="${jar.dir}/${jarname}.jar" fork="true"/>
+        <java jar="${jar.dir}/${jar_name}.jar" fork="true"/>
     </target>
 
 </project>

@@ -1,9 +1,10 @@
 archiv_name=xsuhaj02
 folders=build dest-client dest-server doc examples lib src
 files=build.xml readme.txt rozdeleni.txt
-download_name=cards
+lib_script=get-libs.sh
+archiv_cards=cards
 
-.PHONY: doc
+.PHONY: make run doc dir lib zip clean
 
 make:
 	ant compile
@@ -15,10 +16,10 @@ doc:
 	ant doc
 
 dir:
-	mkdir -p $(folders)
+	ant dir
 
-cards:
-	cd lib && ./get-libs.sh
+lib:
+	ant lib
 
 zip: dir clean
 	mkdir $(archiv_name)
@@ -30,5 +31,3 @@ zip: dir clean
 clean:
 	ant clean
 	rm -f $(archiv_name).zip
-	rm -f lib/$(download_name).zip
-	rm -rf lib/$(download_name)
