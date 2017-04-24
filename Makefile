@@ -1,6 +1,7 @@
 archiv_name=xsuhaj02
 folders=build dest-client dest-server doc examples lib src
 files=build.xml readme.txt rozdeleni.txt
+download_name=cards
 
 .PHONY: doc
 
@@ -16,6 +17,9 @@ doc:
 dir:
 	mkdir -p $(folders)
 
+cards:
+	cd lib && ./get-libs.sh
+
 zip: dir clean
 	mkdir $(archiv_name)
 	ant doc
@@ -26,3 +30,5 @@ zip: dir clean
 clean:
 	ant clean
 	rm -f $(archiv_name).zip
+	rm -f lib/$(download_name).zip
+	rm -rf lib/$(download_name)
