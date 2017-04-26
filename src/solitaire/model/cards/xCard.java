@@ -165,6 +165,54 @@ public class xCard implements Card {
         return str;
     }
 
+    // transform CARD to 3 characters = VALUE+COLOR+FACE
+    public String code(){
+        String str;
+        switch (this.value) {
+            case 1 :
+                str = "A";
+                break;
+            case 10 :
+                str = "T"; // TEN
+                break;
+            case 11 :
+                str = "J";
+                break;
+            case 12 :
+                str = "Q";
+                break;
+            case 13 :
+                str = "K";
+                break;
+            default :
+                str = String.valueOf(this.value);
+                break;
+        }
+        switch (this.color) {
+            case HEARTS: {
+                str = str+"H";
+                break;
+                }
+            case SPADES:
+                str = str+"S";
+                break;
+            case DIAMONDS:
+                str = str+"D";
+                break;
+            default:
+                str = str+"C";
+                break;
+        }
+        if (face) {
+        	str = str+"U";
+        }
+        else {
+        	str = str+"D";
+        }
+        return str;
+    }
+
+
     // compare two card objects
     public boolean equals(Object o) {
         if (o == null) return false;

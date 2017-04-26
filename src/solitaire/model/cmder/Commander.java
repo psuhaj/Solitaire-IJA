@@ -23,22 +23,25 @@ public class Commander {
 		G_GU, // gameDeck   => gameDeckUP
 		GU_G, // gameDeckUP => gameDeck
 
+		GE_GU, // gameDeckEMPTY => gameDeckUP
+
 		Cmd_Null; // null
 
 		@Override
 		public String toString() {
 			switch(this) {
-				case W_T  : return "working    => target    ";
-				case T_W  : return "target     => working   ";
-				case GU_W : return "gameDeckUP => working   ";
-				case W_GU : return "working    => gamedeckUP";
-				case GU_T : return "gameDeckUP => target    ";
-				case T_GU : return "target     => gameDeckUP";
-				case T_T  : return "target     => target    ";
-				case W_W  : return "working    => working   ";
-				case G_GU : return "gameDeck   => gameDeckUP";
-				case GU_G : return "gameDeckUP => gameDeck  ";
-				default   : return "Cmd_Null                ";
+				case W_T  : return "working    => target       ";
+				case T_W  : return "target     => working      ";
+				case GU_W : return "gameDeckUP => working      ";
+				case W_GU : return "working    => gamedeckUP   ";
+				case GU_T : return "gameDeckUP => target       ";
+				case T_GU : return "target     => gameDeckUP   ";
+				case T_T  : return "target     => target       ";
+				case W_W  : return "working    => working      ";
+				case G_GU : return "gameDeck   => gameDeckUP   ";
+				case GU_G : return "gameDeckUP => gameDeck     ";
+				case GE_GU: return "gameDeckEMPTY => gameDeckUP";
+				default   : return "Cmd_Null                   ";
 			}
 		}
 	};
