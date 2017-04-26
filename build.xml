@@ -43,7 +43,7 @@
     </target>
 
     <!-- remove content of directories -->
-    <target name="clean" depends="clean-lib">
+    <target name="clean"> <!-- OFF depends="clean-lib"-->
         <delete includeEmptyDirs="true">
             <fileset dir="${build.dir}">
                 <include name="*/**"/>
@@ -73,7 +73,7 @@
     </target>
 
     <!-- compile and generate a java archiv -->
-    <target name="compile" depends="lib">
+    <target name="compile"> <!-- OFF depends="lib" -->
         <javac srcdir="${src.dir}" destdir="${build.dir}"/>
         <mkdir dir="${jar.dir}"/>
         <jar destfile="${jar.dir}/${jar_name}.jar" basedir="${build.dir}">

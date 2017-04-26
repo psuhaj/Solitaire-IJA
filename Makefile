@@ -26,6 +26,9 @@ zip: dir clean
 	zip -q -r $(archiv_name).zip $(archiv_name)
 	rm -rf $(archiv_name)
 
+cleanlib:
+	ant clean-lib
+
 clean:
 	ant clean
 	rm -f $(archiv_name).zip
