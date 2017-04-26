@@ -8,6 +8,7 @@ package solitaire;
 import java.util.Collections;
 import solitaire.model.board.*;
 import solitaire.model.cards.*;
+import solitaire.model.cmder.*;
 import java.util.Stack;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,11 +24,13 @@ public class Solitaire {
      * @param args the command line arguments
      */
 
+    private static Commander commander;
 
-
-
+    // application logic
     public static void main(String[] args) {
-        // TODO code application logic here
+
+        // UNDO INIT
+        commander = new Commander();
 
         //create card factory
         AbstractFactorySolitaire factory = new FactoryKlondike();
@@ -87,11 +90,11 @@ public class Solitaire {
                 val2 = matcher.group(2); // number 1
                 val3 = matcher.group(3); // number 2
                 val4 = matcher.group(4); // number 3
-                /*System.out.println();
-                System.out.println(val1);
-                System.out.println(val2);
-                System.out.println(val3);
-                System.out.println(val4);*/
+                //System.out.println();
+                //System.out.println(val1);
+                //System.out.println(val2);
+                //System.out.println(val3);
+                //System.out.println(val4);
                 if (val2!=null) {
                     num1 = Integer.parseInt(val2);
                     n1 = true;
@@ -143,6 +146,7 @@ public class Solitaire {
             }
             System.out.println("================================");
             print_game_all(workingArray, targetArray, GameDeck, GameDeckUp);
+            System.out.println("\nCMD = "+commander.cmd_undo());
             System.out.println("================================");
         }
 
@@ -460,6 +464,7 @@ public class Solitaire {
             	working.putEmpty(tmp2);
             }
         }
+        // TODO place correctly: commander.cmd_do(Commander.enum_cmd.W_T);
     }
 
     public static void targetToWorking(CardStack working,CardDeck target){
@@ -469,6 +474,7 @@ public class Solitaire {
         if(!success){
             target.put(tmp);
         }
+        // TODO place correctly: commander.cmd_do(Commander.enum_cmd.T_W);
     }
 
     public static void gameDeckUpToTarget(CardDeck up,CardDeck target){
@@ -478,6 +484,7 @@ public class Solitaire {
         if(!success){
             up.put(tmp);
         }
+        // TODO place correctly: commander.cmd_do(Commander.enum_cmd.GU_T);
     }
 
     public static void gameDeckUpToWorking(CardStack working,CardDeck up){
@@ -487,6 +494,7 @@ public class Solitaire {
         if(!success){
             up.put(tmp);
         }
+        // TODO place correctly: commander.cmd_do(Commander.enum_cmd.GU_W);
     }
 
     public static void TargetToTarget(CardDeck target1,CardDeck target2){
@@ -496,6 +504,7 @@ public class Solitaire {
         if(!success){
             target1.put(tmp);
         }
+        // TODO place correctly: commander.cmd_do(Commander.enum_cmd.T_T);
     }
 
     public static void WorkingToWorking(CardStack working1,CardStack working2,int number){
@@ -514,20 +523,22 @@ public class Solitaire {
             	working1.putEmpty(tmp2);
             }
         }
+        // TODO place correctly: commander.cmd_do(Commander.enum_cmd.W_W);
 
-/*
 
-        CardStack tmp = working1.pop(card);
-        boolean success = working2.put(tmp);
-        //if cant put card on target
-        if(!success){
-            working1.put(tmp);
-        }
-        else{//turn the to card up on the stack from where cards were moved
-            Card tmp2 = working1.pop();
-            tmp2.turnFaceUp();
-            working1.put(tmp2);
-        }*/
+		    /*
+		        	CardStack tmp = working1.pop(card);
+		        	boolean success = working2.put(tmp);
+		        	//if cant put card on target
+		        	if(!success){
+		        	    working1.put(tmp);
+		        	}
+		        	else{//turn the to card up on the stack from where cards were moved
+		        	    Card tmp2 = working1.pop();
+		        	    tmp2.turnFaceUp();
+		        	    working1.put(tmp2);
+		        	}
+		    */
     }
 
     public static void deckToUp(CardDeck gameDeck,CardDeck up){
@@ -545,6 +556,6 @@ public class Solitaire {
             tmp.turnFaceUp();
             up.put(tmp);
         }
-
+        // TODO place correctly: commander.cmd_do(Commander.enum_cmd.G_GU);
     }
 }
