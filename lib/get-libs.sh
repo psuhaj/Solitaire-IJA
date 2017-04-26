@@ -3,7 +3,7 @@
 destination="lib"
 file1="cards"
 
-wget -q "http://www.stud.fit.vutbr.cz/~xtotha01/$file1.zip" -P $destination
+wget -q "https://github.com/europ/stuff/raw/master/cards.zip" -P $destination
 
 if [ $? -ne 0 ]; then
 	printf "ERROR: Could not download \"cards.zip\"!\n"
