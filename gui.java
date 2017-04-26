@@ -125,10 +125,30 @@ public class gui extends JFrame {
 
 
 
-		//add jpanel to frame
-        add(panel);
+		//some shit for creating and indexing the GRID
+		/*
+		JPanel[][] gridPanel = new JPanel[2][2];
+		setLayout(new GridLayout(2,2));
+		gridPanel[0][0]=panel;
+		add(gridPanel[0][0]);
+		gridPanel[0][1]=new JPanel();
+		add(gridPanel[0][1]);
+		for(int m = 1; m < 2; m++) {
+   			for(int n = 0; n < 2; n++) {
+		      gridPanel[m][n] = new JPanel();
+		      add(gridPanel[m][n]);
+		   }
+		}
+*/
 
+
+
+		add(panel);
         pack();
+
+
+
+        //some shit for resizing,TODO
 
        /* @Override
         addComponentListener(new ComponentListener() {
