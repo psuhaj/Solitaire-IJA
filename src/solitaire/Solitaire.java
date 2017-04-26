@@ -514,6 +514,7 @@ public class Solitaire {
         }
         boolean success = working2.put(card);
         if(success){
+        	commander.cmd_do(Commander.enum_cmd.W_W);
         	working2.pop();
         	CardStack tmp = working1.pop(card);
         	working2.put(tmp);
@@ -523,7 +524,6 @@ public class Solitaire {
             	working1.putEmpty(tmp2);
             }
         }
-        // TODO place correctly: commander.cmd_do(Commander.enum_cmd.W_W);
 
 
 		    /*
