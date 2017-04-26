@@ -8,7 +8,17 @@ import javax.swing.SwingUtilities;
 import java.awt.Color;
 import java.awt.*;
 import javax.swing.*;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import java.awt.event.*;
+import java.io.IOException;
+import java.io.File;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 
+//import ija.elements.AllMainObjects;
 
 public class gui extends JFrame {
 
@@ -34,51 +44,132 @@ public class gui extends JFrame {
       	layout.setVgap(10);*/
 
 
-    	panel.setLayout(new GridLayout(2,7,10,10));
-
-       // JButton quitButton = new JButton("Quit");
-
-       // panel.add(quitButton);
-
+    	//layout is null, so we can position the elements correctly
+    	panel.setLayout(null);
+    	//set the background color
         panel.setBackground(Color.green);
 
 
-        /*JLabel card1 = new JLabel(new ImageIcon(getClass().getResource("cards/2_of_clubs.png")),JLabel.CENTER);
-        //card.setPreferedSize(12,18);
-        JLabel card2 = new JLabel(new ImageIcon(getClass().getResource("cards/3_of_clubs.png")));
-        JLabel card3 = new JLabel(new ImageIcon(getClass().getResource("cards/4_of_clubs.png")));
-        JLabel card4 = new JLabel(new ImageIcon(getClass().getResource("cards/5_of_clubs.png")));
+        
+        
 
-       // panelGrid.add(card);
-        //layout.add(card);
-        panel.add(card1);
-        panel.add(card2);
-        panel.add(card3);
-        panel.add(card4);*/
-
-        JLabel[] cards = new JLabel[14];
-
-
-        for(int i =0 ; i< 14; i++){
-        	/*JLabel */cards[i] = new JLabel(new ImageIcon(getClass().getResource("cards/2_of_clubs.png")),JLabel.CENTER);
-        	cards[i].setPreferredSize(new Dimension(20, 20));
-        	panel.add(cards[i]);
-        }
+        File file = new File("cards/2_of_clubs.png");
+        BufferedImage image=null;
+        try{
+        	image = ImageIO.read(file);
+		}
+		catch(IOException e){
+			e.printStackTrace();
+		}
+		Image img = image.getScaledInstance(125, 181, Image.SCALE_DEFAULT);
+		ImageIcon imageIcon = new ImageIcon(img);
+		JLabel test = new JLabel(imageIcon);
 
 
+		//create jlabel for image
+		JLabel test2 = new JLabel();
+		//read img
+		test2.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("cards/3_of_clubs.png")).getImage().getScaledInstance(128, 181, Image.SCALE_SMOOTH)));
+		
 
+		//add cards
+		panel.add(test); 
+		panel.add(test2);
+
+		//set cards position, so first we add everything then set positions
+		Insets insets = panel.getInsets();//get borders?
+		test.setBounds(40+insets.left, 70+ insets.top, 125,181);
+		test2.setBounds(40+181+insets.left, 70+ insets.top, 125,181);
+
+		//add target deck labels
+		JLabel target1 = new JLabel();
+		JLabel target2 = new JLabel();
+		JLabel target3 = new JLabel();
+		JLabel target4 = new JLabel();
+
+		target1.setOpaque(true);
+		target1.setBackground(Color.lightGray);
+		target2.setOpaque(true);
+		target2.setBackground(Color.lightGray);
+		target3.setOpaque(true);
+		target3.setBackground(Color.lightGray);
+		target4.setOpaque(true);
+		target4.setBackground(Color.lightGray);
+
+		panel.add(target1);
+		panel.add(target2);
+		panel.add(target3);
+		panel.add(target4);
+
+		target1.setBounds(insets.left+700, 70+ insets.top, 125,181);
+		target2.setBounds(700+40+125+insets.right, 70+ insets.top, 125,181);
+		target3.setBounds(125+40+125+700+40+insets.right, 70+ insets.top, 125,181);
+		target4.setBounds(125+40+125+125+700+40+40+insets.right, 70+ insets.top, 125,181);
+
+
+
+		JLayeredPane working1 = new JLayeredPane();
+		panel.add(working1);
+		working1.setBounds(insets.left+40, insets.top+400,125,600);
+		JLabel tmp = new JLabel();
+		tmp.setOpaque(true);
+		tmp.setBackground(Color.lightGray);
+		tmp.setBounds(0,0,125,181);
+		working1.add(tmp,new Integer(1),0);
+
+		JLabel tmp2 = new JLabel();
+		tmp2.setOpaque(true);
+		tmp2.setBackground(Color.RED);
+		tmp2.setBounds(0,50,125,181);
+		working1.add(tmp2,new Integer(2),10);
+
+
+
+		//add jpanel to frame
         add(panel);
 
         pack();
 
+       /* @Override
+        addComponentListener(new ComponentListener() {
+    		public void componentResized(ComponentEvent e) {
+        		target1.setBounds(insets.left+700, 70+ insets.top, 125,181);
+				target2.setBounds(700+40+125+insets.right, 70+ insets.top, 125,181);
+				target3.setBounds(125+40+125+700+40+insets.right, 70+ insets.top, 125,181);
+				target4.setBounds(125+40+125+125+700+40+40+insets.right, 70+ insets.top, 125,181);          
+    			pack();
+    		}
+		});*/
+
+        //create listener and add
+       /* ComponentListener listener = new ComponentAdapter() {
+     		public void componentResized(ComponentEvent e) {
+     			Dimension newSize = e.getComponent().getBounds().getSize();
+				setSize(newSize);
+				setPreferredSize(newSize); 
+     			Insets insets = panel.getInsets();
+        		target1.setBounds((700)*((int)(newSize.getWidth()/1400)), 70+ insets.top, 125,181);
+				target2.setBounds(700+40+125+insets.right, 70+ insets.top, 125,181);
+				target3.setBounds(125+40+125+700+40+insets.right, 70+ insets.top, 125,181);
+				target4.setBounds((125+40+125+125+700+40+40+insets.right)*2, 70+ insets.top, 125,181);     
+    			//pack();
+      		}
+      	};
+      	addComponentListener(listener);*/
+//add(panel);
+      //	pack();
+
         
     }
+
+
 
     public static void main(String[] args) {
 
         SwingUtilities.invokeLater(() -> {
             gui ex = new gui();
             ex.setVisible(true);
+
         });
     }
 }
