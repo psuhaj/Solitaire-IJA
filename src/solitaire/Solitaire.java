@@ -463,6 +463,7 @@ public class Solitaire {
             	tmp2.turnFaceUp();
             	working.putEmpty(tmp2);
             }
+            commander.cmd_do(Commander.enum_cmd.W_T);
         }
         // TODO place correctly: commander.cmd_do(Commander.enum_cmd.W_T);
     }
@@ -474,6 +475,9 @@ public class Solitaire {
         if(!success){
             target.put(tmp);
         }
+        else{
+            commander.cmd_do(Commander.enum_cmd.T_W);
+        }
         // TODO place correctly: commander.cmd_do(Commander.enum_cmd.T_W);
     }
 
@@ -483,6 +487,9 @@ public class Solitaire {
         //if cant put card on target
         if(!success){
             up.put(tmp);
+        }
+        else{
+            commander.cmd_do(Commander.enum_cmd.GU_T);
         }
         // TODO place correctly: commander.cmd_do(Commander.enum_cmd.GU_T);
     }
@@ -494,6 +501,9 @@ public class Solitaire {
         if(!success){
             up.put(tmp);
         }
+        else{
+            commander.cmd_do(Commander.enum_cmd.GU_W);
+        }
         // TODO place correctly: commander.cmd_do(Commander.enum_cmd.GU_W);
     }
 
@@ -503,6 +513,9 @@ public class Solitaire {
         //if cant put card on target
         if(!success){
             target1.put(tmp);
+        }
+        else{
+            commander.cmd_do(Commander.enum_cmd.T_T);
         }
         // TODO place correctly: commander.cmd_do(Commander.enum_cmd.T_T);
     }
@@ -555,7 +568,15 @@ public class Solitaire {
             Card tmp = gameDeck.pop();
             tmp.turnFaceUp();
             up.put(tmp);
+            commander.cmd_do(Commander.enum_cmd.G_GU);
         }
+        
+        
         // TODO place correctly: commander.cmd_do(Commander.enum_cmd.G_GU);
     }
+    
+    
+    //UNDO methods
+    
+    
 }
