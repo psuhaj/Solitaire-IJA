@@ -1,27 +1,25 @@
 package solitaire.model.game;
 
-import java.util.Collections;
 
+import java.util.Collections;
 import solitaire.model.board.*;
 import solitaire.model.cards.*;
 import solitaire.model.cmder.*;
-
 import java.util.Stack;
 import java.util.ArrayList;
 import java.util.List;
 
-import java.util.Scanner; // WILL BE REMOVED - TODO
-import java.util.regex.*; // WILL BE REMOVED - TODO
 
 public class Game {
+
 
     private CardDeck GameDeck;
     private CardDeck GameDeckUp;
     private CardDeck[] targetArray;
     private CardStack[] workingArray;
-
     private Commander commander;
     private AbstractFactorySolitaire factory;
+
 
     // constructor
     public Game() {
