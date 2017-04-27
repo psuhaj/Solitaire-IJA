@@ -26,7 +26,7 @@ public class Solitaire {
 
         String str, val1, val2, val3, val4;
         int num1, num2, num3;
-        boolean n1, n2, n3;
+        boolean n1, n2, n3, flag;
         char c;
 
         Pattern regex = Pattern.compile("[\\s]*([abcdefg])(?:[\\s]+(\\d+))?(?:[\\s]+(\\d+))?(?:[\\s]+(\\d+))?[\\s]*");
@@ -60,43 +60,65 @@ public class Solitaire {
                 }
                 else num3=0;
                 c = val1.charAt(0);
+                flag=true;
                 switch (c) {
                     case 'a':
-                        if (n1 && n2) GAME1.workingToTarget(num1, num2);
-                        else System.out.println("ERROR: enter number/s, workingToTarget(workingArray[num1], targetArray[num2])");
+                        if (n1 && n2 && !n3) GAME1.workingToTarget(num1, num2);
+                        else {
+                        	System.out.println("ERROR: Please enter: num1 & num2. [[ GAME1.workingToTarget(num1, num2); ]]");
+                        	flag=false;
+                        }
                         break;
                     case 'b':
-                        if (n1 && n2) GAME1.targetToWorking(num1, num2);
-                        else System.out.println("ERROR: enter number/s, targetToWorking(workingArray[num1], targetArray[num2])");
+                        if (n1 && n2 && !n3) GAME1.targetToWorking(num1, num2);
+                        else {
+                        	System.out.println("ERROR: Please enter: num1 & num2. [[ GAME1.targetToWorking(num1, num2); ]]");
+                        	flag=false;
+                        }
                         break;
                     case 'c':
-                        if (n1) GAME1.gameDeckUpToTarget(num1);
-                        else System.out.println("ERROR: enter number/s, gameDeckUpToTarget(GameDeckUp, targetArray[num1])");
+                        if (n1 && !n2 && !n3) GAME1.gameDeckUpToTarget(num1);
+                        else {
+                        	System.out.println("ERROR: Please enter: num1. [[ GAME1.gameDeckUpToTarget(num1); ]]");
+                        	flag=false;
+                        }
                         break;
                     case 'd':
-                        if (n1) GAME1.gameDeckUpToWorking(num1);
-                        else System.out.println("ERROR: enter number/s, gameDeckUpToWorking(workingArray[num1], GameDeckUp)");
+                        if (n1 && !n2 && !n3) GAME1.gameDeckUpToWorking(num1);
+                        else {
+                        	System.out.println("ERROR: Please enter: num1. [[ GAME1.gameDeckUpToWorking(num1); ]]");
+                        	flag=false;
+                        }
                         break;
                     case 'e':
-                        if (n1 && n2) GAME1.TargetToTarget(num1, num2);
-                        else System.out.println("ERROR: enter number/s, TargetToTarget(targetArray[num1], targetArray[num2])");
+                        if (n1 && n2 && !n3) GAME1.TargetToTarget(num1, num2);
+                        else {
+                        	System.out.println("ERROR: Please enter: num1 & num2. [[ GAME1.TargetToTarget(num1, num2); ]]");
+                        	flag=false;
+                        }
                         break;
                     case 'f':
                         if (n1 && n2 && n3) GAME1.WorkingToWorking(num1, num2, num3);
-                        else System.out.println("ERROR: enter number/s, WorkingToWorking(workingArray[num1], workingArray[num2], num3)");
+                        else {
+                        	System.out.println("ERROR: Please enter: num1 & num2 & num3. [[ GAME1.WorkingToWorking(num1, num2, num3) ]]");
+                        	flag=false;
+                        }
                         break;
                     default: // G
                         GAME1.deckToUp();
                         break;
                 }
+                if (flag) {
+            		System.out.println("================================");
+            		print_game_all(GAME1.workingArray, GAME1.targetArray, GAME1.GameDeck, GAME1.GameDeckUp);
+            		System.out.println("\nCMD = "+GAME1.print_command());
+            		System.out.println("================================");
+            	}
             }
             else {
                 System.out.println("Wrong input, please repeat again.");
             }
-            System.out.println("================================");
-            print_game_all(GAME1.workingArray, GAME1.targetArray, GAME1.GameDeck, GAME1.GameDeckUp);
-            System.out.println("\nCMD = "+GAME1.print_command());
-            System.out.println("================================");
+            
         }
 
     }
