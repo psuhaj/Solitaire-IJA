@@ -13,11 +13,11 @@ import java.util.List;
 public class Game {
 
 
-    private CardDeck GameDeck;
-    private CardDeck GameDeckUp;
-    private CardDeck[] targetArray;
-    private CardStack[] workingArray;
-    private Commander commander;
+    public CardDeck GameDeck;
+    public CardDeck GameDeckUp;
+    public CardDeck[] targetArray;
+    public CardStack[] workingArray;
+    public Commander commander;
 
 
     // constructor
@@ -69,35 +69,35 @@ public class Game {
 
     */
 
-    public void workingToTarget(CardStack working,CardDeck target) {
+    public void workingToTarget(int workIndex,int targetIndex) {
 
-        Card tmp = working.pop();
-        boolean success = target.put(tmp);
+        Card tmp = this.workingArray[workIndex].pop();
+        boolean success = this.targetArray[targetIndex].put(tmp);
         
         // if cant put card on target
         if (!success) {
-            working.putEmpty(tmp);
+            this.workingArray[workIndex].putEmpty(tmp);
         }
         else {
         	//turn the top card on the working stack up
-            if (!working.isEmpty()) {
-                Card tmp2 = working.pop();
+            if (!this.workingArray[workIndex].isEmpty()) {
+                Card tmp2 = this.workingArray[workIndex].pop();
                 tmp2.turnFaceUp();
-                working.putEmpty(tmp2);
+                this.workingArray[workIndex].putEmpty(tmp2);
             }
             this.commander.cmd_do(Commander.enum_cmd.W_T);
         }
         // TODO place correctly: this.commander.cmd_do(Commander.enum_cmd.W_T);
     }
 
-    public void targetToWorking(CardStack working,CardDeck target) {
+    public void targetToWorking(int targetIndex,int workIndex) {
         
-        Card tmp = target.pop();
-        boolean success = working.put(tmp);
+        Card tmp = this.targetArray[targetIndex].pop();
+        boolean success = this.workingArray[workIndex].put(tmp);
         
         //if cant put card on target
         if (!success) {
-            target.put(tmp);
+            this.targetArray[targetIndex].put(tmp);
         }
         else {
             this.commander.cmd_do(Commander.enum_cmd.T_W);
@@ -105,14 +105,14 @@ public class Game {
         // TODO place correctly: this.commander.cmd_do(Commander.enum_cmd.T_W);
     }
 
-    public void gameDeckUpToTarget(CardDeck up,CardDeck target) {
+    public void gameDeckUpToTarget(int targetIndex) {
         
-        Card tmp = up.pop();
-        boolean success = target.put(tmp);
+        Card tmp = this.GameDeckUp.pop();
+        boolean success = this.targetArray[targetIndex].put(tmp);
         
         //if cant put card on target
         if (!success) {
-            up.put(tmp);
+            this.GameDeckUp.put(tmp);
         }
         else {
             this.commander.cmd_do(Commander.enum_cmd.GU_T);
@@ -120,14 +120,14 @@ public class Game {
         // TODO place correctly: this.commander.cmd_do(Commander.enum_cmd.GU_T);
     }
 
-    public void gameDeckUpToWorking(CardStack working,CardDeck up) {
+    public void gameDeckUpToWorking(int workIndex) {
 
-        Card tmp = up.pop();
-        boolean success = working.put(tmp);
+        Card tmp = this.GameDeckUp.pop();
+        boolean success = this.workingArray[workIndex].put(tmp);
         
         //if cant put card on target
         if (!success) {
-            up.put(tmp);
+            this.GameDeckUp.put(tmp);
         }
         else {
             this.commander.cmd_do(Commander.enum_cmd.GU_W);
@@ -135,14 +135,14 @@ public class Game {
         // TODO place correctly: this.commander.cmd_do(Commander.enum_cmd.GU_W);
     }
 
-    public void TargetToTarget(CardDeck target1,CardDeck target2) {
+    public void TargetToTarget(int targetIndex1,int targetIndex2) {
         
-        Card tmp = target1.pop();
-        boolean success = target2.put(tmp);
+        Card tmp = this.targetArray[targetIndex1].pop();
+        boolean success = this.targetArray[targetIndex2].put(tmp);
         
         //if cant put card on target
         if (!success) {
-            target1.put(tmp);
+            this.targetArray[targetIndex1].put(tmp);
         }
         else {
             this.commander.cmd_do(Commander.enum_cmd.T_T);
@@ -150,23 +150,23 @@ public class Game {
         // TODO place correctly: this.commander.cmd_do(Commander.enum_cmd.T_T);
     }
 
-    public void WorkingToWorking(CardStack working1,CardStack working2,int number) {
+    public void WorkingToWorking(int workIndex1,int workIndex2,int number) {
         
-        Card card = working1.get(number);
+        Card card = this.workingArray[workIndex1].get(number);
         
         if (!card.face()) return; // do nothing if the card we want to move from is facedown
 
-        boolean success = working2.put(card);
+        boolean success = this.workingArray[workIndex2].put(card);
 
         if (success) {
             this.commander.cmd_do(Commander.enum_cmd.W_W);
-            working2.pop();
-            CardStack tmp = working1.pop(card);
-            working2.put(tmp);
-            if (!working1.isEmpty()) {
-                Card tmp2 = working1.pop();
+            this.workingArray[workIndex2].pop();
+            CardStack tmp = this.workingArray[workIndex1].pop(card);
+            this.workingArray[workIndex2].put(tmp);
+            if (!this.workingArray[workIndex1].isEmpty()) {
+                Card tmp2 = this.workingArray[workIndex1].pop();
                 tmp2.turnFaceUp();
-                working1.putEmpty(tmp2);
+                this.workingArray[workIndex1].putEmpty(tmp2);
             }
         }
         /*
@@ -191,21 +191,21 @@ public class Game {
     public void deckToUp(CardDeck gameDeck,CardDeck up) {
         
         //if deck is empty
-        if (gameDeck.isEmpty()) {
-            int size=up.size();
+        if (this.GameDeck.isEmpty()) {
+            int size=this.GameDeckUp.size();
             for (int i = 0; i<size;i++) {
-                Card tmp2 = up.pop();
+                Card tmp2 = this.GameDeckUp.pop();
                 tmp2.turnFaceDown();
-                gameDeck.put(tmp2);
+                this.GameDeck.put(tmp2);
             }
             // here is missing commander.cmd_to() !!!!!!!!!!
             // TODO peter's: GE_GU, // gameDeckEMPTY => gameDeckUP
             // TODO place correctly: this.commander.cmd_do(Commander.enum_cmd.GE_GU);
         }
         else {
-            Card tmp = gameDeck.pop();
+            Card tmp = this.GameDeck.pop();
             tmp.turnFaceUp();
-            up.put(tmp);
+            this.GameDeckUp.put(tmp);
             this.commander.cmd_do(Commander.enum_cmd.G_GU);
         }
     }

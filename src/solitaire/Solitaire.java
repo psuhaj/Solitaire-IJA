@@ -5,6 +5,7 @@
  */
 package solitaire;
 
+
 import java.util.Collections;
 import solitaire.model.board.*;
 import solitaire.model.cards.*;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.regex.*;
+import solitaire.model.game.*;
 /**
  *
  * @author adrian and peto
@@ -29,47 +31,10 @@ public class Solitaire {
     // application logic
     public static void main(String[] args) {
 
-        // UNDO INIT
-        commander = new Commander();
-
-        //create card factory
-        AbstractFactorySolitaire factory = new FactoryKlondike();
-
-        //Create deck for game
-        CardDeck GameDeck = factory.createCardDeck();
-
-        //for cards which are get from GameDeck
-        CardDeck GameDeckUp = new xCardDeck();
-
-        //create working stacks
-        CardDeck[] targetArray = new CardDeck[4];
-        CardStack[] workingArray = new CardStack[7];
-
-        //create working stacks
-        for(int i = 0; i<7;i++){
-            workingArray[i] = factory.createWorkingPack();
-        }
-
-        //add cards to working stacks
-        for(int i=0;i<7;i++){
-            for(int j=i;j<7;j++){
-                workingArray[j].putEmpty(GameDeck.pop());
-            }
-        }
-
-        //turn face up
-        for(int i=0;i<7;i++){
-            Card tmp=workingArray[i].pop();
-            tmp.turnFaceUp();
-            workingArray[i].putEmpty(tmp);
-        }
-
-
-        //create target packs
-        for(int i = 0; i<4;i++){
-            targetArray[i] = factory.createTargetPack();
-        }
-
+        
+        
+        
+        
         Scanner scan = new Scanner(System.in);
         String str, val1, val2, val3, val4;
         int num1, num2, num3;
@@ -445,138 +410,5 @@ public class Solitaire {
 
  }
 // END OF ===========================================================================
-
-
-
-
-    //methods for moving cards
-    public static void workingToTarget(CardStack working,CardDeck target){
-        Card tmp = working.pop();
-        boolean success = target.put(tmp);
-        //if cant put card on target
-        if(!success){
-            working.putEmpty(tmp);
-        }
-        else{//turn the top card on the working stack up
-            if (!working.isEmpty()) {
-            	Card tmp2 = working.pop();
-            	tmp2.turnFaceUp();
-            	working.putEmpty(tmp2);
-            }
-            commander.cmd_do(Commander.enum_cmd.W_T);
-        }
-        // TODO place correctly: commander.cmd_do(Commander.enum_cmd.W_T);
-    }
-
-    public static void targetToWorking(CardStack working,CardDeck target){
-        Card tmp = target.pop();
-        boolean success = working.put(tmp);
-        //if cant put card on target
-        if(!success){
-            target.put(tmp);
-        }
-        else{
-            commander.cmd_do(Commander.enum_cmd.T_W);
-        }
-        // TODO place correctly: commander.cmd_do(Commander.enum_cmd.T_W);
-    }
-
-    public static void gameDeckUpToTarget(CardDeck up,CardDeck target){
-        Card tmp = up.pop();
-        boolean success = target.put(tmp);
-        //if cant put card on target
-        if(!success){
-            up.put(tmp);
-        }
-        else{
-            commander.cmd_do(Commander.enum_cmd.GU_T);
-        }
-        // TODO place correctly: commander.cmd_do(Commander.enum_cmd.GU_T);
-    }
-
-    public static void gameDeckUpToWorking(CardStack working,CardDeck up){
-        Card tmp = up.pop();
-        boolean success = working.put(tmp);
-        //if cant put card on target
-        if(!success){
-            up.put(tmp);
-        }
-        else{
-            commander.cmd_do(Commander.enum_cmd.GU_W);
-        }
-        // TODO place correctly: commander.cmd_do(Commander.enum_cmd.GU_W);
-    }
-
-    public static void TargetToTarget(CardDeck target1,CardDeck target2){
-        Card tmp = target1.pop();
-        boolean success = target2.put(tmp);
-        //if cant put card on target
-        if(!success){
-            target1.put(tmp);
-        }
-        else{
-            commander.cmd_do(Commander.enum_cmd.T_T);
-        }
-        // TODO place correctly: commander.cmd_do(Commander.enum_cmd.T_T);
-    }
-
-    public static void WorkingToWorking(CardStack working1,CardStack working2,int number){
-        Card card = working1.get(number);
-        if(!card.face()){
-            return;//do nothing if the card we want to move from is down
-        }
-        boolean success = working2.put(card);
-        if(success){
-        	commander.cmd_do(Commander.enum_cmd.W_W);
-        	working2.pop();
-        	CardStack tmp = working1.pop(card);
-        	working2.put(tmp);
-        	if(!working1.isEmpty()) {
-        		Card tmp2 = working1.pop();
-            	tmp2.turnFaceUp();
-            	working1.putEmpty(tmp2);
-            }
-        }
-
-
-		    /*
-		        	CardStack tmp = working1.pop(card);
-		        	boolean success = working2.put(tmp);
-		        	//if cant put card on target
-		        	if(!success){
-		        	    working1.put(tmp);
-		        	}
-		        	else{//turn the to card up on the stack from where cards were moved
-		        	    Card tmp2 = working1.pop();
-		        	    tmp2.turnFaceUp();
-		        	    working1.put(tmp2);
-		        	}
-		    */
-    }
-
-    public static void deckToUp(CardDeck gameDeck,CardDeck up){
-        //if deck is empty
-        if(gameDeck.isEmpty()){
-            int size=up.size();
-            for(int i = 0; i<size;i++){
-                Card tmp2 = up.pop();
-                tmp2.turnFaceDown();
-                gameDeck.put(tmp2);
-            }
-        }
-        else{
-            Card tmp = gameDeck.pop();
-            tmp.turnFaceUp();
-            up.put(tmp);
-            commander.cmd_do(Commander.enum_cmd.G_GU);
-        }
-        
-        
-        // TODO place correctly: commander.cmd_do(Commander.enum_cmd.G_GU);
-    }
-    
-    
-    //UNDO methods
-    
     
 }
