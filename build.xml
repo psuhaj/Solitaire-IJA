@@ -67,7 +67,7 @@
 
     <!-- download lib directory content -->
     <target name="lib" depends="clean-lib">
-        <exec executable="/bin/sh">
+        <exec executable="/bin/sh" failonerror="true">
             <arg value="${lib.dir}/${script_libs}"/>
         </exec>
     </target>

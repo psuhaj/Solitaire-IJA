@@ -7,8 +7,10 @@ wget -q "https://github.com/europ/stuff/raw/master/cards.zip" -P $destination
 
 if [ $? -ne 0 ]; then
 	printf "ERROR: Could not download \"cards.zip\"!\n"
-	exit
+	exit 1
 fi
 
 unzip -q $destination/$file1.zip -d $destination
 rm -f $destination/$file1.zip
+
+exit 0
