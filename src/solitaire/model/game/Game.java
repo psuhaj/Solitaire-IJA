@@ -56,6 +56,14 @@ public class Game {
         }
     }
 
+    public Game(CardDeck GD, CardDeck GDUP, CardDeck[] TA, CardStack[] WA, Commander CMDER) {
+        this.GameDeck     = GD;
+        this.GameDeckUp   = GDUP;
+        this.targetArray  = TA;
+        this.workingArray = WA;
+        this.commander    = CMDER;
+    }
+
     public void workingToTarget(int workIndex,int targetIndex) {
 
         Card tmp = this.workingArray[workIndex].pop();

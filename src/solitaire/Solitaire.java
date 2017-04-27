@@ -122,17 +122,17 @@ public class Solitaire {
                         }
                         break;
                     default:
-                    		echo("----------------------------------------------------------");
-							echo("W -> T : a n n   : game.workingToTarget(num1, num2);");
-							echo("T -> W : b n n   : game.targetToWorking(num1, num2);");
-							echo("G -> T : c n     : game.gameDeckUpToTarget(num1);");
-							echo("G -> W : d n     : game.gameDeckUpToWorking(num1);");
-							echo("T -> T : e n n   : game.TargetToTarget(num1, num2);");
-							echo("W -> W : f n n n : game.WorkingToWorking(num1, num2, num3);");
-							echo("flip   : g       : game.deckToUp();");
-							echo("----------------------------------------------------------");
-							flag=false;
-                    	break;
+                            echo("----------------------------------------------------------");
+                            echo("W -> T : a n n   : game.workingToTarget(num1, num2);");
+                            echo("T -> W : b n n   : game.targetToWorking(num1, num2);");
+                            echo("G -> T : c n     : game.gameDeckUpToTarget(num1);");
+                            echo("G -> W : d n     : game.gameDeckUpToWorking(num1);");
+                            echo("T -> T : e n n   : game.TargetToTarget(num1, num2);");
+                            echo("W -> W : f n n n : game.WorkingToWorking(num1, num2, num3);");
+                            echo("flip   : g       : game.deckToUp();");
+                            echo("----------------------------------------------------------");
+                            flag=false;
+                        break;
                 }
                 if (flag) {
                     System.out.println("================================");
@@ -149,50 +149,74 @@ public class Solitaire {
     }
 
     public static void write_load_game_test(Game GAME1) {
-        print_game_all(GAME1.workingArray, GAME1.targetArray, GAME1.GameDeck, GAME1.GameDeckUp);
-        String path = "/home/adrian/Documents/Data/IJA/Solitaire-IJA";
-        echo(path);
-        //write_game(path,GAME1);
+        
+        echo();
 
-        /*
-        Game loaded = null;
-        loaded = load_game();
-        print_game_all(loaded.workingArray, loaded.targetArray, loaded.GameDeck, loaded.GameDeckUp);
-        */
+        //echo("=================================================================");
+        //print_game_all(GAME1.workingArray, GAME1.targetArray, GAME1.GameDeck, GAME1.GameDeckUp);
+        //echo("=================================================================");
+        
+        String path = "/home/adrian/Documents/Data/IJA/Solitaire-IJA/";
+        String name = "gamex.solitiare";
+
+        //echo(path+name);
+        //echo("=================================================================");
+
+        int retval;
+        retval = write_game("myfile",GAME1);
+        echo(retval);
+
+
+        /*Game loaded = null;
+        loaded = load_game(path+name);
+        if (loaded != null) print_game_all(loaded.workingArray, loaded.targetArray, loaded.GameDeck, loaded.GameDeckUp);
+        else echo("Loaded game is NULL.");*/
+
     }
 
-    public static boolean write_game(String path, Game game) {
+    public static int write_game(String path, Game game) {
         try {
-            FileOutputStream output_file = new FileOutputStream(path);
-            ObjectOutputStream output_object = new ObjectOutputStream(output_file);
-            output_object.writeObject(game);
-            output_object.close();
-            output_file.close();
+            FileOutputStream FOS = new FileOutputStream(path);
+            ObjectOutputStream OOS = new ObjectOutputStream(FOS);
+            OOS.writeObject(game);
+            OOS.close();
+            FOS.close();
+            return 0;
         }
-        catch (IOException i) {
-            i.printStackTrace();
+        catch (FileNotFoundException fnfe) {
+            echo("write_game: catch (FileNotFoundException fnfe)");
+            fnfe.printStackTrace();
+            return 1;
         }
-        return true;
+        catch (IOException ioe) {
+            echo("write_game: catch (IOException ioe)");
+            ioe.printStackTrace();
+            return 2;
+        }
     }
 
     public static Game load_game(String path) {
-        Game game = null;
         try {
+            Game filegame;
             FileInputStream input_file = new FileInputStream(path);
             ObjectInputStream input_object = new ObjectInputStream(input_file);
-            game = (Game) input_object.readObject();
+            filegame = (Game) input_object.readObject();
             input_object.close();
             input_file.close();
+            print_game_all(filegame.workingArray, filegame.targetArray, filegame.GameDeck, filegame.GameDeckUp);
+            Game game = new Game(filegame.GameDeck,filegame.GameDeckUp,filegame.targetArray,filegame.workingArray,filegame.commander);
+            return game;
         }
-        catch (IOException i) {
-            i.printStackTrace();
+        catch (IOException ioe) {
+            echo("load_game: catch (IOException ioe)");
+            ioe.printStackTrace();
             return null;
         }
-        catch (ClassNotFoundException c) {
-            c.printStackTrace();
+        catch (ClassNotFoundException cnfe) {
+            echo("load_game: catch (ClassNotFoundException cnfe)");
+            cnfe.printStackTrace();
             return null;
         }
-        return game;
     }
 
 //##########################################################################################################
