@@ -286,7 +286,7 @@ public class Solitaire {
         if (deck.isEmpty()==false) {
             size     = deck.size();
             top_card = deck.get();
-            for(int i=0; i<size; i++) {
+            for(int i=0; i<size-1; i++) {
                 str = str + "(X) ";
             }
             str = str + "(" + top_card.print_log() + ") ";
