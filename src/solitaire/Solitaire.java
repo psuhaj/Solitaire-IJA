@@ -1,49 +1,38 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package solitaire;
 
-
 import java.util.Collections;
-import solitaire.model.board.*;
-import solitaire.model.cards.*;
-import solitaire.model.cmder.*;
-import java.util.Stack;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.regex.*;
 import solitaire.model.game.*;
-/**
- *
- * @author adrian and peto
- */
+
+import java.util.Scanner; // for printing, TODO - remove it
+import java.util.regex.*; // for printing, TODO - remove it
+import solitaire.model.board.*; // for printing, TODO - remove it
+import solitaire.model.cards.*; // for printing, TODO - remove it
+
 public class Solitaire {
 
-    /**
-     * @param args the command line arguments
-     */
+	static Game GAME1;
+	//static Game GAME2;
+	//static Game GAME3;
+	//static Game GAME4;
 
-    private static Commander commander;
-
-    // application logic
     public static void main(String[] args) {
 
-        
-        
-        
-        
+    	GAME1 = new Game();
+    	//GAME2 = new Game();
+    	//GAME3 = new Game();
+    	//GAME4 = new Game();
+
         Scanner scan = new Scanner(System.in);
+
         String str, val1, val2, val3, val4;
         int num1, num2, num3;
         boolean n1, n2, n3;
         char c;
-        Pattern regex = Pattern.compile("[\\s]*([ABCDEFG])(?:[\\s]+(\\d+))?(?:[\\s]+(\\d+))?(?:[\\s]+(\\d+))?[\\s]*");
+
+        Pattern regex = Pattern.compile("[\\s]*([abcdefg])(?:[\\s]+(\\d+))?(?:[\\s]+(\\d+))?(?:[\\s]+(\\d+))?[\\s]*");
         Matcher matcher;
 
-        print_game_all(workingArray, targetArray, GameDeck, GameDeckUp);
+        print_game_all(GAME1.workingArray, GAME1.targetArray, GAME1.GameDeck, GAME1.GameDeckUp);
         System.out.println("================================");
 
         while(scan.hasNextLine()) {
@@ -55,11 +44,6 @@ public class Solitaire {
                 val2 = matcher.group(2); // number 1
                 val3 = matcher.group(3); // number 2
                 val4 = matcher.group(4); // number 3
-                //System.out.println();
-                //System.out.println(val1);
-                //System.out.println(val2);
-                //System.out.println(val3);
-                //System.out.println(val4);
                 if (val2!=null) {
                     num1 = Integer.parseInt(val2);
                     n1 = true;
@@ -77,41 +61,41 @@ public class Solitaire {
                 else num3=0;
                 c = val1.charAt(0);
                 switch (c) {
-                    case 'A':
-                        if (n1 && n2) workingToTarget(workingArray[num1], targetArray[num2]);
+                    case 'a':
+                        if (n1 && n2) GAME1.workingToTarget(num1, num2);
                         else System.out.println("ERROR: enter number/s, workingToTarget(workingArray[num1], targetArray[num2])");
                         break;
-                    case 'B':
-                        if (n1 && n2) targetToWorking(workingArray[num1], targetArray[num2]);
+                    case 'b':
+                        if (n1 && n2) GAME1.targetToWorking(num1, num2);
                         else System.out.println("ERROR: enter number/s, targetToWorking(workingArray[num1], targetArray[num2])");
                         break;
-                    case 'C':
-                        if (n1) gameDeckUpToTarget(GameDeckUp, targetArray[num1]);
+                    case 'c':
+                        if (n1) GAME1.gameDeckUpToTarget(num1);
                         else System.out.println("ERROR: enter number/s, gameDeckUpToTarget(GameDeckUp, targetArray[num1])");
                         break;
-                    case 'D':
-                        if (n1) gameDeckUpToWorking(workingArray[num1], GameDeckUp);
+                    case 'd':
+                        if (n1) GAME1.gameDeckUpToWorking(num1);
                         else System.out.println("ERROR: enter number/s, gameDeckUpToWorking(workingArray[num1], GameDeckUp)");
                         break;
-                    case 'E':
-                        if (n1 && n2) TargetToTarget(targetArray[num1], targetArray[num2]);
+                    case 'e':
+                        if (n1 && n2) GAME1.TargetToTarget(num1, num2);
                         else System.out.println("ERROR: enter number/s, TargetToTarget(targetArray[num1], targetArray[num2])");
                         break;
-                    case 'F':
-                        if (n1 && n2 && n3) WorkingToWorking(workingArray[num1], workingArray[num2], num3);
+                    case 'f':
+                        if (n1 && n2 && n3) GAME1.WorkingToWorking(num1, num2, num3);
                         else System.out.println("ERROR: enter number/s, WorkingToWorking(workingArray[num1], workingArray[num2], num3)");
                         break;
                     default: // G
-                        deckToUp(GameDeck, GameDeckUp);
+                        GAME1.deckToUp();
                         break;
                 }
             }
             else {
-                System.out.println("Wrong input repeat again");
+                System.out.println("Wrong input, please repeat again.");
             }
             System.out.println("================================");
-            print_game_all(workingArray, targetArray, GameDeck, GameDeckUp);
-            System.out.println("\nCMD = "+commander.cmd_undo());
+            print_game_all(GAME1.workingArray, GAME1.targetArray, GAME1.GameDeck, GAME1.GameDeckUp);
+            System.out.println("\nCMD = "+GAME1.print_command());
             System.out.println("================================");
         }
 
@@ -410,5 +394,5 @@ public class Solitaire {
 
  }
 // END OF ===========================================================================
-    
+
 }

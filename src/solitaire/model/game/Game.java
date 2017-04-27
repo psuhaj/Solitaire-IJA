@@ -56,24 +56,11 @@ public class Game {
         }
     }
 
-    /*
-		TODO
-		methods are called as method(working[3], target[3])
-
-		do we need to FIXIT as 
-		method(int a, int b) {
-			working = this.working[a];
-			target  = this.target[b];
-			...
-		}
-
-    */
-
     public void workingToTarget(int workIndex,int targetIndex) {
 
         Card tmp = this.workingArray[workIndex].pop();
         boolean success = this.targetArray[targetIndex].put(tmp);
-        
+
         // if cant put card on target
         if (!success) {
             this.workingArray[workIndex].putEmpty(tmp);
@@ -91,10 +78,10 @@ public class Game {
     }
 
     public void targetToWorking(int targetIndex,int workIndex) {
-        
+
         Card tmp = this.targetArray[targetIndex].pop();
         boolean success = this.workingArray[workIndex].put(tmp);
-        
+
         //if cant put card on target
         if (!success) {
             this.targetArray[targetIndex].put(tmp);
@@ -106,10 +93,10 @@ public class Game {
     }
 
     public void gameDeckUpToTarget(int targetIndex) {
-        
+
         Card tmp = this.GameDeckUp.pop();
         boolean success = this.targetArray[targetIndex].put(tmp);
-        
+
         //if cant put card on target
         if (!success) {
             this.GameDeckUp.put(tmp);
@@ -124,7 +111,7 @@ public class Game {
 
         Card tmp = this.GameDeckUp.pop();
         boolean success = this.workingArray[workIndex].put(tmp);
-        
+
         //if cant put card on target
         if (!success) {
             this.GameDeckUp.put(tmp);
@@ -136,10 +123,10 @@ public class Game {
     }
 
     public void TargetToTarget(int targetIndex1,int targetIndex2) {
-        
+
         Card tmp = this.targetArray[targetIndex1].pop();
         boolean success = this.targetArray[targetIndex2].put(tmp);
-        
+
         //if cant put card on target
         if (!success) {
             this.targetArray[targetIndex1].put(tmp);
@@ -151,9 +138,9 @@ public class Game {
     }
 
     public void WorkingToWorking(int workIndex1,int workIndex2,int number) {
-        
+
         Card card = this.workingArray[workIndex1].get(number);
-        
+
         if (!card.face()) return; // do nothing if the card we want to move from is facedown
 
         boolean success = this.workingArray[workIndex2].put(card);
@@ -188,8 +175,8 @@ public class Game {
         */
     }
 
-    public void deckToUp(CardDeck gameDeck,CardDeck up) {
-        
+    public void deckToUp() {
+
         //if deck is empty
         if (this.GameDeck.isEmpty()) {
             int size=this.GameDeckUp.size();
@@ -208,6 +195,11 @@ public class Game {
             this.GameDeckUp.put(tmp);
             this.commander.cmd_do(Commander.enum_cmd.G_GU);
         }
+    }
+
+    // for printing, TODO - remove it
+    public String print_command() {
+        return this.commander.cmd_undo().toString();
     }
 
     // TODO: UNDO methods (inverse methods)
