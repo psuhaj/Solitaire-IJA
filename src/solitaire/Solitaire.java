@@ -169,10 +169,10 @@ public class Solitaire {
         }
 
 
-        /*Game loaded = null;
+        Game loaded = null;
         loaded = load_game(path+name);
         if (loaded != null) print_game_all(loaded.workingArray, loaded.targetArray, loaded.GameDeck, loaded.GameDeckUp);
-        else echo("Loaded game is NULL.");*/
+        else echo("Loaded game is NULL.");
 
     }
 
@@ -238,27 +238,47 @@ public class Solitaire {
     }
 
     public static Game load_game(String path) {
-        try {
-            Game filegame;
-            FileInputStream input_file = new FileInputStream(path);
-            ObjectInputStream input_object = new ObjectInputStream(input_file);
-            filegame = (Game) input_object.readObject();
-            input_object.close();
-            input_file.close();
-            print_game_all(filegame.workingArray, filegame.targetArray, filegame.GameDeck, filegame.GameDeckUp);
-            Game game = new Game(filegame.GameDeck,filegame.GameDeckUp,filegame.targetArray,filegame.workingArray,filegame.commander);
-            return game;
-        }
-        catch (IOException ioe) {
-            echo("load_game: catch (IOException ioe)");
-            ioe.printStackTrace();
+        String[] data = new String[13];
+        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+            String line;
+            int i = 0;
+            while ((line = br.readLine()) != null) {
+                data[i]=line;
+                i++;
+            }
+        } catch (IOException e) {
             return null;
         }
-        catch (ClassNotFoundException cnfe) {
-            echo("load_game: catch (ClassNotFoundException cnfe)");
-            cnfe.printStackTrace();
-            return null;
+
+        String[] cards;
+        Card card; 
+        for(int idx=0; idx<13; idx++) {
+            if (idx == 0) { // GD
+                if (data[idx]=="$") {
+                    ;
+                }
+                else {
+                    cards = data[idx].split(" ");
+                    for(String code: cards) {
+                        card = new xCard(code);
+                        print(code+"\t"+card+"\n");
+                    }
+                }
+            }
+            else if (idx == 1) { // GDUP
+                
+            }
+            else if (1 < idx && idx <= 5) { // target[]
+                
+            }
+            else { // working[]
+                
+            }
         }
+
+
+
+        return null;
     }
 
 //##########################################################################################################

@@ -14,6 +14,54 @@ public class xCard implements Card {
         this.face  = false; // (true = faceUP),(false = faceDOWN)
     }
 
+    // constructor for decoder
+    public xCard(String code) {
+        switch (code.charAt(0)) {
+            case 'A' :
+                this.value = 1;
+                break;
+            case 'J' :
+                this.value = 11;
+                break;
+            case 'Q' :
+                this.value = 12;
+                break;
+            case 'K' :
+                this.value = 13;
+                break;
+            case 'T' :
+                this.value = 10;
+                break;
+            default :
+                this.value = Character.getNumericValue(code.charAt(0));
+                break;
+        }
+        switch (code.charAt(1)) {
+            case 'H': {
+                this.color = Card.Color.HEARTS;
+                break;
+                }
+            case 'S':
+                this.color = Card.Color.SPADES;
+                break;
+            case 'D':
+                this.color = Card.Color.DIAMONDS;
+                break;
+            default:
+                this.color = Card.Color.CLUBS;
+                break;
+        }
+        switch (code.charAt(2)) {
+            case 'U': {
+                this.face = true;
+                break;
+                }
+            default:
+                this.face = false;
+                break;
+        }
+    }
+
     // GET COLOR
     @Override
     public Card.Color color() {
