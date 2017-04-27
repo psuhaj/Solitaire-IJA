@@ -3,14 +3,17 @@
 destination="lib"
 file1="cards"
 
-wget -q "https://github.com/europ/stuff/raw/master/cards.zip" -P $destination
+Error() {
+	printf "$1"
+	exit $2
+}
 
-if [ $? -ne 0 ]; then
-	printf "ERROR: Could not download \"cards.zip\"!\n"
-	exit 1
-fi
+wget -q "https://github.com/europ/stuff/raw/master/cards.zip" -P $destination > /dev/null 2>&1
+if [ $? -ne 0 ]; then Error "ERROR: Could not download \"cards.zip\"!\n" 1 ; fi
 
-unzip -q $destination/$file1.zip -d $destination
+unzip -q $destination/$file1.zip -d $destination > /dev/null 2>&1
+if [ $? -ne 0 ]; then Error "ERROR: Could not unzip \"cards.zip\"!\n" 1 ; fi
+
 rm -f $destination/$file1.zip
 
 exit 0
