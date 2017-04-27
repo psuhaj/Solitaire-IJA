@@ -24,6 +24,7 @@ public interface Card {
 	public int compareValue(Card c);
 	public boolean similarColorTo(Card c);
 	public String toString();
+	public String code();
 	public String print_log();
 
 }

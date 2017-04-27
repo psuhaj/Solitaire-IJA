@@ -166,6 +166,7 @@ public class xCard implements Card {
     }
 
     // transform CARD to 3 characters = VALUE+COLOR+FACE
+    @Override
     public String code(){
         String str;
         switch (this.value) {

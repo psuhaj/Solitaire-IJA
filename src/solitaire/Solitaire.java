@@ -26,8 +26,8 @@ public class Solitaire {
         //GAME3 = new Game();
         //GAME4 = new Game();
 
-        run(GAME1);
-        //write_load_game_test(GAME1);
+        //run(GAME1);
+        write_load_game_test(GAME1);
 
     }
 
@@ -149,13 +149,13 @@ public class Solitaire {
     }
 
     public static void write_load_game_test(Game GAME1) {
-        
+
         echo();
 
         //echo("=================================================================");
         //print_game_all(GAME1.workingArray, GAME1.targetArray, GAME1.GameDeck, GAME1.GameDeckUp);
         //echo("=================================================================");
-        
+
         String path = "/home/adrian/Documents/Data/IJA/Solitaire-IJA/";
         String name = "gamex.solitiare";
 
@@ -163,8 +163,10 @@ public class Solitaire {
         //echo("=================================================================");
 
         int retval;
-        retval = write_game("myfile",GAME1);
-        echo(retval);
+        retval = write_game(path+name,GAME1);
+        if (retval != 0 ) {
+            echo("TODO!!! write_game returned 1"); // TODO error, could not write game to file !
+        }
 
 
         /*Game loaded = null;
@@ -175,24 +177,64 @@ public class Solitaire {
     }
 
     public static int write_game(String path, Game game) {
-        try {
-            FileOutputStream FOS = new FileOutputStream(path);
-            ObjectOutputStream OOS = new ObjectOutputStream(FOS);
-            OOS.writeObject(game);
-            OOS.close();
-            FOS.close();
-            return 0;
+        String[] data = new String[13];
+        for(int i=0; i<13; i++) data[i]="";
+        for(int idx=0; idx<13; idx++) {
+            if (idx == 0) { // GD
+                if (game.GameDeck.isEmpty()) {
+                    data[idx]="$\n";
+                }
+                else {
+                    for(int i=0; i<game.GameDeck.size(); i++) {
+                        data[idx] += game.GameDeck.get(i).code()+" ";
+                    }
+                    data[idx] += "\n";
+                }
+            }
+            else if (idx == 1) { // GDUP
+                if (game.GameDeckUp.isEmpty()) {
+                    data[idx]="$\n";
+                }
+                else {
+                    for(int i=0; i<game.GameDeckUp.size(); i++) {
+                        data[idx] += game.GameDeckUp.get(i).code()+" ";
+                    }
+                    data[idx] += "\n";
+                }
+            }
+            else if (1 < idx && idx <= 5) { // target[]
+                if (game.targetArray[idx-2].isEmpty()) {
+                    data[idx]="$\n";
+                }
+                else {
+                    for(int i=0; i<game.targetArray[idx-2].size(); i++) {
+                        data[idx] += game.targetArray[idx-2].get(i).code()+" ";
+                    }
+                    data[idx] += "\n";
+                }
+            }
+            else { // working[]
+                if (game.workingArray[idx-6].isEmpty()) {
+                    data[idx]="$\n";
+                }
+                else {
+                    for(int i=0; i<game.workingArray[idx-6].size(); i++) {
+                        data[idx] += game.workingArray[idx-6].get(i).code()+" ";
+                    }
+                    data[idx] += "\n";
+                }
+            }
         }
-        catch (FileNotFoundException fnfe) {
-            echo("write_game: catch (FileNotFoundException fnfe)");
-            fnfe.printStackTrace();
+
+        try{
+            PrintWriter writer = new PrintWriter(path, "UTF-8");
+            for(int idx=0; idx<13; idx++) writer.print(data[idx]);
+            writer.close();
+        } catch (IOException e) {
             return 1;
         }
-        catch (IOException ioe) {
-            echo("write_game: catch (IOException ioe)");
-            ioe.printStackTrace();
-            return 2;
-        }
+
+        return 0;
     }
 
     public static Game load_game(String path) {
