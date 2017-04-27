@@ -18,23 +18,22 @@ public class Game {
     private CardDeck[] targetArray;
     private CardStack[] workingArray;
     private Commander commander;
-    private AbstractFactorySolitaire factory;
 
 
     // constructor
     public Game() {
 
         this.commander  = new Commander();
-        this.factory    = new FactoryKlondike();
+        AbstractFactorySolitaire factory = new FactoryKlondike();
 
-        this.GameDeck   = factory.createCardDeck();
-        this.GameDeckUp = new xCardDeck();
-        this.targetArray = new CardDeck[4];
+        this.GameDeck     = factory.createCardDeck();
+        this.GameDeckUp   = new xCardDeck();
+        this.targetArray  = new CardDeck[4];
         this.workingArray = new CardStack[7];
 
         // create working stacks
         for(int i = 0; i<7;i++){
-            this.workingArray[i] = this.factory.createWorkingPack();
+            this.workingArray[i] = factory.createWorkingPack();
         }
 
         // add cards to working stacks
@@ -53,7 +52,7 @@ public class Game {
 
         //create target packs
         for(int i = 0; i<4;i++){
-            this.targetArray[i] = this.factory.createTargetPack();
+            this.targetArray[i] = factory.createTargetPack();
         }
     }
 
