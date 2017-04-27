@@ -39,7 +39,7 @@ public class Solitaire {
         boolean n1, n2, n3, flag;
         char c;
 
-        Pattern regex = Pattern.compile("[\\s]*([abcdefg])(?:[\\s]+(\\d+))?(?:[\\s]+(\\d+))?(?:[\\s]+(\\d+))?[\\s]*");
+        Pattern regex = Pattern.compile("[\\s]*([abcdefgh])(?:[\\s]+(\\d+))?(?:[\\s]+(\\d+))?(?:[\\s]+(\\d+))?[\\s]*");
         Matcher matcher;
 
         print_game_all(GAME1.workingArray, GAME1.targetArray, GAME1.GameDeck, GAME1.GameDeckUp);
@@ -75,35 +75,35 @@ public class Solitaire {
                     case 'a':
                         if (n1 && n2 && !n3) GAME1.workingToTarget(num1, num2);
                         else {
-                            System.out.println("ERROR: Please enter: num1 & num2. [[ GAME1.workingToTarget(num1, num2); ]]");
+                            System.out.println("ERROR: Please enter: num1 & num2. [[ GAME1.workingToTarget(num1, num2) ]]");
                             flag=false;
                         }
                         break;
                     case 'b':
                         if (n1 && n2 && !n3) GAME1.targetToWorking(num1, num2);
                         else {
-                            System.out.println("ERROR: Please enter: num1 & num2. [[ GAME1.targetToWorking(num1, num2); ]]");
+                            System.out.println("ERROR: Please enter: num1 & num2. [[ GAME1.targetToWorking(num1, num2) ]]");
                             flag=false;
                         }
                         break;
                     case 'c':
                         if (n1 && !n2 && !n3) GAME1.gameDeckUpToTarget(num1);
                         else {
-                            System.out.println("ERROR: Please enter: num1. [[ GAME1.gameDeckUpToTarget(num1); ]]");
+                            System.out.println("ERROR: Please enter: num1. [[ GAME1.gameDeckUpToTarget(num1) ]]");
                             flag=false;
                         }
                         break;
                     case 'd':
                         if (n1 && !n2 && !n3) GAME1.gameDeckUpToWorking(num1);
                         else {
-                            System.out.println("ERROR: Please enter: num1. [[ GAME1.gameDeckUpToWorking(num1); ]]");
+                            System.out.println("ERROR: Please enter: num1. [[ GAME1.gameDeckUpToWorking(num1) ]]");
                             flag=false;
                         }
                         break;
                     case 'e':
                         if (n1 && n2 && !n3) GAME1.TargetToTarget(num1, num2);
                         else {
-                            System.out.println("ERROR: Please enter: num1 & num2. [[ GAME1.TargetToTarget(num1, num2); ]]");
+                            System.out.println("ERROR: Please enter: num1 & num2. [[ GAME1.TargetToTarget(num1, num2) ]]");
                             flag=false;
                         }
                         break;
@@ -114,13 +114,25 @@ public class Solitaire {
                             flag=false;
                         }
                         break;
-                    default: // G
+                    case 'g':
                         if (!n1 && !n2 && !n3) GAME1.deckToUp();
                         else {
                             System.out.println("ERROR: Please do not enter numbers. [[ GAME1.deckToUp() ]]");
                             flag=false;
                         }
                         break;
+                    default:
+                    		echo("----------------------------------------------------------");
+							echo("W -> T : a n n   : game.workingToTarget(num1, num2);");
+							echo("T -> W : b n n   : game.targetToWorking(num1, num2);");
+							echo("G -> T : c n     : game.gameDeckUpToTarget(num1);");
+							echo("G -> W : d n     : game.gameDeckUpToWorking(num1);");
+							echo("T -> T : e n n   : game.TargetToTarget(num1, num2);");
+							echo("W -> W : f n n n : game.WorkingToWorking(num1, num2, num3);");
+							echo("flip   : g       : game.deckToUp();");
+							echo("----------------------------------------------------------");
+							flag=false;
+                    	break;
                 }
                 if (flag) {
                     System.out.println("================================");
