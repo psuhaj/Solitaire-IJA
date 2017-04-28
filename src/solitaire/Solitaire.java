@@ -177,8 +177,12 @@ public class Solitaire {
     }
 
     public static int write_game(String path, Game game) {
+
+    	// create array of empty strings
         String[] data = new String[13];
         for(int i=0; i<13; i++) data[i]="";
+
+        // fill the array with data
         for(int idx=0; idx<13; idx++) {
             if (idx == 0) { // GD
                 if (game.GameDeck.isEmpty()) {
@@ -226,6 +230,7 @@ public class Solitaire {
             }
         }
 
+        // write the data into file
         try{
             PrintWriter writer = new PrintWriter(path, "UTF-8");
             for(int idx=0; idx<13; idx++) writer.print(data[idx]);
@@ -238,7 +243,10 @@ public class Solitaire {
     }
 
     public static Game load_game(String path) {
+ 
+    	// read the file into array of strings representing data
         String[] data = new String[13];
+ 
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             int i = 0;
@@ -250,8 +258,21 @@ public class Solitaire {
             return null;
         }
 
+        echo("==LOADED DATA==");
+        for(String c: data) {
+        	echo(c);
+        }
+        echo("===============");
+
+
         String[] cards;
-        Card card; 
+        Card card;
+
+        CardDeck    GD   = new xCardDeck();
+		CardDeck    GDUP = new xCardDeck();
+		CardDeck[]  TA   = new xCardDeck[4];
+		CardStack[] WA   = new xCardStack[7];
+
         for(int idx=0; idx<13; idx++) {
             if (idx == 0) { // GD
                 if (data[idx]=="$") {
@@ -261,22 +282,83 @@ public class Solitaire {
                     cards = data[idx].split(" ");
                     for(String code: cards) {
                         card = new xCard(code);
-                        print(code+"\t"+card+"\n");
+                        GD.put(card);
                     }
                 }
             }
             else if (idx == 1) { // GDUP
-                
+                if (data[idx].equals("$")) {
+                    continue;
+                }
+                else {
+                    cards = data[idx].split(" ");
+                    for(String code: cards) {
+                        card = new xCard(code);
+                        GDUP.put(card);
+                    }
+                }
             }
             else if (1 < idx && idx <= 5) { // target[]
-                
+            	echo("TARGET: IDX=="+idx);
+                if (data[idx].equals("$")) {
+                    continue;
+                }
+                else {
+                    cards = data[idx].split(" ");
+                    for(String code: cards) {
+                        card = new xCard(code);
+                        TA[idx-2].put(card);
+                    }
+                }
             }
             else { // working[]
-                
+            	echo("WORKING: IDX=="+idx);
+                /*
+                if (data[idx].equals("$")) {
+                    continue;
+                }
+                else {
+                    cards = data[idx].split(" ");
+                    for(String code: cards) {
+                        card = new xCard(code);
+                        WA[idx-6].putEmpty(card);
+                    }
+                }
+                */
             }
         }
 
-
+        echo("==GD==");
+        for(int i=0; i<GD.size(); i++) {
+        	print(GD.get(i));
+        }
+        echo();
+        echo("==GDUP==");
+        for(int i=0; i<GDUP.size(); i++) {
+        	echo(GDUP.get(i));
+        }
+        echo();
+        for(int i=0; i<4; i++) {
+        	echo("==TA["+i+"]==");
+        	/*
+        	// java.lang.NullPointerException WHYYYYYYY?
+        	if (!TA[i].isEmpty()) echo ("asd");
+        	else echo("qwer");
+			*/
+        	/*if (!TA[i].isEmpty()) {
+       			for(int j=0; j<TA[i].size(); j++) {
+       				echo(TA[i].get(j));
+       			}
+       		}*/
+        }
+        for(int i=0; i<7; i++) {
+        	echo("==WA["+i+"]==");
+        	/*if (!WA[i].isEmpty()) {
+       			for(int j=0; j<WA[i].size(); j++) {
+       				echo(WA[i].get(j));
+       			}
+       		}*/
+        }
 
         return null;
     }
