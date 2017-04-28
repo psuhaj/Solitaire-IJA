@@ -243,10 +243,10 @@ public class Solitaire {
     }
 
     public static Game load_game(String path) {
- 
+
         // read the file into array of strings representing data
         String[] data = new String[13];
- 
+
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             int i = 0;
@@ -258,17 +258,17 @@ public class Solitaire {
             return null;
         }
 
-        echo("==LOADED DATA==");
+        echo("==LOADED DATA: String[13]==");
         for(String c: data) {
             echo(c);
         }
-        echo("===============");
+        echo("===========================");
 
 
         String[] cards;
         Card card;
 
-        
+
         CardDeck    GD   = new xCardDeck();
         CardDeck    GDUP = new xCardDeck();
         CardDeck[]  TA   = new xCardDeck[4]; // TODO = check the initialization (data type is correct ?)
@@ -278,7 +278,7 @@ public class Solitaire {
             if (idx == 0) { // GD
 
                 echo("GD:   IDX = "+idx); // LOG PRINTING
-                
+
                 if (data[idx].equals("$")) {
                     continue;
                 }
@@ -295,7 +295,7 @@ public class Solitaire {
             else if (idx == 1) { // GDUP
 
                 echo("GDUP: IDX = "+idx); // LOG PRINTING
-                
+
                 if (data[idx].equals("$")) {
                     continue;
                 }
@@ -310,9 +310,8 @@ public class Solitaire {
 
             }
             else if (1 < idx && idx < 6) { // target[]
-                
+
                 echo("TARG: IDX = "+idx); // LOG PRINTING
-                
 
                 if (data[idx].equals("$")) {
                     continue;
@@ -359,7 +358,7 @@ public class Solitaire {
         }
         echo();
 
-        
+
         echo("==GDUP==");
         for(int i=0; i<GDUP.size(); i++) {
             print(GDUP.get(i)+" ");
@@ -367,7 +366,7 @@ public class Solitaire {
         echo();
 
         /*
-        
+
         // NullPointerException
         for(int i=0; i<4; i++) {
             echo("==TA["+i+"]==");
