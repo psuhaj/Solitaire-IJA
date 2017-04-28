@@ -156,7 +156,7 @@ public class Solitaire {
         //print_game_all(GAME1.workingArray, GAME1.targetArray, GAME1.GameDeck, GAME1.GameDeckUp);
         //echo("=================================================================");
 
-        String path = "/home/adrian/Documents/Data/IJA/Solitaire-IJA/";
+        String path = "/home/suhaj/Dokumenty/IJA/Git solitaire/Solitaire-IJA/";
         String name = "gamex.solitiare";
 
         //echo(path+name);
@@ -268,12 +268,24 @@ public class Solitaire {
         String[] cards;
         Card card;
 
+        AbstractFactorySolitaire factory = new FactoryKlondike();//factory for creating decks and stacks
 
         CardDeck    GD   = new xCardDeck();
         CardDeck    GDUP = new xCardDeck();
-        CardDeck[]  TA   = new xCardDeck[4]; // TODO = check the initialization (data type is correct ?)
+        CardDeck[]  TA   = new CardDeck[4]; // TODO = check the initialization (data type is correct ?)
         CardStack[] WA   = new CardStack[7]; // TODO = check the initialization (data type is correct ?)
-
+        
+        for(int i = 0; i<7;i++){
+            WA[i] = factory.createWorkingPack();
+        }
+        
+        for(int i = 0; i<4;i++){
+            TA[i] = factory.createTargetPack();
+        }
+        
+        
+        
+        
         for(int idx=0; idx<13; idx++) {
             if (idx == 0) { // GD
 
@@ -323,7 +335,7 @@ public class Solitaire {
                         //echo(card); // print object card
 
                         // NullPointerException
-                        //TA[idx-2].put(card); // TODO = put card to TA[0-3]
+                        TA[idx-2].put(card); // TODO = put card to TA[0-3]
                     }
                 }
 
@@ -342,7 +354,7 @@ public class Solitaire {
                         //echo(card); // print object card
 
                         // NullPointerException
-                        //WA[idx-6].putEmpty(card); // TODO = put card to WA[0-6]
+                        WA[idx-6].putEmpty(card); // TODO = put card to WA[0-6]
                     }
                 }
 
@@ -365,7 +377,7 @@ public class Solitaire {
         }
         echo();
 
-        /*
+        
 
         // NullPointerException
         for(int i=0; i<4; i++) {
@@ -386,10 +398,10 @@ public class Solitaire {
             echo();
         }
 
-        */
+        
 
         Game g = null;
-        //g = new Game(GD, GDUP, TA, WA); // TODO = enable this to make object game created on data from file
+        g = new Game(GD, GDUP, TA, WA); // TODO = enable this to make object game created on data from file
         return g;
     }
 
