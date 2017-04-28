@@ -156,7 +156,8 @@ public class Solitaire {
         //print_game_all(GAME1.workingArray, GAME1.targetArray, GAME1.GameDeck, GAME1.GameDeckUp);
         //echo("=================================================================");
 
-        String path = "/home/suhaj/Dokumenty/IJA/Git solitaire/Solitaire-IJA/";
+        //String path = "/home/suhaj/Dokumenty/IJA/Git solitaire/Solitaire-IJA/";
+        String path = "/home/adrian/Documents/Data/IJA/Solitaire-IJA/";
         String name = "gamex.solitiare";
 
         //echo(path+name);
@@ -168,11 +169,12 @@ public class Solitaire {
         //    echo("TODO!!! write_game returned 1"); // TODO error, could not write game to file !
         //}
 
-
         Game loaded = null;
         loaded = load_game(path+name);
         if (loaded != null) print_game_all(loaded.workingArray, loaded.targetArray, loaded.GameDeck, loaded.GameDeckUp);
         else echo("\nload_game() returned NULL");
+
+        echo("\n\nWARNING LOG!\nPATH ="+path+name);
 
     }
 
@@ -244,7 +246,7 @@ public class Solitaire {
 
     public static Game load_game(String path) {
 
-        // read the file into array of strings representing data
+        // READ FILE TO STRING (data[i]=one line from file)
         String[] data = new String[13];
 
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
@@ -258,39 +260,27 @@ public class Solitaire {
             return null;
         }
 
-        echo("==LOADED DATA: String[13]==");
-        for(String c: data) {
-            echo(c);
-        }
-        echo("===========================");
-
-
+        // INITIALIZATION OF GD, GDUP, TA[], WA[]
         String[] cards;
         Card card;
-
         AbstractFactorySolitaire factory = new FactoryKlondike();//factory for creating decks and stacks
 
         CardDeck    GD   = new xCardDeck();
         CardDeck    GDUP = new xCardDeck();
-        CardDeck[]  TA   = new CardDeck[4]; // TODO = check the initialization (data type is correct ?)
-        CardStack[] WA   = new CardStack[7]; // TODO = check the initialization (data type is correct ?)
-        
+        CardDeck[]  TA   = new CardDeck[4];
+        CardStack[] WA   = new CardStack[7];
+
         for(int i = 0; i<7;i++){
             WA[i] = factory.createWorkingPack();
         }
-        
+
         for(int i = 0; i<4;i++){
             TA[i] = factory.createTargetPack();
         }
-        
-        
-        
-        
+
+        // FILLING GD, GDUP, TA[], WA[] WITH DATA
         for(int idx=0; idx<13; idx++) {
             if (idx == 0) { // GD
-
-                echo("GD:   IDX = "+idx); // LOG PRINTING
-
                 if (data[idx].equals("$")) {
                     continue;
                 }
@@ -298,16 +288,12 @@ public class Solitaire {
                     cards = data[idx].split(" ");
                     for(String code: cards) {
                         card = new xCard(code);
-                        //echo(card); // print object card
                         GD.put(card); // put card to GD
                     }
                 }
 
             }
             else if (idx == 1) { // GDUP
-
-                echo("GDUP: IDX = "+idx); // LOG PRINTING
-
                 if (data[idx].equals("$")) {
                     continue;
                 }
@@ -315,16 +301,12 @@ public class Solitaire {
                     cards = data[idx].split(" ");
                     for(String code: cards) {
                         card = new xCard(code);
-                        //echo(card); // print object card
                         GDUP.put(card); // put card to GDUP
                     }
                 }
 
             }
             else if (1 < idx && idx < 6) { // target[]
-
-                echo("TARG: IDX = "+idx); // LOG PRINTING
-
                 if (data[idx].equals("$")) {
                     continue;
                 }
@@ -332,18 +314,12 @@ public class Solitaire {
                     cards = data[idx].split(" ");
                     for(String code: cards) {
                         card = new xCard(code);
-                        //echo(card); // print object card
-
-                        // NullPointerException
-                        TA[idx-2].put(card); // TODO = put card to TA[0-3]
+                        TA[idx-2].put(card); // put card to TA[0-3]
                     }
                 }
 
             }
             else { // working[]
-
-                echo("WORK: IDX=="+idx); // LOG PRINTING
-
                 if (data[idx].equals("$")) {
                     continue;
                 }
@@ -351,57 +327,14 @@ public class Solitaire {
                     cards = data[idx].split(" ");
                     for(int i=0; i<cards.length; i++) {
                         card = new xCard(cards[i]);
-                        //echo(card); // print object card
-
-                        // NullPointerException
-                        WA[idx-6].putEmpty(card); // TODO = put card to WA[0-6]
+                        WA[idx-6].putEmpty(card); // put card to WA[0-6]
                     }
                 }
 
             }
         }
 
-
-        // PRINTING THE DATA (deck or stack with cards)
-
-        echo("==GD==");
-        for(int i=0; i<GD.size(); i++) {
-            print(GD.get(i)+" ");
-        }
-        echo();
-
-
-        echo("==GDUP==");
-        for(int i=0; i<GDUP.size(); i++) {
-            print(GDUP.get(i)+" ");
-        }
-        echo();
-
-        
-
-        // NullPointerException
-        for(int i=0; i<4; i++) {
-            echo("==TA["+i+"]==");
-            echo(TA[0].size());
-            for(int j=0; j<TA[i].size(); j++) {
-                echo(TA[i].get(j));
-            }
-            echo();
-        }
-
-        // NullPointerException
-        for(int i=0; i<7; i++) {
-            echo("==WA["+i+"]==");
-            for(int j=0; j<WA[i].size(); j++) {
-                echo(WA[i].get(j));
-            }
-            echo();
-        }
-
-        
-
-        Game g = null;
-        g = new Game(GD, GDUP, TA, WA); // TODO = enable this to make object game created on data from file
+        Game g = new Game(GD, GDUP, TA, WA);
         return g;
     }
 
