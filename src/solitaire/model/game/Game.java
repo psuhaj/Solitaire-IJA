@@ -56,12 +56,12 @@ public class Game {
         }
     }
 
-    public Game(CardDeck GD, CardDeck GDUP, CardDeck[] TA, CardStack[] WA, Commander CMDER) {
+    public Game(CardDeck GD, CardDeck GDUP, CardDeck[] TA, CardStack[] WA) {
         this.GameDeck     = GD;
         this.GameDeckUp   = GDUP;
         this.targetArray  = TA;
         this.workingArray = WA;
-        this.commander    = CMDER;
+        this.commander    = new Commander();
     }
 
     public void workingToTarget(int workIndex,int targetIndex) {
