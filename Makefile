@@ -26,6 +26,9 @@ zip: dir clean
 	@zip -q -r $(archiv_name).zip $(archiv_name)
 	@rm -rf $(archiv_name)
 
+merlin: clean
+	@./merlin.sh
+
 cleanlib:
 	@ant clean-lib
 
