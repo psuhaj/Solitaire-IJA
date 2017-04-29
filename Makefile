@@ -5,30 +5,30 @@ files=build.xml readme.txt rozdeleni.txt
 .PHONY: make run doc dir lib zip clean
 
 make:
-	ant compile
+	@ant compile
 
 run: make
-	java -jar dest-client/ija-client.jar
+	@java -jar dest-client/ija-client.jar
 
 doc:
-	ant doc
+	@ant doc
 
 dir:
-	ant dir
+	@ant dir
 
 lib:
-	ant lib
+	@ant lib
 
 zip: dir clean
-	mkdir $(archiv_name)
-	ant doc
-	cp -r -t $(archiv_name) $(folders) $(files)
-	zip -q -r $(archiv_name).zip $(archiv_name)
-	rm -rf $(archiv_name)
+	@mkdir $(archiv_name)
+	@ant doc
+	@cp -r -t $(archiv_name) $(folders) $(files)
+	@zip -q -r $(archiv_name).zip $(archiv_name)
+	@rm -rf $(archiv_name)
 
 cleanlib:
-	ant clean-lib
+	@ant clean-lib
 
 clean:
-	ant clean
-	rm -f $(archiv_name).zip
+	@ant clean
+	@rm -f $(archiv_name).zip
