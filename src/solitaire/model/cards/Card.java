@@ -1,4 +1,5 @@
 package solitaire.model.cards;
+import java.awt.image.BufferedImage;
 
 public interface Card {
 
@@ -26,5 +27,6 @@ public interface Card {
     public String toString();
     public String code();
     public String print_log();
+    public BufferedImage getCardImage();
 
 }

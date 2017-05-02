@@ -71,6 +71,10 @@ public class xCard implements Card {
         return this.color;
     }
 
+    public BufferedImage getCardImage(){
+        return this.image;
+    }
+
     // GET VALUE
     @Override
     public int value() {
