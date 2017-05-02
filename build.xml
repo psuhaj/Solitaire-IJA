@@ -80,6 +80,7 @@
             <manifest>
                 <attribute name="Main-Class" value="${main-class}"/>
             </manifest>
+            <fileset dir="lib"/>
         </jar>
     </target>
 

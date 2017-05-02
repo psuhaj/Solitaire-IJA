@@ -26,8 +26,8 @@ public class Solitaire {
         //GAME3 = new Game();
         //GAME4 = new Game();
 
-        //run(GAME1);
-        write_load_game_test(GAME1);
+        run(GAME1);
+        //write_load_game_test(GAME1);
 
     }
 

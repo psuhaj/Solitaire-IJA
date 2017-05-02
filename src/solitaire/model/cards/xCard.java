@@ -1,17 +1,20 @@
 package solitaire.model.cards;
 
+import java.awt.image.BufferedImage;
+
 public class xCard implements Card {
 
     // Card's atributes
     private Card.Color color;
     private int value;
     private boolean face;
-
+    private BufferedImage image;
     // constructor
-    public xCard(Card.Color c, int value) {
+    public xCard(Card.Color c, int value, BufferedImage image) {
         this.color = c;
         this.value = value;
         this.face  = false; // (true = faceUP),(false = faceDOWN)
+        this.image = image;
     }
 
     // constructor for decoder

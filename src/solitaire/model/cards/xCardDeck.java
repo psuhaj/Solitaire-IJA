@@ -1,6 +1,9 @@
 package solitaire.model.cards;
 
 import java.util.Stack;
+import java.io.File;
+import javax.imageio.ImageIO;
+import java.io.IOException;
 
 public class xCardDeck implements CardDeck {
 
@@ -63,21 +66,27 @@ public class xCardDeck implements CardDeck {
 	public CardDeck createStandardDeck() {
 		CardDeck stdDeck = new xCardDeck();
 		Card card;
-		for (int i = 1; i<=13; i++) {
-			card = new xCard(Card.Color.CLUBS,i);
-			stdDeck.put(card);
+		try{
+			for (int i = 1; i<=13; i++) {
+				card = new xCard(Card.Color.CLUBS,i,ImageIO.read(this.getClass().getResourceAsStream("/cards/"+i+"_of_clubs.png")));
+				stdDeck.put(card);
+			}
+			for (int i = 1; i<=13; i++) {
+				card = new xCard(Card.Color.DIAMONDS,i,ImageIO.read(this.getClass().getResourceAsStream("/cards/"+i+"_of_diamonds.png")));
+				stdDeck.put(card);
+			}
+			for (int i = 1; i<=13; i++) {
+				card = new xCard(Card.Color.HEARTS,i,ImageIO.read(this.getClass().getResourceAsStream("/cards/"+i+"_of_hearts.png")));
+				stdDeck.put(card);
+			}
+			for (int i = 1; i<=13; i++) {
+				card = new xCard(Card.Color.SPADES,i,ImageIO.read(this.getClass().getResourceAsStream("/cards/"+i+"_of_spades.png")));
+				stdDeck.put(card);
+			}
+			//return stdDeck;
 		}
-		for (int i = 1; i<=13; i++) {
-			card = new xCard(Card.Color.DIAMONDS,i);
-			stdDeck.put(card);
-		}
-		for (int i = 1; i<=13; i++) {
-			card = new xCard(Card.Color.HEARTS,i);
-			stdDeck.put(card);
-		}
-		for (int i = 1; i<=13; i++) {
-			card = new xCard(Card.Color.SPADES,i);
-			stdDeck.put(card);
+		catch(IOException e){
+				e.printStackTrace();
 		}
 		return stdDeck;
 	}
