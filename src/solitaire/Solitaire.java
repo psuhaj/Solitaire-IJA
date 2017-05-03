@@ -27,7 +27,9 @@ import solitaire.model.cards.*; // for printing, TODO - remove it
 
 public class Solitaire extends JFrame {
 	//public static int gameFlag=0;
-	//public static int gameUpFlag=0;
+	public static int gameUpFlag=0;
+    public static int targetNum=-1;
+    public static int workingNUm=-1;
 
 	static Game GAME1;
 
@@ -98,6 +100,8 @@ public class Solitaire extends JFrame {
         test.setTransferHandler(new TransferHandler("icon"));
         test2.setTransferHandler(new TransferHandler("icon"));
 */
+
+        //listener pre game deck, presuvaju sa karty na gameDeckUp na kliknuti
 	    gameDeck.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -129,11 +133,12 @@ public class Solitaire extends JFrame {
 
         });
 
+
 	    gameDeckUp.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 	
-                
+                gameUpFlag=1;
             }
 
         });
@@ -163,11 +168,162 @@ public class Solitaire extends JFrame {
 		target4.setOpaque(true);
 		target4.setBackground(Color.lightGray);
 
+
+        //listenery pre target balicky
+
+        target1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if(gameUpFlag==1){
+                    gameUpFlag=0;
+                    GAME1.gameDeckUpToTarget(0);
+                    if(!GAME1.GameDeckUp.isEmpty()){
+                        gameDeckUp.setIcon(new ImageIcon(new ImageIcon(GAME1.GameDeckUp.get().getCardImage()).getImage().getScaledInstance(128, 181, Image.SCALE_SMOOTH)));//obrazok sa nacita
+                        gameDeckUp.revalidate();
+                    }
+                    else{
+                        gameDeckUp.setBackground(Color.lightGray);
+                        gameDeckUp.revalidate();
+                    }
+                    if(!GAME1.targetArray[0].isEmpty()){
+                        target1.setIcon(new ImageIcon(new ImageIcon(GAME1.targetArray[0].get().getCardImage()).getImage().getScaledInstance(128, 181, Image.SCALE_SMOOTH)));
+                        target1.revalidate();
+                        
+                    }
+                    else{
+                        target1.setIcon(null);
+                        target1.setOpaque(true);
+                        target1.setBackground(Color.lightGray);
+                        target1.revalidate();//prekreslenie?
+                    }
+                    getContentPane().repaint();//prekreslenie
+
+                }    
+                
+            }
+
+        });
+
+       target2.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if(gameUpFlag==1){
+                    gameUpFlag=0;
+                    GAME1.gameDeckUpToTarget(1);
+                    if(!GAME1.GameDeckUp.isEmpty()){
+                        gameDeckUp.setIcon(new ImageIcon(new ImageIcon(GAME1.GameDeckUp.get().getCardImage()).getImage().getScaledInstance(128, 181, Image.SCALE_SMOOTH)));
+                        gameDeckUp.revalidate();
+                    }
+                    else{
+                        gameDeckUp.setBackground(Color.lightGray);
+                        gameDeckUp.revalidate();
+                    }
+                    if(!GAME1.targetArray[1].isEmpty()){
+                        target2.setIcon(new ImageIcon(new ImageIcon(GAME1.targetArray[1].get().getCardImage()).getImage().getScaledInstance(128, 181, Image.SCALE_SMOOTH)));
+                        target2.revalidate();
+                        
+                    }
+                    else{
+                        target2.setIcon(null);
+                        target2.setOpaque(true);
+                        target2.setBackground(Color.lightGray);
+                        target2.revalidate();
+                    }
+                    getContentPane().repaint();
+
+                }    
+                
+            }
+
+        });
+
+       target3.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if(gameUpFlag==1){
+                    gameUpFlag=0;
+                    GAME1.gameDeckUpToTarget(2);
+                    if(!GAME1.GameDeckUp.isEmpty()){
+                        gameDeckUp.setIcon(new ImageIcon(new ImageIcon(GAME1.GameDeckUp.get().getCardImage()).getImage().getScaledInstance(128, 181, Image.SCALE_SMOOTH)));
+                        gameDeckUp.revalidate();
+                    }
+                    else{
+                        gameDeckUp.setBackground(Color.lightGray);
+                        gameDeckUp.revalidate();
+                    }
+                    if(!GAME1.targetArray[2].isEmpty()){
+                        target3.setIcon(new ImageIcon(new ImageIcon(GAME1.targetArray[2].get().getCardImage()).getImage().getScaledInstance(128, 181, Image.SCALE_SMOOTH)));
+                        target3.revalidate();
+                        
+                    }
+                    else{
+                        target3.setIcon(null);
+                        target3.setOpaque(true);
+                        target3.setBackground(Color.lightGray);
+                        target3.revalidate();
+                    }
+                    getContentPane().repaint();
+
+                }    
+                
+            }
+
+        });
+
+       target4.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if(gameUpFlag==1){
+                    gameUpFlag=0;
+                    GAME1.gameDeckUpToTarget(3);
+                    if(!GAME1.GameDeckUp.isEmpty()){
+                        gameDeckUp.setIcon(new ImageIcon(new ImageIcon(GAME1.GameDeckUp.get().getCardImage()).getImage().getScaledInstance(128, 181, Image.SCALE_SMOOTH)));
+                        gameDeckUp.revalidate();
+                    }
+                    else{
+                        gameDeckUp.setBackground(Color.lightGray);
+                        gameDeckUp.revalidate();
+                    }
+                    if(!GAME1.targetArray[3].isEmpty()){
+                        target4.setIcon(new ImageIcon(new ImageIcon(GAME1.targetArray[3].get().getCardImage()).getImage().getScaledInstance(128, 181, Image.SCALE_SMOOTH)));
+                        target4.revalidate();
+                        
+                    }
+                    else{
+                        target4.setIcon(null);
+                        target4.setOpaque(true);
+                        target4.setBackground(Color.lightGray);
+                        target4.revalidate();
+                    }
+                    getContentPane().repaint();
+
+                }    
+                
+            }
+
+        });
+
+
+       this.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                    
+                gameUpFlag=0;
+            }
+
+        });
+
+
+
+
+
+        //pridavanie target balickov
 		panel.add(target1);
 		panel.add(target2);
 		panel.add(target3);
 		panel.add(target4);
 
+        //nastavenie pozicie
 		target1.setBounds(insets.left+700, 70+ insets.top, 125,181);
 		target2.setBounds(700+40+125+insets.right, 70+ insets.top, 125,181);
 		target3.setBounds(125+40+125+700+40+insets.right, 70+ insets.top, 125,181);
@@ -175,7 +331,7 @@ public class Solitaire extends JFrame {
 
 
 
-		JLayeredPane working1 = new JLayeredPane();
+		/*JLayeredPane working1 = new JLayeredPane();
 		panel.add(working1);
 		working1.setBounds(insets.left+40, insets.top+400,125,600);
 		JLabel tmp = new JLabel();
@@ -187,8 +343,49 @@ public class Solitaire extends JFrame {
 		JLabel tmp2 = new JLabel();
 		tmp2.setOpaque(true);
 		tmp2.setBackground(Color.RED);
-		tmp2.setBounds(0,50,125,181);
-		working1.add(tmp2,new Integer(2),10);
+        tmp2.setBorder(BorderFactory.createLineBorder(Color.black));
+		tmp2.setBounds(0,30,125,181);
+		working1.add(tmp2,new Integer(2),1);*/
+
+
+
+        //vytvorenie 7 stackov pre working
+        JLayeredPane[] workingStacks = new JLayeredPane[7];
+        
+        for(int i=0;i<7;i++){
+            workingStacks[i] = new JLayeredPane();
+            panel.add(workingStacks[i]);
+            workingStacks[i].setBounds(insets.left+40+(i*200), insets.top+400,125,600);
+            JLabel tmp = new JLabel();
+            tmp.setOpaque(true);
+            tmp.setBackground(Color.lightGray);
+            tmp.setBounds(0,0,125,181);//pozicia v ramci layeredpane
+            workingStacks[i].add(tmp,new Integer(1),0);
+            for(int j = 0;j<GAME1.workingArray[i].size();j++){//prejdeme vsetky karty v stacku a vykreslime potrebne
+                if(GAME1.workingArray[i].get(j).face()){//ak je tvarou hore
+                    JLabel tmp2 = new JLabel();
+                    tmp2.setIcon(new ImageIcon(new ImageIcon(GAME1.workingArray[i].get(j).getCardImage()).getImage().getScaledInstance(128, 181, Image.SCALE_SMOOTH)));
+                    tmp2.setBounds(0,j*30,125,181);
+                    workingStacks[i].add(tmp2,new Integer(j+2),j+1);
+                }
+                else{
+                    JLabel tmp2 = new JLabel();
+                    tmp2.setOpaque(true);
+                    tmp2.setBackground(Color.RED);
+                    tmp2.setBorder(BorderFactory.createLineBorder(Color.black));
+                    tmp2.setBounds(0,j*30,125,181);
+                    workingStacks[i].add(tmp2,new Integer(j+2),j+1);
+                }
+            }
+
+        }
+
+
+
+
+
+
+
 
 
 
