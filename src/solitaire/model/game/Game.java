@@ -82,7 +82,6 @@ public class Game {
                 tmp2.turnFaceUp();
                 this.workingArray[workIndex].putEmpty(tmp2);
             }
-            this.commander.cmd_do(Commander.enum_cmd.W_T); // TODO = remove this, wont be used propably
         }
     }
 
@@ -97,7 +96,6 @@ public class Game {
             this.targetArray[targetIndex].put(tmp);
         }
         else {
-            this.commander.cmd_do(Commander.enum_cmd.T_W); // TODO = remove this, wont be used propably
         }
     }
 
@@ -112,7 +110,6 @@ public class Game {
             this.GameDeckUp.put(tmp);
         }
         else {
-            this.commander.cmd_do(Commander.enum_cmd.GU_T); // TODO = remove this, wont be used propably
         }
     }
 
@@ -127,7 +124,6 @@ public class Game {
             this.GameDeckUp.put(tmp);
         }
         else {
-            this.commander.cmd_do(Commander.enum_cmd.GU_W); // TODO = remove this, wont be used propably
         }
     }
 
@@ -142,7 +138,6 @@ public class Game {
             this.targetArray[targetIndex1].put(tmp);
         }
         else {
-            this.commander.cmd_do(Commander.enum_cmd.T_T); // TODO = remove this, wont be used propably
         }
     }
 
@@ -156,7 +151,6 @@ public class Game {
         boolean success = this.workingArray[workIndex2].put(card);
 
         if (success) {
-            this.commander.cmd_do(Commander.enum_cmd.W_W); // TODO = remove this, wont be used propably
             this.workingArray[workIndex2].pop();
             CardStack tmp = this.workingArray[workIndex1].pop(card);
             this.workingArray[workIndex2].put(tmp);
@@ -187,7 +181,6 @@ public class Game {
             Card tmp = this.GameDeck.pop();
             tmp.turnFaceUp();
             this.GameDeckUp.put(tmp);
-            this.commander.cmd_do(Commander.enum_cmd.G_GU); // TODO = remove this, wont be used propably
         }
     }
 
