@@ -56,6 +56,7 @@ public class Game {
         }
     }
 
+
     public Game(CardDeck GD, CardDeck GDUP, CardDeck[] TA, CardStack[] WA) {
         this.GameDeck     = GD;
         this.GameDeckUp   = GDUP;
@@ -63,6 +64,7 @@ public class Game {
         this.workingArray = WA;
         this.commander    = new Commander();
     }
+
 
     public void workingToTarget(int workIndex,int targetIndex) {
 
@@ -80,10 +82,10 @@ public class Game {
                 tmp2.turnFaceUp();
                 this.workingArray[workIndex].putEmpty(tmp2);
             }
-            this.commander.cmd_do(Commander.enum_cmd.W_T);
+            this.commander.cmd_do(Commander.enum_cmd.W_T); // TODO = remove this, wont be used propably
         }
-        // TODO place correctly: this.commander.cmd_do(Commander.enum_cmd.W_T);
     }
+
 
     public void targetToWorking(int targetIndex,int workIndex) {
 
@@ -95,10 +97,10 @@ public class Game {
             this.targetArray[targetIndex].put(tmp);
         }
         else {
-            this.commander.cmd_do(Commander.enum_cmd.T_W);
+            this.commander.cmd_do(Commander.enum_cmd.T_W); // TODO = remove this, wont be used propably
         }
-        // TODO place correctly: this.commander.cmd_do(Commander.enum_cmd.T_W);
     }
+
 
     public void gameDeckUpToTarget(int targetIndex) {
 
@@ -110,10 +112,10 @@ public class Game {
             this.GameDeckUp.put(tmp);
         }
         else {
-            this.commander.cmd_do(Commander.enum_cmd.GU_T);
+            this.commander.cmd_do(Commander.enum_cmd.GU_T); // TODO = remove this, wont be used propably
         }
-        // TODO place correctly: this.commander.cmd_do(Commander.enum_cmd.GU_T);
     }
+
 
     public void gameDeckUpToWorking(int workIndex) {
 
@@ -125,10 +127,10 @@ public class Game {
             this.GameDeckUp.put(tmp);
         }
         else {
-            this.commander.cmd_do(Commander.enum_cmd.GU_W);
+            this.commander.cmd_do(Commander.enum_cmd.GU_W); // TODO = remove this, wont be used propably
         }
-        // TODO place correctly: this.commander.cmd_do(Commander.enum_cmd.GU_W);
     }
+
 
     public void TargetToTarget(int targetIndex1,int targetIndex2) {
 
@@ -140,10 +142,10 @@ public class Game {
             this.targetArray[targetIndex1].put(tmp);
         }
         else {
-            this.commander.cmd_do(Commander.enum_cmd.T_T);
+            this.commander.cmd_do(Commander.enum_cmd.T_T); // TODO = remove this, wont be used propably
         }
-        // TODO place correctly: this.commander.cmd_do(Commander.enum_cmd.T_T);
     }
+
 
     public void WorkingToWorking(int workIndex1,int workIndex2,int number) {
 
@@ -154,7 +156,7 @@ public class Game {
         boolean success = this.workingArray[workIndex2].put(card);
 
         if (success) {
-            this.commander.cmd_do(Commander.enum_cmd.W_W);
+            this.commander.cmd_do(Commander.enum_cmd.W_W); // TODO = remove this, wont be used propably
             this.workingArray[workIndex2].pop();
             CardStack tmp = this.workingArray[workIndex1].pop(card);
             this.workingArray[workIndex2].put(tmp);
@@ -164,24 +166,8 @@ public class Game {
                 this.workingArray[workIndex1].putEmpty(tmp2);
             }
         }
-        /*
-        // TODO: remove this block comment or fix it
-
-        CardStack tmp = working1.pop(card);
-        boolean success = working2.put(tmp);
-        //if cant put card on target
-        if(!success){
-            working1.put(tmp);
-        }
-        else{
-            //turn the to card up on the stack from where cards were moved
-            Card tmp2 = working1.pop();
-            tmp2.turnFaceUp();
-            working1.put(tmp2);
-        }
-
-        */
     }
+
 
     public void deckToUp() {
 
@@ -201,15 +187,15 @@ public class Game {
             Card tmp = this.GameDeck.pop();
             tmp.turnFaceUp();
             this.GameDeckUp.put(tmp);
-            this.commander.cmd_do(Commander.enum_cmd.G_GU);
+            this.commander.cmd_do(Commander.enum_cmd.G_GU); // TODO = remove this, wont be used propably
         }
     }
+
 
     // for printing, TODO - remove it
     public String print_command() {
         return this.commander.cmd_undo().toString();
     }
 
-    // TODO: UNDO methods (inverse methods)
 
 }
