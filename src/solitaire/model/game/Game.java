@@ -10,6 +10,9 @@ import java.util.List;
 
 public class Game {
 
+    public static void print(Object... args){for(Object o: args)System.out.print(o);}
+    public static void echo(Object... args){for(Object o: args)System.out.print(o);System.out.println();}
+
     public CardDeck GameDeck;
     public CardDeck GameDeckUp;
     public CardDeck[] targetArray;
@@ -114,6 +117,97 @@ public class Game {
             this.history.peek().undo();
             this.history.pop();
         }
+    }
+
+    public void hint() {
+
+        int size;
+        Card card;
+
+        // find hint WORKING TO TARGET
+        for(int i=0; i<7; i++) {
+            card = this.workingArray[i].get();
+            for(int j=0; j<4; j++) {
+                if (this.targetArray[j].tryPut(card)) {
+                    if (this.targetArray[j].isEmpty()) echo("workingArray["+i+"] : "+card+"  ====>>>>  targetArray["+j+"]"); // TODO replace this
+                    else echo("workingArray["+i+"] : "+card+"  ====>>>>  targetArray["+j+"] : "+this.targetArray[j].get()); // TODO replace this
+                    return;
+                }
+            }
+        }
+
+        // find hint WORKING TO WORKING
+        for(int i=0; i<7; i++) {
+            size = this.workingArray[i].size();
+            for(int j=size-1; j>=0; j--) {
+                card = this.workingArray[i].get(j);
+                if(card.face()) {
+                    for(int k=0; k<7; k++) {
+                        if (k != i) {
+                            if (this.workingArray[k].tryPut(card)) {
+                                echo("workingArray["+i+"] : "+card+"  ====>>>>  workingArray["+k+"] : "+this.workingArray[k].get()); // TODO replace this
+                                return;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // find hint GAMEDECKUP TO TARGET
+        if (!this.GameDeckUp.isEmpty()) {
+            card = this.GameDeckUp.get();
+            for(int j=0; j<4; j++) {
+                if (this.targetArray[j].tryPut(card)) {
+                    if (this.targetArray[j].isEmpty()) echo("gameDeckUp : "+card+"  ====>>>>  targetArray["+j+"]"); // TODO replace this
+                    else echo("gameDeckUp : "+card+"  ====>>>>  targetArray["+j+"] : "+this.targetArray[j].get()); // TODO replace this
+                    return;
+                }
+            }
+        }
+
+        // find hint GAMEDECKUP TO WORKING
+        if (!this.GameDeckUp.isEmpty()) {
+            card = this.GameDeckUp.get();
+            for(int i=0; i<7; i++) {
+                if (this.workingArray[i].tryPut(card)) {
+                    echo("gameDeckUp : "+card+"  ====>>>>  workingArray["+i+"] : "+this.workingArray[i].get()); // TODO replace this
+                    return;
+                }
+            }
+        }
+
+        // find hint GAMEDECK TO GAMEDECKUP
+        if (!this.GameDeck.isEmpty()) { // GD is not empty
+            echo("gameDeck ====>>>> gameDeckUp"); // TODO replace this
+            return;
+        }
+        else {
+            if (!this.GameDeckUp.isEmpty()) { // GD is empty and GDUP is not empty
+                echo("Reload (gameDeckUp => gameDeck)"); // TODO replace this
+                return;
+            }
+            else {
+                echo("NO MORE HINT"); // TODO replace this
+                return;
+            }
+        }
+
+
+  
+
+        
+
+
+
+
+
+
+
+
+
+
+
     }
 
 }

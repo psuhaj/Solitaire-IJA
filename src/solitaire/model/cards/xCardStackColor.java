@@ -39,4 +39,27 @@ public class xCardStackColor extends xCardDeck {
 		}
 	}
 
+
+	public boolean tryPut(Card card) {
+		if (this.isEmpty()) { // is empty
+			if (1 == card.value()) { // is ace
+				return true;
+			}
+			else {
+				return false; // is not ace
+			}
+		}
+		else { // is not empty
+			if (this.color != card.color()) return false; // card does not match package color
+			int difference = this.stack_size + 1;
+			if (card.value() == difference) { // value is off by one
+				return true;
+			}
+			else { // value is not off by one
+				return false;
+			}
+		}
+	}
+
+
 }

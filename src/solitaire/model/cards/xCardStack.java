@@ -26,11 +26,34 @@ public class xCardStack extends xCardDeck implements CardStack {
 	}
 
 	//at the beginning we dont control the rewuirements
+	@Override
     public boolean putEmpty(Card card){
         return super.put(card);
     }
-        
-        @Override
+    
+    @Override
+    public boolean tryPut(Card card) {
+		if (this.isEmpty()) { // is empty
+			if (13 == card.value()) { // is king
+				return true;
+			}
+			else {
+				return false; // is not king
+			}
+		}
+		else { // is not empty
+			int difference = this.get().compareValue(card);
+			if (!this.get().similarColorTo(card) && difference == 1) { // different color and the value is off by one
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+    }
+
+
+    @Override
 	public boolean put(Card card) {
 		if (this.isEmpty()) { // is empty
 			if (13 == card.value()) { // is king
