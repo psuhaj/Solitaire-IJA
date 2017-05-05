@@ -8,17 +8,15 @@ public class deckToUp {
     CardDeck gameDeckUp;
 
     public deckToUp(CardDeck gameDeck, CardDeck gameDeckUp) {
-        this.gameDeck = gameDeck;
+        this.gameDeck   = gameDeck;
         this.gameDeckUp = gameDeckUp;
     }
 
     public boolean execute() {
 
-        // TODO = if gameDeck AND up are both empty then return false ? Peter check this out!
-
         boolean retval = false;
 
-        if (!this.gameDeck.isEmpty() && !this.gameDeckUp.isEmpty()) {
+        if (!(this.gameDeck.isEmpty() && this.gameDeckUp.isEmpty())) {
             //if deck is empty
             if (this.gameDeck.isEmpty()) {
                 int size = this.gameDeckUp.size();

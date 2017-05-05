@@ -1,6 +1,5 @@
 package solitaire.model.game;
 
-
 import java.util.Collections;
 import solitaire.model.board.*;
 import solitaire.model.cards.*;
@@ -9,186 +8,114 @@ import java.util.Stack;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Game {
-
 
     public CardDeck GameDeck;
     public CardDeck GameDeckUp;
     public CardDeck[] targetArray;
     public CardStack[] workingArray;
-    public Commander commander;
+    public Stack<Object> history;
 
-
-    // constructor
+    // first constructor
     public Game() {
 
-        this.commander  = new Commander();
         AbstractFactorySolitaire factory = new FactoryKlondike();
-
+        
         this.GameDeck     = factory.createCardDeck();
         this.GameDeckUp   = new xCardDeck();
         this.targetArray  = new CardDeck[4];
         this.workingArray = new CardStack[7];
-
+        this.history      = new Stack<Object>();
+        
         // create working stacks
         for(int i = 0; i<7;i++){
             this.workingArray[i] = factory.createWorkingPack();
         }
-
+        
         // add cards to working stacks
         for(int i=0;i<7;i++){
             for(int j=i;j<7;j++){
                 this.workingArray[j].putEmpty(this.GameDeck.pop());
             }
         }
-
+        
         //turn face up
         for(int i=0;i<7;i++){
             Card tmp=this.workingArray[i].pop();
             tmp.turnFaceUp();
             this.workingArray[i].putEmpty(tmp);
         }
-
+        
         //create target packs
         for(int i = 0; i<4;i++){
             this.targetArray[i] = factory.createTargetPack();
         }
     }
 
-
+    // second constructor - because of load game
     public Game(CardDeck GD, CardDeck GDUP, CardDeck[] TA, CardStack[] WA) {
         this.GameDeck     = GD;
         this.GameDeckUp   = GDUP;
         this.targetArray  = TA;
         this.workingArray = WA;
-        this.commander    = new Commander();
+        this.history      = new Stack<Object>();
     }
 
 
     public void workingToTarget(int workIndex,int targetIndex) {
-
-        Card tmp = this.workingArray[workIndex].pop();
-        boolean success = this.targetArray[targetIndex].put(tmp);
-
-        // if cant put card on target
-        if (!success) {
-            this.workingArray[workIndex].putEmpty(tmp);
-        }
-        else {
-        	//turn the top card on the working stack up
-            if (!this.workingArray[workIndex].isEmpty()) {
-                Card tmp2 = this.workingArray[workIndex].pop();
-                tmp2.turnFaceUp();
-                this.workingArray[workIndex].putEmpty(tmp2);
-            }
-        }
+        workingToTarget wtt = new workingToTarget(this.workingArray[workIndex], this.targetArray[targetIndex]);
+        boolean retval = wtt.execute();
+        if (retval) history.push(wtt);
     }
 
 
     public void targetToWorking(int targetIndex,int workIndex) {
-
-        Card tmp = this.targetArray[targetIndex].pop();
-        boolean success = this.workingArray[workIndex].put(tmp);
-
-        //if cant put card on target
-        if (!success) {
-            this.targetArray[targetIndex].put(tmp);
-        }
-        else {
-        }
+        targetToWorking ttw = new targetToWorking(this.workingArray[workIndex], this.targetArray[targetIndex]);
+        boolean retval = ttw.execute();
+        if (retval) history.push(ttw);
     }
 
 
     public void gameDeckUpToTarget(int targetIndex) {
-
-        Card tmp = this.GameDeckUp.pop();
-        boolean success = this.targetArray[targetIndex].put(tmp);
-
-        //if cant put card on target
-        if (!success) {
-            this.GameDeckUp.put(tmp);
-        }
-        else {
-        }
+        gameDeckUpToTarget gdutt = new gameDeckUpToTarget(this.GameDeckUp, this.targetArray[targetIndex]);
+        boolean retval = gdutt.execute();
+        if (retval) history.push(gdutt);
     }
 
 
     public void gameDeckUpToWorking(int workIndex) {
-
-        Card tmp = this.GameDeckUp.pop();
-        boolean success = this.workingArray[workIndex].put(tmp);
-
-        //if cant put card on target
-        if (!success) {
-            this.GameDeckUp.put(tmp);
-        }
-        else {
-        }
-    }
-
-
-    public void TargetToTarget(int targetIndex1,int targetIndex2) {
-
-        Card tmp = this.targetArray[targetIndex1].pop();
-        boolean success = this.targetArray[targetIndex2].put(tmp);
-
-        //if cant put card on target
-        if (!success) {
-            this.targetArray[targetIndex1].put(tmp);
-        }
-        else {
-        }
+        gameDeckUpToWorking gdutw = new gameDeckUpToWorking(this.GameDeckUp, this.workingArray[workIndex]);
+        boolean retval = gdutw.execute();
+        if (retval) history.push(gdutw);
     }
 
 
     public void WorkingToWorking(int workIndex1,int workIndex2,int number) {
-
-        Card card = this.workingArray[workIndex1].get(number);
-
-        if (!card.face()) return; // do nothing if the card we want to move from is facedown
-
-        boolean success = this.workingArray[workIndex2].put(card);
-
-        if (success) {
-            this.workingArray[workIndex2].pop();
-            CardStack tmp = this.workingArray[workIndex1].pop(card);
-            this.workingArray[workIndex2].put(tmp);
-            if (!this.workingArray[workIndex1].isEmpty()) {
-                Card tmp2 = this.workingArray[workIndex1].pop();
-                tmp2.turnFaceUp();
-                this.workingArray[workIndex1].putEmpty(tmp2);
-            }
-        }
+        workingToWorking wtw = new workingToWorking(this.workingArray[workIndex1], this.workingArray[workIndex2], number);
+        boolean retval = wtw.execute();
+        if (retval) history.push(wtw);
     }
 
+
+    public void TargetToTarget(int targetIndex1,int targetIndex2) {
+        targetToTarget ttt = new targetToTarget(this.targetArray[targetIndex1], this.targetArray[targetIndex2]);
+        boolean retval = ttt.execute();
+        if (retval) history.push(ttt);
+    }
 
     public void deckToUp() {
-
-        //if deck is empty
-        if (this.GameDeck.isEmpty()) {
-            int size=this.GameDeckUp.size();
-            for (int i = 0; i<size;i++) {
-                Card tmp2 = this.GameDeckUp.pop();
-                tmp2.turnFaceDown();
-                this.GameDeck.put(tmp2);
-            }
-            // here is missing commander.cmd_to() !!!!!!!!!!
-            // TODO peter's: GE_GU, // gameDeckEMPTY => gameDeckUP
-            // TODO place correctly: this.commander.cmd_do(Commander.enum_cmd.GE_GU);
-        }
-        else {
-            Card tmp = this.GameDeck.pop();
-            tmp.turnFaceUp();
-            this.GameDeckUp.put(tmp);
-        }
+        deckToUp dtu = new deckToUp(this.GameDeck, this.GameDeckUp);
+        boolean retval = dtu.execute();
+        if (retval) history.push(dtu);
     }
 
-
-    // for printing, TODO - remove it
-    public String print_command() {
-        return this.commander.cmd_undo().toString();
+    public void undo() {
+        /*
+        if (!history.empty()) {
+            this.history.peek().undo();
+            this.history.pop();
+        }
+        */
     }
-
 
 }

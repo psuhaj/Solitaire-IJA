@@ -7,7 +7,7 @@ public class gameDeckUpToWorking {
 	CardStack working;
 	CardDeck gameDeckUp;
 
-	public gameDeckUpToWorking(CardStack working, CardDeck gameDeckUp) {
+	public gameDeckUpToWorking(CardDeck gameDeckUp, CardStack working) {
 		this.working = working;
 		this.gameDeckUp = gameDeckUp;
 	}
