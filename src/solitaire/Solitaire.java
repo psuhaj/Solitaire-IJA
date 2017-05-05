@@ -39,7 +39,7 @@ public class Solitaire {
         boolean n1, n2, n3, flag;
         char c;
 
-        Pattern regex = Pattern.compile("[\\s]*([abcdefgh])(?:[\\s]+(\\d+))?(?:[\\s]+(\\d+))?(?:[\\s]+(\\d+))?[\\s]*");
+        Pattern regex = Pattern.compile("[\\s]*([abcdefghu])(?:[\\s]+(\\d+))?(?:[\\s]+(\\d+))?(?:[\\s]+(\\d+))?[\\s]*");
         Matcher matcher;
 
         print_game_all(GAME1.workingArray, GAME1.targetArray, GAME1.GameDeck, GAME1.GameDeckUp);
@@ -121,6 +121,13 @@ public class Solitaire {
                             flag=false;
                         }
                         break;
+                    case 'u':
+                        if (!n1 && !n2 && !n3) GAME1.undo();
+                        else {
+                            System.out.println("ERROR: Please do not enter numbers. [[ GAME1.undo() ]]");
+                            flag=false;
+                        }
+                        break;
                     default:
                             echo("----------------------------------------------------------");
                             echo("W -> T : a n n   : game.workingToTarget(num1, num2);");
@@ -130,6 +137,7 @@ public class Solitaire {
                             echo("T -> T : e n n   : game.TargetToTarget(num1, num2);");
                             echo("W -> W : f n n n : game.WorkingToWorking(num1, num2, num3);");
                             echo("flip   : g       : game.deckToUp();");
+                            echo("undo   : u       : game.undo();");
                             echo("----------------------------------------------------------");
                             flag=false;
                         break;
@@ -137,7 +145,6 @@ public class Solitaire {
                 if (flag) {
                     System.out.println("================================");
                     print_game_all(GAME1.workingArray, GAME1.targetArray, GAME1.GameDeck, GAME1.GameDeckUp);
-                    GAME1.undo();
                     System.out.println("================================");
                 }
             }
