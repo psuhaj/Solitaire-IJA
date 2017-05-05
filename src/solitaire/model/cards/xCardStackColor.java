@@ -39,7 +39,7 @@ public class xCardStackColor extends xCardDeck {
 		}
 	}
 
-
+	@Override
 	public boolean tryPut(Card card) {
 		if (this.isEmpty()) { // is empty
 			if (1 == card.value()) { // is ace

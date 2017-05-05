@@ -36,6 +36,13 @@ public class xCardDeck implements CardDeck {
 		return true;
 	}
 
+	// because of error
+	@Override
+	public boolean tryPut(Card card) {
+		return true;
+	}
+
+
 	// POP CARD
 	@Override
 	public Card pop() {
