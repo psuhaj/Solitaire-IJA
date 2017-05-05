@@ -53,7 +53,7 @@ public class deckToUp implements Commander {
             tmp.turnFaceDown();
             this.gameDeck.put(tmp);
         }
-        
+
     }
 
 }

@@ -30,6 +30,12 @@ public class xCardStack extends xCardDeck implements CardStack {
     public boolean putEmpty(Card card){
         return super.put(card);
     }
+
+    @Override
+    public void putEmpty(CardStack stack){
+		xCardStack xs = (xCardStack) stack;
+		this.stack.addAll(xs.stack);
+    }
     
     @Override
     public boolean tryPut(Card card) {

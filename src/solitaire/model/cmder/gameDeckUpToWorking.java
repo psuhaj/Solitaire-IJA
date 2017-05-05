@@ -13,7 +13,7 @@ public class gameDeckUpToWorking implements Commander {
     }
 
     public boolean execute() {
-        
+
         boolean retval = false;
 
         Card tmp = this.gameDeckUp.pop();

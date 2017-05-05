@@ -18,7 +18,7 @@ public class workingToWorking implements Commander {
 
         boolean retval = false;
 
-        if (!card.face()) return false; // do nothing if the card we want to move from is facedown
+        if (!card.face()) return false;
 
         boolean success = this.working2.put(card);
 
@@ -38,7 +38,11 @@ public class workingToWorking implements Commander {
     }
 
     public void undo() {
-        System.out.println("========== YOU HAVE CALLED: workingToWorking.undo() ==========");
+
+        // TODO here is not done code !!!
+        CardStack tmp = this.working2.pop(card);
+        this.working1.putEmpty(tmp);
+
     }
 
 }

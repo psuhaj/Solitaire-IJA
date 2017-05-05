@@ -31,7 +31,10 @@ public class targetToTarget implements Commander {
     }
 
     public void undo() {
-        System.out.println("========== YOU HAVE CALLED: targetToTarget.undo() ==========");
+        
+    	Card tmp = this.target2.pop();
+    	this.target1.put(tmp);
+
     }
 
 }

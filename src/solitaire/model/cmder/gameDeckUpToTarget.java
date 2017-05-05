@@ -13,7 +13,7 @@ public class gameDeckUpToTarget implements Commander {
     }
 
     public boolean execute() {
-        
+
         boolean retval = false;
 
         Card tmp = this.gameDeckUp.pop();
@@ -31,7 +31,7 @@ public class gameDeckUpToTarget implements Commander {
     }
 
     public void undo() {
-        
+
         Card tmp = this.target.pop();
         this.gameDeckUp.put(tmp);
 

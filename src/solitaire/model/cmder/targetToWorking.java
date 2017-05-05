@@ -15,7 +15,7 @@ public class targetToWorking implements Commander {
     public boolean execute() {
 
         boolean retval = false;
-        
+
         Card tmp = this.target.pop();
         boolean success = this.working.put(tmp);
 
@@ -31,7 +31,10 @@ public class targetToWorking implements Commander {
     }
 
     public void undo() {
-        System.out.println("========== YOU HAVE CALLED: targetToWorking.undo() ==========");
+
+        Card tmp = this.working.pop();
+        this.target.put(tmp);
+
     }
 
 }
