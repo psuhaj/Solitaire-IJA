@@ -16,9 +16,9 @@ public class deckToUp implements Commander {
 
         boolean retval = false;
 
-        if (!(this.gameDeck.isEmpty() && this.gameDeckUp.isEmpty())) {
-            //if deck is empty
-            if (this.gameDeck.isEmpty()) {
+        if (!(this.gameDeck.isEmpty() && this.gameDeckUp.isEmpty())) { // if GD and GDUP are not empty
+            if (this.gameDeck.isEmpty()) { // if GD is empty
+                // replace all cards from GDUP to GD
                 int size = this.gameDeckUp.size();
                 for (int i = 0; i<size;i++) {
                     Card tmp2 = this.gameDeckUp.pop();
@@ -39,7 +39,21 @@ public class deckToUp implements Commander {
     }
 
     public void undo() {
-        System.out.println("========== YOU HAVE CALLED: deckToUp.undo() ==========");
+
+        if (this.gameDeckUp.isEmpty()) {
+            int size = this.gameDeck.size();
+            for (int i = 0; i<size;i++) {
+                Card tmp2 = this.gameDeck.pop();
+                tmp2.turnFaceUp();
+                this.gameDeckUp.put(tmp2);
+            }
+        }
+        else {
+            Card tmp = this.gameDeckUp.pop();
+            tmp.turnFaceDown();
+            this.gameDeck.put(tmp);
+        }
+        
     }
 
 }

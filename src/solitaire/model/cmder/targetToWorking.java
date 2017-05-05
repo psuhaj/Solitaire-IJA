@@ -15,6 +15,7 @@ public class targetToWorking implements Commander {
     public boolean execute() {
 
         boolean retval = false;
+        
         Card tmp = this.target.pop();
         boolean success = this.working.put(tmp);
 

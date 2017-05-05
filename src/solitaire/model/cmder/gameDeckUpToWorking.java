@@ -4,18 +4,19 @@ import solitaire.model.cards.*;
 
 public class gameDeckUpToWorking implements Commander {
 
-	CardStack working;
-	CardDeck gameDeckUp;
+    CardStack working;
+    CardDeck gameDeckUp;
 
-	public gameDeckUpToWorking(CardDeck gameDeckUp, CardStack working) {
-		this.working = working;
-		this.gameDeckUp = gameDeckUp;
-	}
+    public gameDeckUpToWorking(CardDeck gameDeckUp, CardStack working) {
+        this.working = working;
+        this.gameDeckUp = gameDeckUp;
+    }
 
-	public boolean execute() {
-		boolean retval = false;
+    public boolean execute() {
+        
+        boolean retval = false;
 
-		Card tmp = this.gameDeckUp.pop();
+        Card tmp = this.gameDeckUp.pop();
         boolean success = this.working.put(tmp);
 
         //if cant put card on target
@@ -26,11 +27,11 @@ public class gameDeckUpToWorking implements Commander {
             retval = true;
         }
 
-		return retval;
-	}
+        return retval;
+    }
 
-	public void undo() {
-		System.out.println("========== YOU HAVE CALLED: gameDeckUpToWorking.undo() ==========");
-	}
+    public void undo() {
+        System.out.println("========== YOU HAVE CALLED: gameDeckUpToWorking.undo() ==========");
+    }
 
 }

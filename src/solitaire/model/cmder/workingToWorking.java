@@ -18,8 +18,6 @@ public class workingToWorking implements Commander {
 
         boolean retval = false;
 
-        //Card card = this.working1.get(number); // PETER's FIX
-
         if (!card.face()) return false; // do nothing if the card we want to move from is facedown
 
         boolean success = this.working2.put(card);
