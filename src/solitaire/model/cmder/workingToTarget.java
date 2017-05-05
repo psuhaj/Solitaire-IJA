@@ -37,7 +37,11 @@ public class workingToTarget implements Commander {
     }
 
     public void undo() {
-        System.out.println("========== YOU HAVE CALLED: workingToTarget.undo() ==========");
+        
+        Card tmp = this.target.pop();
+        this.working.get().turnFaceDown();
+        this.working.putEmpty(tmp);
+
     }
 
 }

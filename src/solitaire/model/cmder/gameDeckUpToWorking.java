@@ -31,7 +31,10 @@ public class gameDeckUpToWorking implements Commander {
     }
 
     public void undo() {
-        System.out.println("========== YOU HAVE CALLED: gameDeckUpToWorking.undo() ==========");
+
+        Card tmp = this.working.pop();
+        this.gameDeckUp.put(tmp);
+
     }
 
 }
