@@ -127,6 +127,7 @@ public class Solitaire {
                             echo("T -> W : b n n   : game.targetToWorking(num1, num2);");
                             echo("G -> T : c n     : game.gameDeckUpToTarget(num1);");
                             echo("G -> W : d n     : game.gameDeckUpToWorking(num1);");
+                            echo("T -> T : e n n   : game.TargetToTarget(num1, num2);");
                             echo("W -> W : f n n n : game.WorkingToWorking(num1, num2, num3);");
                             echo("flip   : g       : game.deckToUp();");
                             echo("----------------------------------------------------------");
