@@ -90,8 +90,8 @@ public class Game {
     }
 
 
-    public void WorkingToWorking(int workIndex1,int workIndex2,int number) {
-        workingToWorking wtw = new workingToWorking(this.workingArray[workIndex1], this.workingArray[workIndex2], number);
+    public void WorkingToWorking(int workIndex1, int workIndex2, Card crd) {
+        workingToWorking wtw = new workingToWorking(this.workingArray[workIndex1], this.workingArray[workIndex2], crd);
         boolean retval = wtw.execute();
         if (retval) history.push(wtw);
     }

@@ -6,19 +6,19 @@ public class workingToWorking {
 
     CardStack working1;
     CardStack working2;
-    int number;
+    Card card;
 
-    public workingToWorking(CardStack working1, CardStack working2, int number) {
+    public workingToWorking(CardStack working1, CardStack working2, Card card) {
         this.working1 = working1;
         this.working2 = working2;
-        this.number   = number;
+        this.card   = card;
     }
 
     public boolean execute() {
 
         boolean retval = false;
 
-        Card card = this.working1.get(number);
+        //Card card = this.working1.get(number); // PETER's FIX
 
         if (!card.face()) return false; // do nothing if the card we want to move from is facedown
 

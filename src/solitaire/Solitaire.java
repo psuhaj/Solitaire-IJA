@@ -108,7 +108,7 @@ public class Solitaire {
                         }
                         break;
                     case 'f':
-                        if (n1 && n2 && n3) GAME1.WorkingToWorking(num1, num2, num3);
+                        if (n1 && n2 && n3) GAME1.WorkingToWorking(num1, num2, GAME1.workingArray[num1].get(num3));
                         else {
                             System.out.println("ERROR: Please enter: num1 & num2 & num3. [[ GAME1.WorkingToWorking(num1, num2, num3) ]]");
                             flag=false;
