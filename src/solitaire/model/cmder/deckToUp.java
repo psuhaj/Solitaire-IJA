@@ -2,7 +2,7 @@ package solitaire.model.cmder;
 
 import solitaire.model.cards.*;
 
-public class deckToUp {
+public class deckToUp implements Commander {
 
     CardDeck gameDeck;
     CardDeck gameDeckUp;
@@ -39,7 +39,7 @@ public class deckToUp {
     }
 
     public void undo() {
-        System.out.print("========== YOU HAVE CALLED: deckToUp.undo() ==========");
+        System.out.println("========== YOU HAVE CALLED: deckToUp.undo() ==========");
     }
 
 }

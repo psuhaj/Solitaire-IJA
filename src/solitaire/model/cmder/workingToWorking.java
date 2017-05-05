@@ -2,7 +2,7 @@ package solitaire.model.cmder;
 
 import solitaire.model.cards.*;
 
-public class workingToWorking {
+public class workingToWorking implements Commander {
 
     CardStack working1;
     CardStack working2;
@@ -40,7 +40,7 @@ public class workingToWorking {
     }
 
     public void undo() {
-        System.out.print("========== YOU HAVE CALLED: workingToWorking.undo() ==========");
+        System.out.println("========== YOU HAVE CALLED: workingToWorking.undo() ==========");
     }
 
 }

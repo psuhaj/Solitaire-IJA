@@ -14,7 +14,7 @@ public class Game {
     public CardDeck GameDeckUp;
     public CardDeck[] targetArray;
     public CardStack[] workingArray;
-    public Stack<Object> history;
+    public Stack<Commander> history;
 
     // first constructor
     public Game() {
@@ -25,7 +25,7 @@ public class Game {
         this.GameDeckUp   = new xCardDeck();
         this.targetArray  = new CardDeck[4];
         this.workingArray = new CardStack[7];
-        this.history      = new Stack<Object>();
+        this.history      = new Stack<Commander>();
         
         // create working stacks
         for(int i = 0; i<7;i++){
@@ -58,7 +58,7 @@ public class Game {
         this.GameDeckUp   = GDUP;
         this.targetArray  = TA;
         this.workingArray = WA;
-        this.history      = new Stack<Object>();
+        this.history      = new Stack<Commander>();
     }
 
 
@@ -110,12 +110,10 @@ public class Game {
     }
 
     public void undo() {
-        /*
         if (!history.empty()) {
             this.history.peek().undo();
             this.history.pop();
         }
-        */
     }
 
 }

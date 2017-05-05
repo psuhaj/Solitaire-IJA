@@ -2,7 +2,7 @@ package solitaire.model.cmder;
 
 import solitaire.model.cards.*;
 
-public class targetToTarget {
+public class targetToTarget implements Commander {
 
     CardDeck target1;
     CardDeck target2;
@@ -31,7 +31,7 @@ public class targetToTarget {
     }
 
     public void undo() {
-        System.out.print("========== YOU HAVE CALLED: targetToTarget.undo() ==========");
+        System.out.println("========== YOU HAVE CALLED: targetToTarget.undo() ==========");
     }
 
 }

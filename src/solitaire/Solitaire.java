@@ -137,6 +137,7 @@ public class Solitaire {
                 if (flag) {
                     System.out.println("================================");
                     print_game_all(GAME1.workingArray, GAME1.targetArray, GAME1.GameDeck, GAME1.GameDeckUp);
+                    GAME1.undo();
                     System.out.println("================================");
                 }
             }
