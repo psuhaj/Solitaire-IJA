@@ -129,7 +129,7 @@ public class Solitaire {
                         }
                         break;
                     case 'x':
-                        if (!n1 && !n2 && !n3) GAME1.hint();
+                        if (!n1 && !n2 && !n3) echo(GAME1.hint());
                         else {
                             System.out.println("ERROR: Please do not enter numbers. [[ GAME1.hint() ]]");
                             flag=false;

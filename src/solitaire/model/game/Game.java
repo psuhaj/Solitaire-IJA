@@ -10,9 +10,6 @@ import java.util.List;
 
 public class Game {
 
-    public static void print(Object... args){for(Object o: args)System.out.print(o);}
-    public static void echo(Object... args){for(Object o: args)System.out.print(o);System.out.println();}
-
     public CardDeck GameDeck;
     public CardDeck GameDeckUp;
     public CardDeck[] targetArray;
@@ -119,7 +116,7 @@ public class Game {
         }
     }
 
-    public void hint() {
+    public String hint() {
 
         int size;
         Card card;
@@ -129,9 +126,7 @@ public class Game {
             card = this.workingArray[i].get();
             for(int j=0; j<4; j++) {
                 if (this.targetArray[j].tryPut(card)) {
-                    if (this.targetArray[j].isEmpty()) echo("workingArray["+i+"] : "+card+"  ====>>>>  targetArray["+j+"]"); // TODO replace this
-                    else echo("workingArray["+i+"] : "+card+"  ====>>>>  targetArray["+j+"] : "+this.targetArray[j].get()); // TODO replace this
-                    return;
+                    return "Move from "+(i+1)+". working pile to "+(j+1)+". target pile.";
                 }
             }
         }
@@ -145,8 +140,7 @@ public class Game {
                     for(int k=0; k<7; k++) {
                         if (k != i) {
                             if (this.workingArray[k].tryPut(card)) {
-                                echo("workingArray["+i+"] : "+card+"  ====>>>>  workingArray["+k+"] : "+this.workingArray[k].get()); // TODO replace this
-                                return;
+                                return "Move from "+(i+1)+". working pile to "+(k+1)+". working pile.";
                             }
                         }
                     }
@@ -159,9 +153,7 @@ public class Game {
             card = this.GameDeckUp.get();
             for(int j=0; j<4; j++) {
                 if (this.targetArray[j].tryPut(card)) {
-                    if (this.targetArray[j].isEmpty()) echo("gameDeckUp : "+card+"  ====>>>>  targetArray["+j+"]"); // TODO replace this
-                    else echo("gameDeckUp : "+card+"  ====>>>>  targetArray["+j+"] : "+this.targetArray[j].get()); // TODO replace this
-                    return;
+                    return "Move from waste pile to "+(j+1)+". target pile.";
                 }
             }
         }
@@ -171,42 +163,23 @@ public class Game {
             card = this.GameDeckUp.get();
             for(int i=0; i<7; i++) {
                 if (this.workingArray[i].tryPut(card)) {
-                    echo("gameDeckUp : "+card+"  ====>>>>  workingArray["+i+"] : "+this.workingArray[i].get()); // TODO replace this
-                    return;
+                    return "Move from waste pile to "+(i+1)+". working pile.";
                 }
             }
         }
 
         // find hint GAMEDECK TO GAMEDECKUP
         if (!this.GameDeck.isEmpty()) { // GD is not empty
-            echo("gameDeck ====>>>> gameDeckUp"); // TODO replace this
-            return;
+            return "Get next card to waste pile.";
         }
         else {
             if (!this.GameDeckUp.isEmpty()) { // GD is empty and GDUP is not empty
-                echo("Reload (gameDeckUp => gameDeck)"); // TODO replace this
-                return;
+                return "Reload the waste pile.";
             }
             else {
-                echo("NO MORE HINT"); // TODO replace this
-                return;
+                return "No more moves.";
             }
         }
-
-
-  
-
-        
-
-
-
-
-
-
-
-
-
-
 
     }
 
