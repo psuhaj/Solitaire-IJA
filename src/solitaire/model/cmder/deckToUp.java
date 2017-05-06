@@ -2,16 +2,30 @@ package solitaire.model.cmder;
 
 import solitaire.model.cards.*;
 
+/**
+ * Class for command representing movement from game deck to waste deck.
+ */
 public class deckToUp implements Commander {
 
     CardDeck gameDeck;
     CardDeck gameDeckUp;
 
+    /**
+     * Constructs the object.
+     *
+     * @param      gameDeck    The game deck.
+     * @param      gameDeckUp  The waste deck.
+     */
     public deckToUp(CardDeck gameDeck, CardDeck gameDeckUp) {
         this.gameDeck   = gameDeck;
         this.gameDeckUp = gameDeckUp;
     }
 
+    /**
+     * Function executes this command.
+     *
+     * @return     True on success execution of command, false otherwise.
+     */
     public boolean execute() {
 
         boolean retval = false;
@@ -38,6 +52,9 @@ public class deckToUp implements Commander {
         return retval;
     }
 
+    /**
+     * Function provide undo of this command.
+     */
     public void undo() {
 
         if (this.gameDeckUp.isEmpty()) {

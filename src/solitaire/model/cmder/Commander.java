@@ -1,7 +1,7 @@
 package solitaire.model.cmder;
 
 /**
- * Interface for commander.
+ * Interface for command.
  */
 public interface Commander {
 

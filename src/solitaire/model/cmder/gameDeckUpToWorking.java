@@ -2,6 +2,9 @@ package solitaire.model.cmder;
 
 import solitaire.model.cards.*;
 
+/**
+ * Class for command representing movement from waste deck to working stack.
+ */
 public class gameDeckUpToWorking implements Commander {
 
     CardStack working;
@@ -12,6 +15,11 @@ public class gameDeckUpToWorking implements Commander {
         this.gameDeckUp = gameDeckUp;
     }
 
+    /**
+     * Function executes this command.
+     *
+     * @return     True on success execution of command, false otherwise.
+     */
     public boolean execute() {
 
         boolean retval = false;
@@ -30,12 +38,15 @@ public class gameDeckUpToWorking implements Commander {
         return retval;
     }
 
+    /**
+     * Function provide undo of this command.
+     */
     public void undo() {
 
         Card tmp = this.working.pop();
         this.gameDeckUp.put(tmp);
         if (!this.working.isEmpty()) {
-        	this.working.get().turnFaceUp();
+            this.working.get().turnFaceUp();
         }
 
     }

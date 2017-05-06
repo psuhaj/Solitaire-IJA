@@ -2,6 +2,9 @@ package solitaire.model.cmder;
 
 import solitaire.model.cards.*;
 
+/**
+ * Class for command representing movement from working stack to working stack.
+ */
 public class workingToWorking implements Commander {
 
     CardStack working1;
@@ -16,6 +19,11 @@ public class workingToWorking implements Commander {
         this.facechange = false;
     }
 
+    /**
+     * Function executes this command.
+     *
+     * @return     True on success execution of command, false otherwise.
+     */
     public boolean execute() {
 
         boolean retval = false;
@@ -30,7 +38,7 @@ public class workingToWorking implements Commander {
             CardStack tmp = this.working1.pop(card); // get stack
             this.working2.put(tmp); // put stack
             if (!this.working1.isEmpty()) { // turn Down to UP
-            	if (!this.working1.get().face()) this.facechange = true;
+                if (!this.working1.get().face()) this.facechange = true;
                 Card tmp2 = this.working1.pop();
                 tmp2.turnFaceUp();
                 this.working1.putEmpty(tmp2);
@@ -40,6 +48,9 @@ public class workingToWorking implements Commander {
         return retval;
     }
 
+    /**
+     * Function provide undo of this command.
+     */
     public void undo() {
 
         if (this.facechange) this.working1.get().turnFaceDown();

@@ -2,7 +2,7 @@ archiv_name=xsuhaj02
 folders=build dest-client dest-server doc examples lib src
 files=build.xml readme.txt rozdeleni.txt
 
-.PHONY: make run doc dir lib zip merlin cleanlib clean
+.PHONY: make run doc dir lib zip merlin cleandoc cleanlib clean
 
 make:
 	@ant compile
@@ -28,6 +28,9 @@ zip: dir clean
 
 merlin: clean
 	@./merlin.sh
+
+cleandoc:
+	@ant clean-doc
 
 cleanlib:
 	@ant clean-lib
