@@ -1,3 +1,10 @@
+/**
+ * @file       gameDeckUpToWorking.java
+ * @brief      gameDeckUpToWorking command implementation
+ * @author     Peter Šuhaj
+ * @author     Adrián Tóth
+ */
+
 package solitaire.model.cmder;
 
 import solitaire.model.cards.*;

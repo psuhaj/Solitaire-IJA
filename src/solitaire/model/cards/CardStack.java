@@ -1,3 +1,10 @@
+/**
+ * @file       CardStack.java
+ * @brief      Card stack interface
+ * @author     Peter Šuhaj
+ * @author     Adrián Tóth
+ */
+
 package solitaire.model.cards;
 
 /**

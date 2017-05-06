@@ -7,7 +7,7 @@
     <property name="dest-client.dir" value="dest-client"/>
     <property name="dest-server.dir" value="dest-server"/>
     <property name="doc.dir"         value="doc"/>
-    <property name="example.dir"     value="example"/>
+    <property name="examples.dir"    value="examples"/>
     <property name="lib.dir"         value="lib"/>
     <property name="src.dir"         value="src"/>
 
@@ -27,7 +27,7 @@
         <mkdir dir="${dest-client.dir}"/>
         <mkdir dir="${dest-server.dir}"/>
         <mkdir dir="${doc.dir}"/>
-        <mkdir dir="${example.dir}"/>
+        <mkdir dir="${examples.dir}"/>
         <mkdir dir="${lib.dir}"/>
         <mkdir dir="${src.dir}"/>
     </target>
