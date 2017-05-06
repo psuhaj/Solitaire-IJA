@@ -42,12 +42,8 @@ public class workingToWorking implements Commander {
 
     public void undo() {
 
-    	System.out.println("UNDO: this.working1.get().turnFaceDown();");
         if (this.facechange) this.working1.get().turnFaceDown();
-        System.out.println("UNDO: this.card = "+card);
-        System.out.println("UNDO: this.working2.pop(card);");
         CardStack tmp = this.working2.pop(card);
-        System.out.println("UNDO: this.working1.putEmpty(tmp);");
         this.working1.putEmpty(tmp);
 
     }
