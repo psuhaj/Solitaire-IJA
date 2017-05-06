@@ -63,6 +63,7 @@ public class Game {
 
 
     public void workingToTarget(int workIndex,int targetIndex) {
+        if (this.workingArray[workIndex].isEmpty()) return;
         workingToTarget wtt = new workingToTarget(this.workingArray[workIndex], this.targetArray[targetIndex]);
         boolean retval = wtt.execute();
         if (retval) history.push(wtt);
@@ -70,6 +71,7 @@ public class Game {
 
 
     public void targetToWorking(int targetIndex,int workIndex) {
+    	if (this.targetArray[targetIndex].isEmpty()) return;
         targetToWorking ttw = new targetToWorking(this.workingArray[workIndex], this.targetArray[targetIndex]);
         boolean retval = ttw.execute();
         if (retval) history.push(ttw);
@@ -77,6 +79,7 @@ public class Game {
 
 
     public void gameDeckUpToTarget(int targetIndex) {
+    	if (this.GameDeckUp.isEmpty()) return;
         gameDeckUpToTarget gdutt = new gameDeckUpToTarget(this.GameDeckUp, this.targetArray[targetIndex]);
         boolean retval = gdutt.execute();
         if (retval) history.push(gdutt);
@@ -84,6 +87,7 @@ public class Game {
 
 
     public void gameDeckUpToWorking(int workIndex) {
+    	if (this.GameDeckUp.isEmpty()) return;
         gameDeckUpToWorking gdutw = new gameDeckUpToWorking(this.GameDeckUp, this.workingArray[workIndex]);
         boolean retval = gdutw.execute();
         if (retval) history.push(gdutw);
@@ -91,6 +95,7 @@ public class Game {
 
 
     public void WorkingToWorking(int workIndex1, int workIndex2, Card crd) {
+    	if (this.workingArray[workIndex1].isEmpty()) return;
         workingToWorking wtw = new workingToWorking(this.workingArray[workIndex1], this.workingArray[workIndex2], crd);
         boolean retval = wtw.execute();
         if (retval) history.push(wtw);
@@ -98,6 +103,7 @@ public class Game {
 
 
     public void TargetToTarget(int targetIndex1,int targetIndex2) {
+    	if (this.targetArray[targetIndex1].isEmpty()) return;
         targetToTarget ttt = new targetToTarget(this.targetArray[targetIndex1], this.targetArray[targetIndex2]);
         boolean retval = ttt.execute();
         if (retval) history.push(ttt);
