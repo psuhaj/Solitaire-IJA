@@ -123,24 +123,28 @@ public class Game {
 
         // find hint WORKING TO TARGET
         for(int i=0; i<7; i++) {
-            card = this.workingArray[i].get();
-            for(int j=0; j<4; j++) {
-                if (this.targetArray[j].tryPut(card)) {
-                    return "Move from "+(i+1)+". working pile to "+(j+1)+". target pile.";
+            if (!this.workingArray[i].isEmpty()) {
+                card = this.workingArray[i].get();
+                for(int j=0; j<4; j++) {
+                    if (this.targetArray[j].tryPut(card)) {
+                        return "Move from "+(i+1)+". working pile to "+(j+1)+". target pile.";
+                    }
                 }
             }
         }
 
         // find hint WORKING TO WORKING
         for(int i=0; i<7; i++) {
-            size = this.workingArray[i].size();
-            for(int j=size-1; j>=0; j--) {
-                card = this.workingArray[i].get(j);
-                if(card.face()) {
-                    for(int k=0; k<7; k++) {
-                        if (k != i) {
-                            if (this.workingArray[k].tryPut(card)) {
-                                return "Move from "+(i+1)+". working pile to "+(k+1)+". working pile.";
+            if (!this.workingArray[i].isEmpty()) {
+                size = this.workingArray[i].size();
+                for(int j=size-1; j>=0; j--) {
+                    card = this.workingArray[i].get(j);
+                    if(card.face()) {
+                        for(int k=0; k<7; k++) {
+                            if (k != i) {
+                                if (this.workingArray[k].tryPut(card)) {
+                                    return "Move from "+(i+1)+". working pile to "+(k+1)+". working pile.";
+                                }
                             }
                         }
                     }
