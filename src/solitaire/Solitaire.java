@@ -1932,7 +1932,7 @@ public class Solitaire extends /*JFrame*/ JPanel {
 
                 //board.add(gridPanel); 
 
-                 System.out.println("anyad");
+                 //System.out.println("anyad");
                 for(int m = 0; m < 2; m++) {
                     for(int n = 0; n < 2; n++) {
                       if(whereIsGame[m][n]==false){
