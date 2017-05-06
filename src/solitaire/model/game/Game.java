@@ -8,6 +8,9 @@ import java.util.Stack;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class for game.
+ */
 public class Game {
 
     public CardDeck GameDeck;
@@ -16,7 +19,9 @@ public class Game {
     public CardStack[] workingArray;
     public Stack<Commander> history;
 
-    // first constructor
+	/**
+	 * Constructs the object.
+	 */
     public Game() {
 
         AbstractFactorySolitaire factory = new FactoryKlondike();
@@ -52,7 +57,14 @@ public class Game {
         }
     }
 
-    // second constructor - because of load game
+    /**
+     * Constructs the object from given values.
+     *
+     * @param      GD    Game deck.
+     * @param      GDUP  Waste deck.
+     * @param      TA    Target decks.
+     * @param      WA    Working stacks.
+     */
     public Game(CardDeck GD, CardDeck GDUP, CardDeck[] TA, CardStack[] WA) {
         this.GameDeck     = GD;
         this.GameDeckUp   = GDUP;
@@ -61,60 +73,109 @@ public class Game {
         this.history      = new Stack<Commander>();
     }
 
-
-    public void workingToTarget(int workIndex,int targetIndex) {
-        if (this.workingArray[workIndex].isEmpty()) return;
-        workingToTarget wtt = new workingToTarget(this.workingArray[workIndex], this.targetArray[targetIndex]);
+    /**
+     * Function creates a object representing command which will be executed.
+     * If the execution returns true, the object is pushed to the stack of commands.
+     * This function creates a object representing command which provides movement from working stack to target deck.
+     *
+     * @param      idxWorking  The index of working stack.
+     * @param      idxTarget   The index of target deck.
+     */
+    public void workingToTarget(int idxWorking,int idxTarget) {
+        if (this.workingArray[idxWorking].isEmpty()) return;
+        workingToTarget wtt = new workingToTarget(this.workingArray[idxWorking], this.targetArray[idxTarget]);
         boolean retval = wtt.execute();
         if (retval) history.push(wtt);
     }
 
-
-    public void targetToWorking(int targetIndex,int workIndex) {
-    	if (this.targetArray[targetIndex].isEmpty()) return;
-        targetToWorking ttw = new targetToWorking(this.workingArray[workIndex], this.targetArray[targetIndex]);
+    /**
+     * Function creates a object representing command which will be executed.
+     * If the execution returns true, the object is pushed to the stack of commands.
+     * This function creates a object representing command which provides movement from target deck to working stack.
+     *
+     * @param      idxTarget   The index of target deck.
+     * @param      idxWorking  The index of working stack.
+     */
+    public void targetToWorking(int idxTarget,int idxWorking) {
+    	if (this.targetArray[idxTarget].isEmpty()) return;
+        targetToWorking ttw = new targetToWorking(this.workingArray[idxWorking], this.targetArray[idxTarget]);
         boolean retval = ttw.execute();
         if (retval) history.push(ttw);
     }
 
-
-    public void gameDeckUpToTarget(int targetIndex) {
+    /**
+     * Function creates a object representing command which will be executed.
+     * If the execution returns true, the object is pushed to the stack of commands.
+     * This function creates a object representing command which provides movement from waste deck to target deck.
+     *
+     * @param      idxTarget  The index target deck.
+     */
+    public void gameDeckUpToTarget(int idxTarget) {
     	if (this.GameDeckUp.isEmpty()) return;
-        gameDeckUpToTarget gdutt = new gameDeckUpToTarget(this.GameDeckUp, this.targetArray[targetIndex]);
+        gameDeckUpToTarget gdutt = new gameDeckUpToTarget(this.GameDeckUp, this.targetArray[idxTarget]);
         boolean retval = gdutt.execute();
         if (retval) history.push(gdutt);
     }
 
-
-    public void gameDeckUpToWorking(int workIndex) {
+    /**
+     * Function creates a object representing command which will be executed.
+     * If the execution returns true, the object is pushed to the stack of commands.
+     * This function creates a object representing command which provides movement from waste deck to working stack.
+     *
+     * @param      idxWorking  The index of working stack.
+     */
+    public void gameDeckUpToWorking(int idxWorking) {
     	if (this.GameDeckUp.isEmpty()) return;
-        gameDeckUpToWorking gdutw = new gameDeckUpToWorking(this.GameDeckUp, this.workingArray[workIndex]);
+        gameDeckUpToWorking gdutw = new gameDeckUpToWorking(this.GameDeckUp, this.workingArray[idxWorking]);
         boolean retval = gdutw.execute();
         if (retval) history.push(gdutw);
     }
 
-
-    public void WorkingToWorking(int workIndex1, int workIndex2, Card crd) {
-    	if (this.workingArray[workIndex1].isEmpty()) return;
-        workingToWorking wtw = new workingToWorking(this.workingArray[workIndex1], this.workingArray[workIndex2], crd);
+    /**
+     * Function creates a object representing command which will be executed.
+     * If the execution returns true, the object is pushed to the stack of commands.
+     * This function creates a object representing command which provides movement from working stack 1 to working stack 2.
+     *
+     * @param      idxWorking1  The index of working stack 1
+     * @param      idxWorking2  The index of working stack 2
+     * @param      card         The card
+     */
+    public void WorkingToWorking(int idxWorking1, int idxWorking2, Card card) {
+    	if (this.workingArray[idxWorking1].isEmpty()) return;
+        workingToWorking wtw = new workingToWorking(this.workingArray[idxWorking1], this.workingArray[idxWorking2], card);
         boolean retval = wtw.execute();
         if (retval) history.push(wtw);
     }
 
-
-    public void TargetToTarget(int targetIndex1,int targetIndex2) {
-    	if (this.targetArray[targetIndex1].isEmpty()) return;
-        targetToTarget ttt = new targetToTarget(this.targetArray[targetIndex1], this.targetArray[targetIndex2]);
+    /**
+     * Function creates a object representing command which will be executed.
+     * If the execution returns true, the object is pushed to the stack of commands.
+     * This function creates a object representing command which provides movement from target deck 1 to target deck 2.
+     *
+     * @param      idxTarget1  The index of target deck 1
+     * @param      idxTarget2  The index of target deck 2
+     */
+    public void TargetToTarget(int idxTarget1,int idxTarget2) {
+    	if (this.targetArray[idxTarget1].isEmpty()) return;
+        targetToTarget ttt = new targetToTarget(this.targetArray[idxTarget1], this.targetArray[idxTarget2]);
         boolean retval = ttt.execute();
         if (retval) history.push(ttt);
     }
 
+    /**
+     * Function creates a object representing command which will be executed.
+     * If the execution returns true, the object is pushed to the stack of commands.
+     * This function creates a object representing command which provides movement from game deck to waste deck.
+     */
     public void deckToUp() {
         deckToUp dtu = new deckToUp(this.GameDeck, this.GameDeckUp);
         boolean retval = dtu.execute();
         if (retval) history.push(dtu);
     }
 
+    /**
+     * Function pop out the last object which was inserted into this stack and provide undo of object representing command.
+     */
     public void undo() {
         if (!history.empty()) {
             this.history.peek().undo();
@@ -122,6 +183,11 @@ public class Game {
         }
     }
 
+    /**
+     * Function go throught the game and find possible moves.
+     *
+     * @return     Message including hint.
+     */
     public String hint() {
 
         int size;
