@@ -30,7 +30,7 @@ public class workingToWorking implements Commander {
             CardStack tmp = this.working1.pop(card); // get stack
             this.working2.put(tmp); // put stack
             if (!this.working1.isEmpty()) { // turn Down to UP
-            	facechange = true;
+            	this.facechange = true;
                 Card tmp2 = this.working1.pop();
                 tmp2.turnFaceUp();
                 this.working1.putEmpty(tmp2);
@@ -42,8 +42,12 @@ public class workingToWorking implements Commander {
 
     public void undo() {
 
+    	System.out.println("UNDO: this.working1.get().turnFaceDown();");
         if (this.facechange) this.working1.get().turnFaceDown();
+        System.out.println("UNDO: this.card = "+card);
+        System.out.println("UNDO: this.working2.pop(card);");
         CardStack tmp = this.working2.pop(card);
+        System.out.println("UNDO: this.working1.putEmpty(tmp);");
         this.working1.putEmpty(tmp);
 
     }

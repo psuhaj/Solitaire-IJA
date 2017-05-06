@@ -21,7 +21,11 @@ public class Solitaire {
 
     public static void main(String[] args) {
 
-        GAME1 = new Game();
+    	//String path = "/home/suhaj/Dokumenty/IJA/Git solitaire/Solitaire-IJA/";
+        String path = "/home/adrian/Documents/Data/IJA/Solitaire-IJA/";
+        String name = "gamex.solitiare";
+
+        GAME1 = load_game(path+name);
         //GAME2 = new Game();
         //GAME3 = new Game();
         //GAME4 = new Game();
