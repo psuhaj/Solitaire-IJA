@@ -34,6 +34,7 @@ public class gameDeckUpToWorking implements Commander {
 
         Card tmp = this.working.pop();
         this.gameDeckUp.put(tmp);
+        this.working.get().turnFaceUp();
 
     }
 

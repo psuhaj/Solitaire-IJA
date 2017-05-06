@@ -19,6 +19,9 @@ public class workingToTarget implements Commander {
         boolean retval = false;
 
         Card tmp = this.working.pop();
+        if (this.working.get().face() == false) {
+        	this.facechange = true;
+        }
         boolean success = this.target.put(tmp);
 
         // if cant put card on target
@@ -28,7 +31,6 @@ public class workingToTarget implements Commander {
         else {
             //turn the top card on the working stack up
             if (!this.working.isEmpty()) {
-                this.facechange = true;
                 Card tmp2 = this.working.pop();
                 tmp2.turnFaceUp();
                 this.working.putEmpty(tmp2);
