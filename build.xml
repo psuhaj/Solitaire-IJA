@@ -42,8 +42,17 @@
         </delete>
     </target>
 
+    <!-- remove doc content -->
+    <target name="clean-doc">
+        <delete includeEmptyDirs="true">
+            <fileset dir="${doc.dir}">
+                <include name="*/**"/>
+            </fileset>
+        </delete>
+    </target>
+
     <!-- remove content of directories -->
-    <target name="clean"> <!-- OFF depends="clean-lib"-->
+    <target name="clean" depends="clean-doc"> <!-- OFF depends="clean-lib"-->
         <delete includeEmptyDirs="true">
             <fileset dir="${build.dir}">
                 <include name="*/**"/>
@@ -54,14 +63,11 @@
             <fileset dir="${dest-server.dir}">
                 <include name="*/**"/>
             </fileset>
-            <fileset dir="${doc.dir}">
-                <include name="*/**"/>
-            </fileset>
         </delete>
     </target>
 
     <!-- make documentation -->
-    <target name="doc">
+    <target name="doc" depends="clean-doc">
         <javadoc sourcepath="${src.dir}" destdir="${doc.dir}"/>
     </target>
 
