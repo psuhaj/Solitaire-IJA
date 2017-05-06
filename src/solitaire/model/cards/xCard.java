@@ -2,6 +2,9 @@ package solitaire.model.cards;
 
 import java.awt.image.BufferedImage;
 
+/**
+ * Class for card.
+ */
 public class xCard implements Card {
 
     // Card's atributes
@@ -9,7 +12,14 @@ public class xCard implements Card {
     private int value;
     private boolean face;
     private BufferedImage image;
-    // constructor
+
+    /**
+     * Constructs the object card.
+     *
+     * @param      c      Card's color.
+     * @param      value  Card's value.
+     * @param      image  Card's image.
+     */
     public xCard(Card.Color c, int value, BufferedImage image) {
         this.color = c;
         this.value = value;
@@ -17,9 +27,13 @@ public class xCard implements Card {
         this.image = image;
     }
 
-    // constructor for decoder
+    /**
+     * Constructs the object.
+     *
+     * @param      code  Card's code in three characters.
+     */
     public xCard(String code) {
-        switch (code.charAt(0)) {
+        switch (code.charAt(0)) { // first character including value
             case 'A' :
                 this.value = 1;
                 break;
@@ -39,7 +53,7 @@ public class xCard implements Card {
                 this.value = Character.getNumericValue(code.charAt(0));
                 break;
         }
-        switch (code.charAt(1)) {
+        switch (code.charAt(1)) { // second character including color
             case 'H': {
                 this.color = Card.Color.HEARTS;
                 break;
@@ -54,7 +68,7 @@ public class xCard implements Card {
                 this.color = Card.Color.CLUBS;
                 break;
         }
-        switch (code.charAt(2)) {
+        switch (code.charAt(2)) { // third character including face
             case 'U': {
                 this.face = true;
                 break;
@@ -65,29 +79,51 @@ public class xCard implements Card {
         }
     }
 
-    // GET COLOR
+    /**
+     * Card's color.
+     *
+     * @return     Card's color.
+     */
     @Override
     public Card.Color color() {
         return this.color;
     }
 
+    /**
+     * Card's image.
+     *
+     * @return     Card's image.
+     */
+    @Override
     public BufferedImage getCardImage(){
         return this.image;
     }
 
-    // GET VALUE
+    /**
+     * Card's value.
+     *
+     * @return     Card's value.
+     */
     @Override
     public int value() {
         return this.value;
     }
 
-    // GET FACE
+    /**
+     * Card's face.
+     *
+     * @return     Card's face.
+     */
     @Override
     public boolean face() {
         return this.face;
     }
 
-    // TURN_UP return true, CANNOT_TURN_UP return false
+    /**
+     * Function turns face up if the card's face was down.
+     *
+     * @return     If the card's face was turned up returns true else false.
+     */
     @Override
     public boolean turnFaceUp() {
         if (this.face == false) {
@@ -99,6 +135,11 @@ public class xCard implements Card {
         }
     }
 
+    /**
+     * Function turns face down if the card's face was up.
+     *
+     * @return     If the card's face was turned down returns true else false.
+     */
     public boolean turnFaceDown() {
         if (this.face == true) {
             this.face = false;
@@ -108,14 +149,27 @@ public class xCard implements Card {
             return false;
         }
     }
-    // return the value difference of cards with the same color
+
+    /**
+     * Function compares two cards based on their value.
+     *
+     * @param      c     Comparing card.
+     *
+     * @return     Returns the value difference of cards with the same color.
+     */
     @Override
     public int compareValue(Card c) {
         xCard xc = (xCard) c;
         return this.value() - xc.value();
     }
 
-    // TWO CARDS ARE SAME COLOR ( (Hearts + Diamonds) || (Clubs + Spades) )
+    /**
+     * Function compares two cards based on their color
+     *
+     * @param      c     Comparing card.
+     *
+     * @return     Returns the boolean value if the cards have the same color.
+     */
     @Override
     public boolean similarColorTo(Card c) {
         xCard xc = (xCard) c;
@@ -130,7 +184,11 @@ public class xCard implements Card {
         }
     }
 
-    // print card for log
+    /**
+     * Returns a string representation of card as debug information.
+     *
+     * @return     String representation of the object for debug.
+     */
     public String print_log() {
         String str;
         switch (this.value) {
@@ -147,8 +205,8 @@ public class xCard implements Card {
                 str = " K";
                 break;
             default :
-            	if (this.value != 10 ) str = " "+String.valueOf(this.value);
-            	else str = String.valueOf(this.value);
+                if (this.value != 10 ) str = " "+String.valueOf(this.value);
+                else str = String.valueOf(this.value);
                 break;
         }
         switch (this.color) {
@@ -167,15 +225,19 @@ public class xCard implements Card {
                 break;
         }
         if (face) {
-        	str = str+"_U ";
+            str = str+"_U ";
         }
         else {
-        	str = str+"__ ";
+            str = str+"__ ";
         }
         return str;
     }
 
-    // print card
+    /**
+     * Returns a string representation of the object.
+     *
+     * @return     String representation of the object.
+     */
     @Override
     public String toString(){
         String str;
@@ -212,15 +274,19 @@ public class xCard implements Card {
                 break;
         }
         if (face) {
-        	str = str+"_UP";
+            str = str+"_UP";
         }
         else {
-        	str = str+"_DOWN";
+            str = str+"_DOWN";
         }
         return str;
     }
 
-    // transform CARD to 3 characters = VALUE+COLOR+FACE
+    /**
+     * Function codes the card into three characters.
+     *
+     * @return     Code of card depending on card's value, color and face.
+     */
     @Override
     public String code(){
         String str;
@@ -260,46 +326,12 @@ public class xCard implements Card {
                 break;
         }
         if (face) {
-        	str = str+"U";
+            str = str+"U";
         }
         else {
-        	str = str+"D";
+            str = str+"D";
         }
         return str;
-    }
-
-
-    // compare two card objects
-    public boolean equals(Object o) {
-        if (o == null) return false;
-        else if (getClass() != o.getClass()) return false;
-        else if (this == o) return true;
-        xCard xc = (xCard) o;
-        if (this.color() != xc.color()) return false;
-        if (this.value() != xc.value()) return false;
-        if (this.face != xc.face) return false;
-        return true;
-    }
-
-    // make hash for card, necessary for equals
-    @Override
-    public int hashCode() {
-        int x;
-        switch (this.color) {
-            case HEARTS :
-                x = 0;
-                break;
-            case DIAMONDS :
-                x = 1000;
-                break;
-            case SPADES :
-                x = 2000;
-                break;
-            default :
-                x = 3000;
-                break;
-        }
-        return (this.value * 10) + x + (face ? 1 : 0);
     }
 
 }

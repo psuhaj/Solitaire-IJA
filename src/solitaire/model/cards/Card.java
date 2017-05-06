@@ -1,8 +1,15 @@
 package solitaire.model.cards;
+
 import java.awt.image.BufferedImage;
 
+/**
+ * Interface for card.
+ */
 public interface Card {
 
+    /**
+     * Card's colors.
+     */
     public static enum Color {
         CLUBS, DIAMONDS, HEARTS, SPADES;
 
