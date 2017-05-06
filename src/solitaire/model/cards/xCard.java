@@ -155,7 +155,7 @@ public class xCard implements Card {
      *
      * @param      c     Comparing card.
      *
-     * @return     Returns the value difference of cards with the same color.
+     * @return     Returns the value difference of cards.
      */
     @Override
     public int compareValue(Card c) {
