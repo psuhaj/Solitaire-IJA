@@ -52,13 +52,6 @@ public interface CardDeck {
     public boolean isEmpty();
 
     /**
-     * Creates a standard deck of 52 cards.
-     *
-     * @return     Standard deck.
-     */
-    public CardDeck createStandardDeck();
-
-    /**
      * Checks conditions if the card can be putted on stack.
      *
      * @param      card  The card

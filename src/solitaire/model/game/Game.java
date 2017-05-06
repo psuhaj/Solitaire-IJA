@@ -19,38 +19,38 @@ public class Game {
     public CardStack[] workingArray;
     public Stack<Commander> history;
 
-	/**
-	 * Constructs the object.
-	 */
+    /**
+     * Constructs the object.
+     */
     public Game() {
 
         AbstractFactorySolitaire factory = new FactoryKlondike();
-        
+
         this.GameDeck     = factory.createCardDeck();
         this.GameDeckUp   = new xCardDeck();
         this.targetArray  = new CardDeck[4];
         this.workingArray = new CardStack[7];
         this.history      = new Stack<Commander>();
-        
+
         // create working stacks
         for(int i = 0; i<7;i++){
             this.workingArray[i] = factory.createWorkingPack();
         }
-        
+
         // add cards to working stacks
         for(int i=0;i<7;i++){
             for(int j=i;j<7;j++){
                 this.workingArray[j].putEmpty(this.GameDeck.pop());
             }
         }
-        
+
         //turn face up
         for(int i=0;i<7;i++){
             Card tmp=this.workingArray[i].pop();
             tmp.turnFaceUp();
             this.workingArray[i].putEmpty(tmp);
         }
-        
+
         //create target packs
         for(int i = 0; i<4;i++){
             this.targetArray[i] = factory.createTargetPack();
@@ -97,7 +97,7 @@ public class Game {
      * @param      idxWorking  The index of working stack.
      */
     public void targetToWorking(int idxTarget,int idxWorking) {
-    	if (this.targetArray[idxTarget].isEmpty()) return;
+        if (this.targetArray[idxTarget].isEmpty()) return;
         targetToWorking ttw = new targetToWorking(this.workingArray[idxWorking], this.targetArray[idxTarget]);
         boolean retval = ttw.execute();
         if (retval) history.push(ttw);
@@ -111,7 +111,7 @@ public class Game {
      * @param      idxTarget  The index target deck.
      */
     public void gameDeckUpToTarget(int idxTarget) {
-    	if (this.GameDeckUp.isEmpty()) return;
+        if (this.GameDeckUp.isEmpty()) return;
         gameDeckUpToTarget gdutt = new gameDeckUpToTarget(this.GameDeckUp, this.targetArray[idxTarget]);
         boolean retval = gdutt.execute();
         if (retval) history.push(gdutt);
@@ -125,7 +125,7 @@ public class Game {
      * @param      idxWorking  The index of working stack.
      */
     public void gameDeckUpToWorking(int idxWorking) {
-    	if (this.GameDeckUp.isEmpty()) return;
+        if (this.GameDeckUp.isEmpty()) return;
         gameDeckUpToWorking gdutw = new gameDeckUpToWorking(this.GameDeckUp, this.workingArray[idxWorking]);
         boolean retval = gdutw.execute();
         if (retval) history.push(gdutw);
@@ -141,7 +141,7 @@ public class Game {
      * @param      card         The card
      */
     public void WorkingToWorking(int idxWorking1, int idxWorking2, Card card) {
-    	if (this.workingArray[idxWorking1].isEmpty()) return;
+        if (this.workingArray[idxWorking1].isEmpty()) return;
         workingToWorking wtw = new workingToWorking(this.workingArray[idxWorking1], this.workingArray[idxWorking2], card);
         boolean retval = wtw.execute();
         if (retval) history.push(wtw);
@@ -156,7 +156,7 @@ public class Game {
      * @param      idxTarget2  The index of target deck 2
      */
     public void TargetToTarget(int idxTarget1,int idxTarget2) {
-    	if (this.targetArray[idxTarget1].isEmpty()) return;
+        if (this.targetArray[idxTarget1].isEmpty()) return;
         targetToTarget ttt = new targetToTarget(this.targetArray[idxTarget1], this.targetArray[idxTarget2]);
         boolean retval = ttt.execute();
         if (retval) history.push(ttt);
