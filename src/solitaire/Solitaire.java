@@ -1562,7 +1562,7 @@ public class Solitaire extends /*JFrame*/ JPanel {
                             //System.out.println(workingCard.value());
                             GAME1.WorkingToWorking(workingNum,asdf.getIndex(),workingCard);
                             workingStacks[asdf.getIndex()].removeAll();
-                            workingStacks[asdf.getIndex()].repaint();
+                            //workingStacks[asdf.getIndex()].repaint();
                             Solitaire.this.revalidate();
                             if(GAME1.workingArray[asdf.getIndex()].isEmpty()){
                                 guiCard tmp = new guiCard();
