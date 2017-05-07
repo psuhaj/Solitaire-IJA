@@ -4,6 +4,7 @@
 &nbsp;
 How to run:
 ~~~sh
+ant dir
 ant compile
 ant run
 ~~~
