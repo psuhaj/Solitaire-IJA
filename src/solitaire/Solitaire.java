@@ -1,56 +1,59 @@
+/**
+ * @file       Solitaire.java
+ * @brief      Implementation of the GUI and connecting the parts together. This is the main class.
+ * @author     Peter Šuhaj
+ * @author     Adrián Tóth
+ */
+
+
+
 package solitaire;
-import java.awt.Dimension;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTree;
-import javax.swing.SwingUtilities;
-import java.awt.Color;
 import java.awt.*;
 import javax.swing.*;
-import java.awt.Image;
-import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.awt.event.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
 import java.io.*;
 import java.util.Collections;
 import solitaire.model.game.*;
-import java.util.Scanner; // for printing, TODO - remove it
-import java.util.regex.*; // for printing, TODO - remove it
-import solitaire.model.board.*; // for printing, TODO - remove it
-import solitaire.model.cards.*; // for printing, TODO - remove it
+import solitaire.model.board.*; 
+import solitaire.model.cards.*; 
 import solitaire.*;
-//import ija.elements.AllMainObjects;
 
-public class Solitaire extends /*JFrame*/ JPanel {
+
+
+
+/**
+* Main class of the game. Gui is implemented and game is being created.
+*/
+
+public class Solitaire extends  JPanel {
     
     public static int counter=1;
     public static int games = 1;
     public static boolean oneGame = true;
 	public static boolean[][] whereIsGame = new boolean[2][2];
-    //Solitaire[][] gridPanel = new Solitaire[2][2];
-    //public static int gameFlag=0;
-	private /*static*/ int gameUpFlag=0;
-    private /*static*/ int targetNum=-1;
-    private /*static*/ int workingNum=-1;
-    private /*static*/ Card workingCard;
 
-   // public static int targetIndex=-1;
-   // public static int i,j;
+	private  int gameUpFlag=0;
+    private  int targetNum=-1;
+    private int workingNum=-1;
+    private  Card workingCard;
+
+
     private  workingPanel[] workingStacks = new workingPanel[7];
-    //public  JLabel gameDeckUp;// = new JLabel();
 
     private JLabel gameDeckUp;
-    //public JPanel panel;
 
-	public Game GAME1;// = new Game();
+
+	public Game GAME1;
 
     private double scale;
 
+
+    /**
+    * Constructor with scale flag and index of the game.
+    *@param scaleIn 	flag for detecting scale
+    *@param index 		index of the game
+    */
     public Solitaire(boolean scaleIn,int index) {
         if(scaleIn){
             this.scale=0.5;
@@ -59,70 +62,39 @@ public class Solitaire extends /*JFrame*/ JPanel {
             this.scale=1;
         }
         GAME1=new Game();
-        initUI(this.workingStacks,index/*,this.gameDeckUp*/);
+        initUI(this.workingStacks,index);
     }
 
 
-    public Solitaire(){
-        
-        setLayout(null);
-        setBackground(Color.green);
-        revalidate();
-    }
-
+    /**
+    * Constructor for new game with already started game.
+    *@param gameIn 		game object to load
+    *@param index 		index of the game
+    */
     public Solitaire(Game gameIn,int index){
 
         this.scale=0.5;
         GAME1=gameIn;
-        initUI(this.workingStacks,index/*,this.gameDeckUp*/);
+        initUI(this.workingStacks,index);
     }
 
 
+    /**
+    * Initialization of the GUI for one game. 
+    *@param workingStacks	array of working stacks
+    *@param index 			index of the game
+    */
     private void initUI(workingPanel[] workingStacks,int index) {
         
 
-    	//panel = new JPanel();
-    	/*setTitle("Solitaire");
-        setSize(1400, 900);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setPreferredSize(new Dimension(1400, 900));*/
-
-    	//JPanel panelGrid = new JPanel();
-    	
-    	//GridLayout layout = new GridLayout(2,7);
-
-    	/*layout.setHgap(10);
-      	layout.setVgap(10);*/
 
 
     	//layout is null, so we can position the elements correctly
-    	/*panel.*/setLayout(null);
+    	setLayout(null);
     	//set the background color
-        /*panel.*/setBackground(Color.green);
+        setBackground(Color.green);
 
 
-        
-		        
-
-        /*File file = new File("cards/2_of_clubs.png");
-        BufferedImage image=null;
-        try{
-        	image = ImageIO.read(file);
-		}
-		catch(IOException e){
-			e.printStackTrace();
-		}
-		Image img = image.getScaledInstance((int)(scale*125), (int)(scale*181), Image.SCALE_DEFAULT);
-		ImageIcon imageIcon = new ImageIcon(img);
-		JLabel test = new JLabel(imageIcon);*/
-
-
-		//create jlabel for image
-		//JLabel test2 = new JLabel();
-		//read img
-		//test2.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("cards/3_of_clubs.png")).getImage().getScaledInstance((int)(scale*125), (int)(scale*181), Image.SCALE_SMOOTH)));
-	    
 
         //create buttons
 
@@ -138,7 +110,6 @@ public class Solitaire extends /*JFrame*/ JPanel {
 		JLabel gameDeck = new JLabel();
 		gameDeckUp = new JLabel();
 
-		//gameDeck.setIcon(new ImageIcon(new ImageIcon(GAME1.GameDeck.get().getCardImage()).getImage().getScaledInstance((int)(scale*125), (int)(scale*181), Image.SCALE_SMOOTH)));
 		
         gameDeck.setOpaque(true);
         gameDeck.setBackground(Color.red);
@@ -174,7 +145,6 @@ public class Solitaire extends /*JFrame*/ JPanel {
                         gameDeckUp.setBackground(Color.lightGray);
                         gameDeckUp.revalidate();
                     }
-                    //getContentPane().repaint();
                     revalidate();
             }
 
@@ -192,11 +162,10 @@ public class Solitaire extends /*JFrame*/ JPanel {
 
 
 		//add cards
-		/*panel.*/add(gameDeck); 
-		/*panel.*/add(gameDeckUp);
+		add(gameDeck); 
+		add(gameDeckUp);
 
 		//set cards position, so first we add everything then set positions
-		//Insets insets = /*panel.*/getInsets();//get borders?
 		gameDeck.setBounds((int)((40+insets.left)*scale), (int)((70+ insets.top)*scale), (int)(scale*125),(int)(scale*181));
 		gameDeckUp.setBounds((int)((40+181+insets.left)*scale), (int)((70+ insets.top)*scale), (int)(scale*125),(int)(scale*181));
 
@@ -238,13 +207,7 @@ public class Solitaire extends /*JFrame*/ JPanel {
             target4.setOpaque(true);
             target4.setBackground(Color.lightGray); 
         }
-		/*
-		target2.setOpaque(true);
-		target2.setBackground(Color.lightGray);
-		target3.setOpaque(true);
-		target3.setBackground(Color.lightGray);
-		target4.setOpaque(true);
-		target4.setBackground(Color.lightGray);*/
+		
 
 
 
@@ -275,9 +238,9 @@ public class Solitaire extends /*JFrame*/ JPanel {
                         target1.setIcon(null);
                         target1.setOpaque(true);
                         target1.setBackground(Color.lightGray);
-                        target1.revalidate();//prekreslenie?
+                        target1.revalidate();
                     }
-                    //getContentPane().repaint();//prekreslenie
+
                     revalidate();
 
                     if(GAME1.targetArray[0].size()==13 && GAME1.targetArray[1].size() == 13 && GAME1.targetArray[2].size() == 13 && GAME1.targetArray[3].size() == 13){
@@ -325,8 +288,6 @@ public class Solitaire extends /*JFrame*/ JPanel {
                     }
                     
                     
-
-
                     //repaint game up
 
                     if(!GAME1.targetArray[0].isEmpty()){
@@ -347,7 +308,6 @@ public class Solitaire extends /*JFrame*/ JPanel {
                     }
                 }
 
-                //getContentPane().repaint();
                 revalidate();
                 workingNum=-1;
                 
@@ -382,7 +342,6 @@ public class Solitaire extends /*JFrame*/ JPanel {
                         target2.setBackground(Color.lightGray);
                         target2.revalidate();
                     }
-                    //getContentPane().repaint();
                     revalidate();
                     if(GAME1.targetArray[0].size()==13 && GAME1.targetArray[1].size() == 13 && GAME1.targetArray[2].size() == 13 && GAME1.targetArray[3].size() == 13){
                         JOptionPane.showMessageDialog(Solitaire.this,"Congratulation. You won the game.","WIN",JOptionPane.INFORMATION_MESSAGE);
@@ -413,7 +372,6 @@ public class Solitaire extends /*JFrame*/ JPanel {
                             tmp2.revalidate();
                         }
                         else{//ak je false tak zadna strana
-                            //JLabel tmp2 = new JLabel();
                             tmp2.setOpaque(true);
                             tmp2.setBackground(Color.RED);
                             tmp2.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -449,7 +407,7 @@ public class Solitaire extends /*JFrame*/ JPanel {
                     }
                 }
 
-                //getContentPane().repaint();
+
                 revalidate();
                 workingNum=-1;   
                 
@@ -484,7 +442,6 @@ public class Solitaire extends /*JFrame*/ JPanel {
                         target3.setBackground(Color.lightGray);
                         target3.revalidate();
                     }
-                    //getContentPane().repaint();
                     revalidate();
                     if(GAME1.targetArray[0].size()==13 && GAME1.targetArray[1].size() == 13 && GAME1.targetArray[2].size() == 13 && GAME1.targetArray[3].size() == 13){
                         JOptionPane.showMessageDialog(Solitaire.this,"Congratulation. You won the game.","WIN",JOptionPane.INFORMATION_MESSAGE);
@@ -516,7 +473,6 @@ public class Solitaire extends /*JFrame*/ JPanel {
                             tmp2.revalidate();
                         }
                         else{//ak je false tak zadna strana
-                            //JLabel tmp2 = new JLabel();
                             tmp2.setOpaque(true);
                             tmp2.setBackground(Color.RED);
                             tmp2.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -552,7 +508,6 @@ public class Solitaire extends /*JFrame*/ JPanel {
                     }
                 }
 
-                //getContentPane().repaint();
                 revalidate();
                 workingNum=-1;     
                 
@@ -587,7 +542,7 @@ public class Solitaire extends /*JFrame*/ JPanel {
                         target4.setBackground(Color.lightGray);
                         target4.revalidate();
                     }
-                    //getContentPane().repaint();
+
                     revalidate();
                     if(GAME1.targetArray[0].size()==13 && GAME1.targetArray[1].size() == 13 && GAME1.targetArray[2].size() == 13 && GAME1.targetArray[3].size() == 13){
                         JOptionPane.showMessageDialog(Solitaire.this,"Congratulation. You won the game.","WIN",JOptionPane.INFORMATION_MESSAGE);
@@ -618,7 +573,7 @@ public class Solitaire extends /*JFrame*/ JPanel {
                             tmp2.revalidate();
                         }
                         else{//ak je false tak zadna strana
-                            //JLabel tmp2 = new JLabel();
+              
                             tmp2.setOpaque(true);
                             tmp2.setBackground(Color.RED);
                             tmp2.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -629,7 +584,7 @@ public class Solitaire extends /*JFrame*/ JPanel {
                        
                         tmp2.addMouseListener(new CustomMouseListener());
                         workingStacks[workingNum].repaint();
-                        //gameDeckUp.revalidate();
+                       
                         
                     }
                     
@@ -677,10 +632,10 @@ public class Solitaire extends /*JFrame*/ JPanel {
 
 
         //pridavanie target balickov
-		/*panel.*/add(target1);
-		/*panel.*/add(target2);
-		/*panel.*/add(target3);
-		/*panel.*/add(target4);
+		add(target1);
+		add(target2);
+		add(target3);
+		add(target4);
 
         //nastavenie pozicie
 		target1.setBounds((int)(scale*(insets.left+700)),(int)(scale* (70+ insets.top)), (int)(scale*125),(int)(scale*181));
@@ -690,128 +645,19 @@ public class Solitaire extends /*JFrame*/ JPanel {
 
 
 
-		/*JLayeredPane working1 = new JLayeredPane();
-		panel.add(working1);
-		working1.setBounds(insets.left+40, insets.top+400,(int)(scale*125),600);
-		JLabel tmp = new JLabel();
-		tmp.setOpaque(true);
-		tmp.setBackground(Color.lightGray);
-		tmp.setBounds(0,0,(int)(scale*125),(int)(scale*181));
-		working1.add(tmp,new Integer(1),0);
-
-		JLabel tmp2 = new JLabel();
-		tmp2.setOpaque(true);
-		tmp2.setBackground(Color.RED);
-        tmp2.setBorder(BorderFactory.createLineBorder(Color.black));
-		tmp2.setBounds(0,30,(int)(scale*125),(int)(scale*181));
-		working1.add(tmp2,new Integer(2),1);*/
-
-
-
-        //vytvorenie 7 stackov pre working
-        //workingPanel[] workingStacks = new workingPanel[7];
+		
         
         for(int i=0;i<7;i++){
             workingStacks[i] = new workingPanel();
             workingStacks[i].addIndex(i);//add th eindex of pane to object 
-            /*panel.*/add(workingStacks[i]);
+            add(workingStacks[i]);
             workingStacks[i].setBounds((int)(scale*(insets.left+40+(i*200))), (int)(scale*(insets.top+400)),(int)(scale*125),(int)(scale*600));
             //listener pre layered pane, aby sa vedelo na ktore sa kliklo
             
             workingStacks[i].addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                /*if(workingNum==-1){
-                    workingPanel asd = (workingPanel)e.getSource();
-                    workingNum=asd.getIndex();//get index of panel
-                }
-                else{
-                    workingPanel asd = (workingPanel)e.getSource();
-                    //zavolame funkciu na presun z jedneho stacku na druhy
-                    GAME1.WorkingToWorking(workingNum,asd.getIndex(),workingCard);
-                    System.out.println(workingNum);  
-                    System.out.println(asd.getIndex());
-                    System.out.println(workingCard.value());
-                    //repaint?????
-                           /// JLabel tmpc = new JLabel();
-                            //tmpc.setOpaque(true);
-                            //tmpc.setBackground(Color.lightGray);
-                            //tmpc.setBounds(0,0,(int)(scale*125),(int)(scale*181));//pozicia v ramci layeredpane
-                            //workingStacks[asd.getIndex()].add(tmpc,new Integer(1),0);
-                            
-                            for(int k=0;k<GAME1.workingArray[asd.getIndex()].size();k++){
-                                guiCard tmp2 = new guiCard();
-                                int i = asd.getIndex();
-                                tmp2.addObj(GAME1.workingArray[i].get(k));
-                                if(GAME1.workingArray[i].get(k).face()){//ak je tvarou hore tak obrazok sa vykresli
-                                    tmp2.setIcon(new ImageIcon(new ImageIcon(GAME1.workingArray[i].get(k).getCardImage()).getImage().getScaledInstance((int)(scale*125), (int)(scale*181), Image.SCALE_SMOOTH)));
-                                    tmp2.setBounds(0,k*30,(int)(scale*125),(int)(scale*181));
-                                    workingStacks[i].add(tmp2,new Integer(k+2),k+1);
-                                    tmp2.revalidate();
-                                }
-                                else{//ak je false tak zadna strana
-                                    //JLabel tmp2 = new JLabel();
-                                    tmp2.setOpaque(true);
-                                    tmp2.setBackground(Color.RED);
-                                    tmp2.setBorder(BorderFactory.createLineBorder(Color.black));
-                                    tmp2.setBounds(0,k*30,(int)(scale*125),(int)(scale*181));
-                                    workingStacks[i].add(tmp2,new Integer(k+2),k+1);
-                                    tmp2.revalidate();
-                                }
-                                tmp2.addMouseListener(new MouseAdapter() {
-                                    @Override
-                                    public void mouseClicked(MouseEvent e) {
-                                        guiCard asdf = (guiCard)e.getSource();
-                                        workingCard = asdf.getObj();//uloazime objekt karty
-                                        System.out.println(workingCard.value());
-                                    }
-                                });
-
-                            }
-                            workingStacks[workingNum].removeAll();
-                            if(GAME1.workingArray[workingNum].isEmpty()){
-                                JLabel tmp = new JLabel();
-                                tmp.setOpaque(true);
-                                tmp.setBackground(Color.lightGray);
-                                tmp.setBounds(0,0,(int)(scale*125),(int)(scale*181));//pozicia v ramci layeredpane
-                                workingStacks[workingNum].add(tmp,new Integer(1),0);
-                            }
-                            for(int k=0;k<GAME1.workingArray[workingNum].size();k++){
-                                //vyscistit layeredpane
-                                //Component[] components = workingArray[workingNum].getComponents();
-                                //pridat sive pozadia ak prazdne
-                                guiCard tmp2 = new guiCard();
-                                tmp2.addObj(GAME1.workingArray[workingNum].get(k));
-                                if(GAME1.workingArray[workingNum].get(k).face()){//ak je tvarou hore tak obrazok sa vykresli
-                                    tmp2.setIcon(new ImageIcon(new ImageIcon(GAME1.workingArray[workingNum].get(k).getCardImage()).getImage().getScaledInstance((int)(scale*125), (int)(scale*181), Image.SCALE_SMOOTH)));
-                                    tmp2.setBounds(0,k*30,(int)(scale*125),(int)(scale*181));
-                                    workingStacks[workingNum].add(tmp2,new Integer(k+2),k+1);
-                                    tmp2.revalidate();
-                                }
-                                else{//ak je false tak zadna strana
-                                    //JLabel tmp2 = new JLabel();
-                                    tmp2.setOpaque(true);
-                                    tmp2.setBackground(Color.RED);
-                                    tmp2.setBorder(BorderFactory.createLineBorder(Color.black));
-                                    tmp2.setBounds(0,k*30,(int)(scale*125),(int)(scale*181));
-                                    workingStacks[workingNum].add(tmp2,new Integer(k+2),k+1);
-                                    tmp2.revalidate();
-                                }
-                                //getContentPane().repaint();
-                                //tmp2.revalidate();
-                                tmp2.addMouseListener(new MouseAdapter() {
-                                    @Override
-                                    public void mouseClicked(MouseEvent e) {
-                                        guiCard asdf = (guiCard)e.getSource();
-                                        workingCard = asdf.getObj();//uloazime objekt karty
-                                        System.out.println(workingCard.value());
-                                    }
-                                });
-
-                            }
-                            getContentPane().repaint();
-                            workingNum=-1;
-                }*/
+                
             }
             });
 
@@ -835,176 +681,15 @@ public class Solitaire extends /*JFrame*/ JPanel {
                     workingStacks[i].add(tmp2,new Integer(j+2),j+1);
                 }
                 else{//ak je false tak zadna strana
-                    //JLabel tmp2 = new JLabel();
                     tmp2.setOpaque(true);
                     tmp2.setBackground(Color.RED);
                     tmp2.setBorder(BorderFactory.createLineBorder(Color.black));
                     tmp2.setBounds(0,(int)(scale*j*30),(int)(scale*125),(int)(scale*181));
                     workingStacks[i].add(tmp2,new Integer(j+2),j+1);
                 }
-                tmp2.addMouseListener(new CustomMouseListener()); //{
+                tmp2.addMouseListener(new CustomMouseListener()); 
                 gameDeckUp.revalidate();
-                   //@Override
-                    //public void mouseClicked(MouseEvent e) {
-                       
-                        /*guiCard asdf = (guiCard)e.getSource();
 
-                            
-                        if(workingNum==-1){
-                            //guiCard asdf = (guiCard)e.getSource();
-                            workingCard = asdf.getObj();//uloazime objekt karty
-                            workingNum= asdf.getIndex();
-                            System.out.println(workingCard.value());
-                        }
-                        else{
-                            System.out.println(workingCard.value());
-                            GAME1.WorkingToWorking(workingNum,asdf.getIndex(),workingCard);
-                            for(int k=0;k<GAME1.workingArray[asdf.getIndex()].size();k++){
-                                guiCard tmp2 = new guiCard();
-                                int i = asdf.getIndex();
-                                tmp2.addObj(GAME1.workingArray[i].get(k));
-                                tmp2.setIndex(i);
-                                if(GAME1.workingArray[i].get(k).face()){//ak je tvarou hore tak obrazok sa vykresli
-                                    tmp2.setIcon(new ImageIcon(new ImageIcon(GAME1.workingArray[i].get(k).getCardImage()).getImage().getScaledInstance((int)(scale*125), (int)(scale*181), Image.SCALE_SMOOTH)));
-                                    tmp2.setBounds(0,k*30,(int)(scale*125),(int)(scale*181));
-                                    workingStacks[i].add(tmp2,new Integer(k+2),k+1);
-                                    tmp2.revalidate();
-                                }
-                                else{//ak je false tak zadna strana
-                                    //JLabel tmp2 = new JLabel();
-                                    tmp2.setOpaque(true);
-                                    tmp2.setBackground(Color.RED);
-                                    tmp2.setBorder(BorderFactory.createLineBorder(Color.black));
-                                    tmp2.setBounds(0,k*30,(int)(scale*125),(int)(scale*181));
-                                    workingStacks[i].add(tmp2,new Integer(k+2),k+1);
-                                    tmp2.revalidate();
-                                }
-                                tmp2.addMouseListener(new MouseAdapter() {
-                                    @Override
-                                    public void mouseClicked(MouseEvent e) {
-                                        guiCard asdf = (guiCard)e.getSource();
-                                        workingCard = asdf.getObj();//uloazime objekt karty
-                                        System.out.println(workingCard.value());
-                                    }
-                                });
-
-                            }
-
-                            workingStacks[workingNum].removeAll();
-
-                            if(GAME1.workingArray[workingNum].isEmpty()){
-                                JLabel tmp = new JLabel();
-                                tmp.setOpaque(true);
-                                tmp.setBackground(Color.lightGray);
-                                tmp.setBounds(0,0,(int)(scale*125),(int)(scale*181));//pozicia v ramci layeredpane
-                                workingStacks[workingNum].add(tmp,new Integer(1),0);
-                            }
-
-                            for(int k=0;k<GAME1.workingArray[workingNum].size();k++){
-                                //vyscistit layeredpane
-                                //Component[] components = workingArray[workingNum].getComponents();
-                                //pridat sive pozadia ak prazdne
-                                guiCard tmp2 = new guiCard();
-                                tmp2.addObj(GAME1.workingArray[workingNum].get(k));
-                                tmp2.setIndex(workingNum);
-                                if(GAME1.workingArray[workingNum].get(k).face()){//ak je tvarou hore tak obrazok sa vykresli
-                                    tmp2.setIcon(new ImageIcon(new ImageIcon(GAME1.workingArray[workingNum].get(k).getCardImage()).getImage().getScaledInstance((int)(scale*125), (int)(scale*181), Image.SCALE_SMOOTH)));
-                                    tmp2.setBounds(0,k*30,(int)(scale*125),(int)(scale*181));
-                                    workingStacks[workingNum].add(tmp2,new Integer(k+2),k+1);
-                                    tmp2.revalidate();
-                                }
-                                else{//ak je false tak zadna strana
-                                    //JLabel tmp2 = new JLabel();
-                                    tmp2.setOpaque(true);
-                                    tmp2.setBackground(Color.RED);
-                                    tmp2.setBorder(BorderFactory.createLineBorder(Color.black));
-                                    tmp2.setBounds(0,k*30,(int)(scale*125),(int)(scale*181));
-                                    workingStacks[workingNum].add(tmp2,new Integer(k+2),k+1);
-                                    tmp2.revalidate();
-                                }
-                                //getContentPane().repaint();
-                                //tmp2.revalidate();
-                                
-
-                                //tmp2.addMouseListener(new MouseAdapter() {
-                               //     @Override
-                                //    public void mouseClicked(MouseEvent e) {
-                                        
-
-
-
-
-
-                                //    }
-                                //});
-
-                            }
-                            getContentPane().repaint();
-                            workingNum=-1;
-                        }*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            //guiCard asdf = (guiCard)e.getSource();
-                            //workingCard = asdf.getObj();//uloazime objekt karty
-                            //System.out.println(workingCard.value());
-                            /*for(int k=0;k<GAME1.workingArray[i].size();k++){
-                                JLabel tmp2 = new JLabel();
-                                if(GAME1.workingArray[i].get(k).face()){//ak je tvarou hore tak obrazok sa vykresli
-                                    tmp2.setIcon(new ImageIcon(new ImageIcon(GAME1.workingArray[i].get(k).getCardImage()).getImage().getScaledInstance((int)(scale*125), (int)(scale*181), Image.SCALE_SMOOTH)));
-                                    tmp2.setBounds(0,k*30,(int)(scale*125),(int)(scale*181));
-                                    workingStacks[i].add(tmp2,new Integer(k+2),k+1);
-                                }
-                                else{//ak je false tak zadna strana
-                                    //JLabel tmp2 = new JLabel();
-                                    tmp2.setOpaque(true);
-                                    tmp2.setBackground(Color.RED);
-                                    tmp2.setBorder(BorderFactory.createLineBorder(Color.black));
-                                    tmp2.setBounds(0,k*30,(int)(scale*125),(int)(scale*181));
-                                    workingStacks[i].add(tmp2,new Integer(k+2),k+1);
-                                }
-                                tmp2.revalidate();
-
-                            }
-
-                            for(int k=0;k<GAME1.workingArray[workingNum].size();k++){
-                                JLabel tmp2 = new JLabel();
-                                if(GAME1.workingArray[workingNum].get(k).face()){//ak je tvarou hore tak obrazok sa vykresli
-                                    tmp2.setIcon(new ImageIcon(new ImageIcon(GAME1.workingArray[workingNum].get(k).getCardImage()).getImage().getScaledInstance((int)(scale*125), (int)(scale*181), Image.SCALE_SMOOTH)));
-                                    tmp2.setBounds(0,k*30,(int)(scale*125),(int)(scale*181));
-                                    workingStacks[workingNum].add(tmp2,new Integer(k+2),k+1);
-                                }
-                                else{//ak je false tak zadna strana
-                                    //JLabel tmp2 = new JLabel();
-                                    tmp2.setOpaque(true);
-                                    tmp2.setBackground(Color.RED);
-                                    tmp2.setBorder(BorderFactory.createLineBorder(Color.black));
-                                    tmp2.setBounds(0,k*30,(int)(scale*125),(int)(scale*181));
-                                    workingStacks[workingNum].add(tmp2,new Integer(k+2),k+1);
-                                }
-                                tmp2.revalidate();
-
-                            }
-                            getContentPane().repaint();
-                            workingNum=-1;
-                            workingIndex=-1;*/
-                        //}
-                
-                    //}
-
-                //});
             }
 
         }
@@ -1019,20 +704,7 @@ public class Solitaire extends /*JFrame*/ JPanel {
 
 
 		//some shit for creating and indexing the GRID
-		/*
-		JPanel[][] gridPanel = new JPanel[2][2];
-		setLayout(new GridLayout(2,2));
-		gridPanel[0][0]=panel;
-		add(gridPanel[0][0]);
-		gridPanel[0][1]=new JPanel();
-		add(gridPanel[0][1]);
-		for(int m = 1; m < 2; m++) {
-   			for(int n = 0; n < 2; n++) {
-		      gridPanel[m][n] = new JPanel();
-		      add(gridPanel[m][n]);
-		   }
-		}
-*/
+		
 
         //add buttons
         JButton save = new JButton("Save game");
@@ -1040,10 +712,8 @@ public class Solitaire extends /*JFrame*/ JPanel {
         save.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                //String filename = JOptionPane.showInputDialog(panel,"Enter filename to be saved", null);
-                //System.out.println(filename);  
                 JFileChooser saveFile = new JFileChooser();
-                int retVal = saveFile.showSaveDialog(Solitaire.this/*panel*/);
+                int retVal = saveFile.showSaveDialog(Solitaire.this);
                 if(retVal == JFileChooser.APPROVE_OPTION){
                     saveFile.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
                     File file = saveFile.getCurrentDirectory();
@@ -1066,7 +736,7 @@ public class Solitaire extends /*JFrame*/ JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                     JFileChooser loadFile = new JFileChooser();
-                    int retVal = loadFile.showOpenDialog(Solitaire.this/*panel*/);
+                    int retVal = loadFile.showOpenDialog(Solitaire.this);
                     
                     if(retVal == JFileChooser.APPROVE_OPTION){
                     
@@ -1167,7 +837,6 @@ public class Solitaire extends /*JFrame*/ JPanel {
                                 tmp2.revalidate();
                             }
                             else{//ak je false tak zadna strana
-                                //JLabel tmp2 = new JLabel();
                                 tmp2.setOpaque(true);
                                 tmp2.setBackground(Color.RED);
                                 tmp2.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -1182,7 +851,6 @@ public class Solitaire extends /*JFrame*/ JPanel {
                         }
                         }
 
-                        //getContentPane().repaint();
                         revalidate();
 
 
@@ -1297,7 +965,6 @@ public class Solitaire extends /*JFrame*/ JPanel {
                             tmp2.revalidate();
                         }
                         else{//ak je false tak zadna strana
-                            //JLabel tmp2 = new JLabel();
                             tmp2.setOpaque(true);
                             tmp2.setBackground(Color.RED);
                             tmp2.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -1313,9 +980,6 @@ public class Solitaire extends /*JFrame*/ JPanel {
                     }
                     }
 
-
-
-                    //getContentPane().repaint();
                 revalidate();
             }
 
@@ -1326,14 +990,7 @@ public class Solitaire extends /*JFrame*/ JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 String toPrint = GAME1.hint(); 
-                /*JFrame hintWind = new JFrame("HINT");
-                hintWind.setSize(500, 300);
-                hintWind.setLocationRelativeTo(null);
-                hintWind.setDefaultCloseOperation(EXIT_ON_CLOSE);
-                hintWind.setPreferredSize(new Dimension(500, 300));*/
-                //hintWind.setBounds(500,200,500,300);
-                //add(hintWind);
-                JOptionPane.showMessageDialog(Solitaire.this,/*panel,*/toPrint,"Hint",JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(Solitaire.this,toPrint,"Hint",JOptionPane.INFORMATION_MESSAGE);
                 
             }
 
@@ -1437,7 +1094,6 @@ public class Solitaire extends /*JFrame*/ JPanel {
                             tmp2.revalidate();
                         }
                         else{//ak je false tak zadna strana
-                            //JLabel tmp2 = new JLabel();
                             tmp2.setOpaque(true);
                             tmp2.setBackground(Color.RED);
                             tmp2.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -1452,87 +1108,36 @@ public class Solitaire extends /*JFrame*/ JPanel {
                     }
                     }
 
-
-
-                    //getContentPane().repaint();
                     revalidate();
             }
 
         });
 
 
-        /*panel.*/add(save);
-        /*panel.*/add(load);
-        /*panel.*/add(undo);
-        /*panel.*/add(hint);
-        /*panel.*/add(newGame);
+        add(save);
+        add(load);
+        add(undo);
+        add(hint);
+        add(newGame);
 
-
-
-		/*add(panel);
-        pack();*/
-
-
-
-        //some shit for resizing,TODO
-
-       /* @Override
-        addComponentListener(new ComponentListener() {
-    		public void componentResized(ComponentEvent e) {
-        		target1.setBounds(insets.left+700, 70+ insets.top, (int)(scale*125),(int)(scale*181));
-				target2.setBounds(700+40+(int)(scale*125)+insets.right, 70+ insets.top, (int)(scale*125),(int)(scale*181));
-				target3.setBounds((int)(scale*125)+40+(int)(scale*125)+700+40+insets.right, 70+ insets.top, (int)(scale*125),(int)(scale*181));
-				target4.setBounds((int)(scale*125)+40+(int)(scale*125)+(int)(scale*125)+700+40+40+insets.right, 70+ insets.top, (int)(scale*125),(int)(scale*181));          
-    			pack();
-    		}
-		});*/
-
-        //create listener and add
-       /* ComponentListener listener = new ComponentAdapter() {
-     		public void componentResized(ComponentEvent e) {
-     			Dimension newSize = e.getComponent().getBounds().getSize();
-				setSize(newSize);
-				setPreferredSize(newSize); 
-     			Insets insets = panel.getInsets();
-        		target1.setBounds((700)*((int)(newSize.getWidth()/1400)), 70+ insets.top, (int)(scale*125),(int)(scale*181));
-				target2.setBounds(700+40+(int)(scale*125)+insets.right, 70+ insets.top, (int)(scale*125),(int)(scale*181));
-				target3.setBounds((int)(scale*125)+40+(int)(scale*125)+700+40+insets.right, 70+ insets.top, (int)(scale*125),(int)(scale*181));
-				target4.setBounds(((int)(scale*125)+40+(int)(scale*125)+(int)(scale*125)+700+40+40+insets.right)*2, 70+ insets.top, (int)(scale*125),(int)(scale*181));     
-    			//pack();
-      		}
-      	};
-      	addComponentListener(listener);*/
-//add(panel);
-      //	pack();
 
         
     }
 
-   /* class DragMouseAdapter extends MouseAdapter {
-	    public void mousePressed(MouseEvent e) {
-	        JComponent c = (JComponent) e.getSource();
-	        TransferHandler handler = c.getTransferHandler();
-	        handler.exportAsDrag(c, e, TransferHandler.COPY);
-	    }
-	}
-*/
+   
 
 
     //mouselistener for cards on working stacks
     public class CustomMouseListener implements MouseListener{
       //private JLabel gameDeckUp;
       
-     /* public CustomMouseListener(JLabel gameDU){
-           this.gameDeckUp=gameDU;
-      
-      }*/
+     
       
       public void mouseClicked(MouseEvent e) {
                         guiCard asdf = (guiCard)e.getSource();
 
                         if(gameUpFlag==1){
                             GAME1.gameDeckUpToWorking(asdf.getIndex());
-                            //System.out.println("geci");
                             //repaint gamedeckup
                             if(!GAME1.GameDeckUp.isEmpty()){
                                 gameDeckUp.setIcon(new ImageIcon(new ImageIcon(GAME1.GameDeckUp.get().getCardImage()).getImage().getScaledInstance((int)(scale*125), (int)(scale*181), Image.SCALE_SMOOTH)));
@@ -1544,34 +1149,12 @@ public class Solitaire extends /*JFrame*/ JPanel {
                                 gameDeckUp.setBackground(Color.lightGray);
                                 gameDeckUp.revalidate();
                             }
-                            Solitaire.this.revalidate();//getContentPane().repaint();
-                            //create card on working stack and repaint
-                            /*int i = asdf.getIndex();
-                            int k = GAME1.workingArray[i].size()-1;
-                            GAME1.gameDeckUpToWorking(i);
-                            guiCard tmp2 = new guiCard();
-                            tmp2.addObj(GAME1.workingArray[i].get(k));
-                            tmp2.setIndex(i);
-                            tmp2.setIcon(new ImageIcon(new ImageIcon(GAME1.workingArray[i].get().getCardImage()).getImage().getScaledInstance((int)(scale*125), (int)(scale*181), Image.SCALE_SMOOTH)));
-                            tmp2.setBounds(0,k*30,(int)(scale*125),(int)(scale*181));
-                            workingStacks[i].add(tmp2,new Integer(k+2),k+1);
-                            tmp2.revalidate();
-                            getContentPane().repaint();
+                            Solitaire.this.revalidate();
+
+                            
                             gameUpFlag=0;
-                            System.out.println("gecii");*/
-                            gameUpFlag=0;
-                            //GAME1.gameDeckUpToWorking(asdf.getIndex());
-                            /*if(GAME1.workingArray[asdf.getIndex()].isEmpty()){
-                                guiCard tmp = new guiCard();
-                                tmp.setIndex(asdf.getIndex());
-                                tmp.setOpaque(true);
-                                tmp.setBackground(Color.lightGray);
-                                tmp.setBounds(0,0,(int)(scale*125),(int)(scale*181));//pozicia v ramci layeredpane
-                                tmp.addMouseListener(new CustomMouseListener());
-                                tmp.revalidate();
-                                workingStacks[asdf.getIndex()].add(tmp,new Integer(1),0);
-                                workingStacks[asdf.getIndex()].repaint();
-                            }*/
+
+                            
 
 
                             for(int k=0;k<GAME1.workingArray[asdf.getIndex()].size();k++){
@@ -1604,16 +1187,12 @@ public class Solitaire extends /*JFrame*/ JPanel {
                         }
                         else 
                         if(workingNum==-1){
-                            //guiCard asdf = (guiCard)e.getSource();
                             workingCard = asdf.getObj();//uloazime objekt karty
                             workingNum= asdf.getIndex();
-                            //System.out.println(workingCard.value());
                         }
                         else{
-                            //System.out.println(workingCard.value());
                             GAME1.WorkingToWorking(workingNum,asdf.getIndex(),workingCard);
                             workingStacks[asdf.getIndex()].removeAll();
-                            //workingStacks[asdf.getIndex()].repaint();
                             Solitaire.this.revalidate();
                             if(GAME1.workingArray[asdf.getIndex()].isEmpty()){
                                 guiCard tmp = new guiCard();
@@ -1639,7 +1218,6 @@ public class Solitaire extends /*JFrame*/ JPanel {
                                     tmp2.revalidate();
                                 }
                                 else{//ak je false tak zadna strana
-                                    //JLabel tmp2 = new JLabel();
                                     tmp2.setOpaque(true);
                                     tmp2.setBackground(Color.RED);
                                     tmp2.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -1670,7 +1248,6 @@ public class Solitaire extends /*JFrame*/ JPanel {
 
                             for(int k=0;k<GAME1.workingArray[workingNum].size();k++){
                                 //vyscistit layeredpane
-                                //Component[] components = workingArray[workingNum].getComponents();
                                 //pridat sive pozadia ak prazdne
                                 guiCard tmp2 = new guiCard();
                                 tmp2.addObj(GAME1.workingArray[workingNum].get(k));
@@ -1682,7 +1259,6 @@ public class Solitaire extends /*JFrame*/ JPanel {
                                     tmp2.revalidate();
                                 }
                                 else{//ak je false tak zadna strana
-                                    //JLabel tmp2 = new JLabel();
                                     tmp2.setOpaque(true);
                                     tmp2.setBackground(Color.RED);
                                     tmp2.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -1690,20 +1266,16 @@ public class Solitaire extends /*JFrame*/ JPanel {
                                     workingStacks[workingNum].add(tmp2,new Integer(k+2),k+1);
                                     tmp2.revalidate();
                                 }
-                                //getContentPane().repaint();
-                                //tmp2.revalidate();
-                                
 
                                 tmp2.addMouseListener(new CustomMouseListener());
-                                //gameDeckUp.revalidate();
-                                    //System.out.println("geciike");
+
                             }
                             //getContentPane().repaint();
                             Solitaire.this.revalidate();
                             workingStacks[workingNum].repaint();
                             workingNum=-1;
                         }
-//System.out.println("gecicei");
+
       }
 
 
@@ -1718,7 +1290,11 @@ public class Solitaire extends /*JFrame*/ JPanel {
     public void mouseReleased(MouseEvent e) {}
    }
 
-
+   /**
+    	* Loads the given file.
+    	* @param	path path to the file
+    	* @return	initialized game object
+    */
 
    public static Game load_game(String path) {
 
@@ -1815,7 +1391,12 @@ public class Solitaire extends /*JFrame*/ JPanel {
     }
 
 
-
+    	/**
+    	* Saves the given game to the given path.
+    	* @param	path path to the file
+    	* @param	game game object to be saved
+    	* @return	exit code for detecting errors
+    	*/
         public static int write_game(String path, Game game) {
 
         // create array of empty strings
@@ -1883,7 +1464,9 @@ public class Solitaire extends /*JFrame*/ JPanel {
     }
 
 
-
+    /**
+    * Main method. Creating one game at the start, than more games if the user wants.
+    */
 
     public static void main(String[] args) {
 
@@ -1900,8 +1483,7 @@ public class Solitaire extends /*JFrame*/ JPanel {
 
         SwingUtilities.invokeLater(() -> {
         Solitaire ex = new Solitaire(false,Solitaire.counter);
-            //ex.GAME1 = new Game();
-            //ex.setVisible(true);
+
         JFrame board = new JFrame();
         board.setTitle("Solitaire");
         board.setSize(1400, 900);
@@ -1910,29 +1492,9 @@ public class Solitaire extends /*JFrame*/ JPanel {
         board.setPreferredSize(new Dimension(1400, 900));
         board.add(ex);
         board.getContentPane().setBackground(Color.green);
-        /*Solitaire[][] gridPanel = new Solitaire[2][2];
-        board.setLayout(new GridLayout(2,2));*/
+        
 
 
-
-        //gridPanel[0][0]=panel;
-        //add(gridPanel[0][0]);
-        //gridPanel[0][1]=new JPanel();
-        //add(gridPanel[0][1]);
-       /* for(int m = 0; m < 2; m++) {
-            for(int n = 0; n < 2; n++) {
-              if(whereIsGame[m][n]==false){
-                  gridPanel[m][n] = new Solitaire(true,Solitaire.counter);
-                  Solitaire.counter++;
-                  board.add(gridPanel[m][n]);
-                  whereIsGame[m][n]=true;
-              }
-
-            
-           }
-        }*/
-
-        //board.add(gridPanel);
 
         Solitaire[][] gridPanel = new Solitaire[2][2];
 
@@ -1959,31 +1521,11 @@ public class Solitaire extends /*JFrame*/ JPanel {
                     whereIsGame[0][0]=true;
                     gridPanel[0][0].revalidate();
                     board.getContentPane().repaint();
-                    /*for(int i = 0;i<2;i++){
-                        for(int j =0;j<2;j++){
-                            gridPanel[i][j]=new Solitaire();
-                            board.add(gridPanel[i][j]);
-                        }
-                    }*/
+                    
                 }
 
-                /*if(oneGame==false && games==1){
-                    System.out.println("gecikeee");
-                    oneGame=true;
-                    //board.setLayout(null);
-                    board.removeAll();
-                    board.setLayout(new FlowLayout());
-                    Solitaire ex = new Solitaire(false,Solitaire.counter);
-                    board.add(ex);
-                    ex.revalidate();
-                    board.getContentPane().repaint();
-                    return;
+                
 
-                }*/
-
-                //board.add(gridPanel); 
-
-                 //System.out.println("anyad");
                 for(int m = 0; m < 2; m++) {
                     for(int n = 0; n < 2; n++) {
                       if(whereIsGame[m][n]==false){
@@ -1999,9 +1541,9 @@ public class Solitaire extends /*JFrame*/ JPanel {
                           return;
                           
                       }
-                    //break;    
+  
                    }
-                //break;
+
                 }
 
 
@@ -2012,11 +1554,8 @@ public class Solitaire extends /*JFrame*/ JPanel {
             public void actionPerformed(ActionEvent e) {
                 if(whereIsGame[0][0]){
                     board.remove(gridPanel[0][0]);
-                    //gridPanel[0][0]=new Solitaire();
-                    //board.add(gridPanel[0][0]);
                     whereIsGame[0][0]=false;
                     Solitaire.games--;
-                    //gridPanel[0][0].revalidate();
                     board.getContentPane().repaint();
                 }
 
@@ -2027,11 +1566,8 @@ public class Solitaire extends /*JFrame*/ JPanel {
             public void actionPerformed(ActionEvent e) {
                 if(whereIsGame[0][1]){
                 board.remove(gridPanel[0][1]);
-               // gridPanel[0][1]=new Solitaire();
-                //board.add(gridPanel[0][1]);
                 whereIsGame[0][1]=false;
                 Solitaire.games--;
-                //gridPanel[0][1].revalidate();
                 board.getContentPane().repaint();
             }
             }
@@ -2041,11 +1577,8 @@ public class Solitaire extends /*JFrame*/ JPanel {
             public void actionPerformed(ActionEvent e) {
                 if(whereIsGame[1][0]){
                 board.remove(gridPanel[1][0]);
-               // gridPanel[1][0]=new Solitaire();
-                //board.add(gridPanel[1][0]);
                 whereIsGame[1][0]=false;
                 Solitaire.games--;
-               // gridPanel[1][0].revalidate();
                 board.getContentPane().repaint();
             }
             }
@@ -2055,11 +1588,8 @@ public class Solitaire extends /*JFrame*/ JPanel {
             public void actionPerformed(ActionEvent e) {
                 if(whereIsGame[1][1]){
                 board.remove(gridPanel[1][1]);
-              //  gridPanel[1][1]=new Solitaire();
-                //board.add(gridPanel[1][1]);
                 whereIsGame[1][1]=false;
                 Solitaire.games--;
-               // gridPanel[1][1].revalidate();
                 board.getContentPane().repaint();
             }
             }
