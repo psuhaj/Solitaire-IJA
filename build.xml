@@ -79,7 +79,7 @@
     </target>
 
     <!-- compile and generate a java archiv -->
-    <target name="compile" depends="lib">
+    <target name="compile" depends="lib, doc">
         <javac srcdir="${src.dir}" destdir="${build.dir}"/>
         <mkdir dir="${jar.dir}"/>
         <jar destfile="${jar.dir}/${jar_name}.jar" basedir="${build.dir}">
