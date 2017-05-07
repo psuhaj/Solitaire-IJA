@@ -1,5 +1,4 @@
 # Solitaire
-![Image of Solitaire](https://github.com/peter2141/Solitaire-IJA/blob/master/Solitaire.png)
 ## Term project for course Java Programming Language (IJA)
 ### © Peter Šuhaj & Adrián Tóth
 &nbsp;
@@ -8,3 +7,4 @@ How to run:
 ant compile
 ant run
 ~~~
+![Image of Solitaire](https://github.com/peter2141/Solitaire-IJA/blob/master/Solitaire.png)
