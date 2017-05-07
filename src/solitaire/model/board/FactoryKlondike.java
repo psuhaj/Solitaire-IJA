@@ -1,3 +1,10 @@
+/**
+ * @file       FactoryKlondike.java
+ * @brief      FactoryKlondike implementation
+ * @author     Peter Šuhaj
+ * @author     Adrián Tóth
+ */
+
 package solitaire.model.board;
 
 import solitaire.model.cards.*;

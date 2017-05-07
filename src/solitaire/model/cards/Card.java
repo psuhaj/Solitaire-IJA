@@ -1,3 +1,10 @@
+/**
+ * @file       Card.java
+ * @brief      Card interface
+ * @author     Peter Šuhaj
+ * @author     Adrián Tóth
+ */
+
 package solitaire.model.cards;
 
 import java.awt.image.BufferedImage;

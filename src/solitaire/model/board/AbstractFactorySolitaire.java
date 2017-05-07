@@ -1,3 +1,10 @@
+/**
+ * @file       AbstractFactorySolitaire.java
+ * @brief      AbstractFactorySolitaire implementation
+ * @author     Peter Šuhaj
+ * @author     Adrián Tóth
+ */
+
 package solitaire.model.board;
 
 import solitaire.model.cards.Card;

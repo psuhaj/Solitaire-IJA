@@ -1,3 +1,10 @@
+/**
+ * @file       Commander.java
+ * @brief      Commander interface
+ * @author     Peter Šuhaj
+ * @author     Adrián Tóth
+ */
+
 package solitaire.model.cmder;
 
 /**

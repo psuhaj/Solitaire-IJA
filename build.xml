@@ -7,7 +7,7 @@
     <property name="dest-client.dir" value="dest-client"/>
     <property name="dest-server.dir" value="dest-server"/>
     <property name="doc.dir"         value="doc"/>
-    <property name="example.dir"     value="example"/>
+    <property name="examples.dir"    value="examples"/>
     <property name="lib.dir"         value="lib"/>
     <property name="src.dir"         value="src"/>
 
@@ -18,7 +18,7 @@
 
     <property name="main-class"      value="solitaire.Solitaire"/>
 
-    <!-- remove warning message -->
+    <!-- fix of warning -->
     <property name="build.sysclasspath" value="last"/>
 
     <!-- create necessary directories -->
@@ -27,9 +27,30 @@
         <mkdir dir="${dest-client.dir}"/>
         <mkdir dir="${dest-server.dir}"/>
         <mkdir dir="${doc.dir}"/>
-        <mkdir dir="${example.dir}"/>
+        <mkdir dir="${examples.dir}"/>
         <mkdir dir="${lib.dir}"/>
         <mkdir dir="${src.dir}"/>
+    </target>
+
+    <!-- create documentation -->
+    <target name="doc">
+        <javadoc sourcepath="${src.dir}" destdir="${doc.dir}"/>
+    </target>
+
+    <!-- download lib directory content -->
+    <target name="lib">
+        <exec executable="/bin/sh" failonerror="true">
+            <arg value="${lib.dir}/${script_libs}"/>
+        </exec>
+    </target>
+
+    <!-- remove doc content -->
+    <target name="clean-doc">
+        <delete includeEmptyDirs="true">
+            <fileset dir="${doc.dir}">
+                <include name="*/**"/>
+            </fileset>
+        </delete>
     </target>
 
     <!-- remove lib content except "get-libs.sh" -->
@@ -42,17 +63,8 @@
         </delete>
     </target>
 
-    <!-- remove doc content -->
-    <target name="clean-doc">
-        <delete includeEmptyDirs="true">
-            <fileset dir="${doc.dir}">
-                <include name="*/**"/>
-            </fileset>
-        </delete>
-    </target>
-
     <!-- remove content of directories -->
-    <target name="clean" depends="clean-doc"> <!-- OFF depends="clean-lib"-->
+    <target name="clean" depends="clean-doc, clean-lib">
         <delete includeEmptyDirs="true">
             <fileset dir="${build.dir}">
                 <include name="*/**"/>
@@ -66,20 +78,8 @@
         </delete>
     </target>
 
-    <!-- make documentation -->
-    <target name="doc" depends="clean-doc">
-        <javadoc sourcepath="${src.dir}" destdir="${doc.dir}"/>
-    </target>
-
-    <!-- download lib directory content -->
-    <target name="lib" depends="clean-lib">
-        <exec executable="/bin/sh" failonerror="true">
-            <arg value="${lib.dir}/${script_libs}"/>
-        </exec>
-    </target>
-
     <!-- compile and generate a java archiv -->
-    <target name="compile"> <!-- OFF depends="lib" -->
+    <target name="compile" depends="lib, doc">
         <javac srcdir="${src.dir}" destdir="${build.dir}"/>
         <mkdir dir="${jar.dir}"/>
         <jar destfile="${jar.dir}/${jar_name}.jar" basedir="${build.dir}">

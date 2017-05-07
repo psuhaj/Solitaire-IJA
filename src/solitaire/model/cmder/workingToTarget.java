@@ -1,3 +1,10 @@
+/**
+ * @file       workingToTarget.java
+ * @brief      workingToTarget command implementation
+ * @author     Peter Šuhaj
+ * @author     Adrián Tóth
+ */
+
 package solitaire.model.cmder;
 
 import solitaire.model.cards.*;

@@ -1,3 +1,10 @@
+/**
+ * @file       xCardStackColor.java
+ * @brief      Card stack (target) implementation
+ * @author     Peter Šuhaj
+ * @author     Adrián Tóth
+ */
+
 package solitaire.model.cards;
 
 import java.util.Stack;

@@ -1,3 +1,10 @@
+/**
+ * @file       CardDeck.java
+ * @brief      Card deck interface
+ * @author     Peter Šuhaj
+ * @author     Adrián Tóth
+ */
+
 package solitaire.model.cards;
 
 /**

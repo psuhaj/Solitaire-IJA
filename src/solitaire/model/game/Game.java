@@ -1,3 +1,10 @@
+/**
+ * @file       Game.java
+ * @brief      Game implementation
+ * @author     Peter Šuhaj
+ * @author     Adrián Tóth
+ */
+
 package solitaire.model.game;
 
 import java.util.Collections;
