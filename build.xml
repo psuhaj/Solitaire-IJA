@@ -94,7 +94,7 @@
     </target>
 
     <!-- run the program -->
-    <target name="run" depends="compile">
+    <target name="run">
         <java jar="${jar.dir}/${jar_name}.jar" fork="true"/>
     </target>
 
