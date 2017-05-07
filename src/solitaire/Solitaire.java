@@ -1466,6 +1466,7 @@ public class Solitaire extends  JPanel {
 
     /**
     * Main method. Creating one game at the start, than more games if the user wants.
+    * @param args  command line arguments
     */
 
     public static void main(String[] args) {
