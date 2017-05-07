@@ -12,9 +12,9 @@
     <property name="src.dir"         value="src"/>
 
     <property name="jar.dir"         value="${dest-client.dir}"/>
-    <property name="jar_name"         value="ija-client"/>
+    <property name="jar_name"        value="ija-client"/>
 
-    <property name="script_libs"       value="get-libs.sh"/>
+    <property name="script_libs"     value="get-libs.sh"/>
 
     <property name="main-class"      value="solitaire.Solitaire"/>
 
