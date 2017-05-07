@@ -261,6 +261,8 @@ public class Solitaire extends /*JFrame*/ JPanel {
                         gameDeckUp.revalidate();
                     }
                     else{
+                        gameDeckUp.setIcon(null);
+                        gameDeckUp.setOpaque(true);
                         gameDeckUp.setBackground(Color.lightGray);
                         gameDeckUp.revalidate();
                     }
@@ -277,6 +279,10 @@ public class Solitaire extends /*JFrame*/ JPanel {
                     }
                     //getContentPane().repaint();//prekreslenie
                     revalidate();
+
+                    if(GAME1.targetArray[0].size()==13 && GAME1.targetArray[1].size() == 13 && GAME1.targetArray[2].size() == 13 && GAME1.targetArray[3].size() == 13){
+                        JOptionPane.showMessageDialog(Solitaire.this,"Congratulation. You won the game.","WIN",JOptionPane.INFORMATION_MESSAGE);
+                    }
                 }
                 else if(workingNum!=-1){
                     GAME1.workingToTarget(workingNum,0);
@@ -314,6 +320,7 @@ public class Solitaire extends /*JFrame*/ JPanel {
                         tmp2.addMouseListener(new CustomMouseListener());
                         workingStacks[workingNum].repaint();
                         gameDeckUp.revalidate();
+
                         
                     }
                     
@@ -332,6 +339,11 @@ public class Solitaire extends /*JFrame*/ JPanel {
                         target1.setOpaque(true);
                         target1.setBackground(Color.lightGray);
                         target1.revalidate();//prekreslenie?
+                    }
+
+
+                    if(GAME1.targetArray[0].size()==13 && GAME1.targetArray[1].size() == 13 && GAME1.targetArray[2].size() == 13 && GAME1.targetArray[3].size() == 13){
+                        JOptionPane.showMessageDialog(Solitaire.this,"Congratulation. You won the game.","WIN",JOptionPane.INFORMATION_MESSAGE);
                     }
                 }
 
@@ -354,6 +366,8 @@ public class Solitaire extends /*JFrame*/ JPanel {
                         gameDeckUp.revalidate();
                     }
                     else{
+                        gameDeckUp.setIcon(null);
+                        gameDeckUp.setOpaque(true);
                         gameDeckUp.setBackground(Color.lightGray);
                         gameDeckUp.revalidate();
                     }
@@ -370,6 +384,9 @@ public class Solitaire extends /*JFrame*/ JPanel {
                     }
                     //getContentPane().repaint();
                     revalidate();
+                    if(GAME1.targetArray[0].size()==13 && GAME1.targetArray[1].size() == 13 && GAME1.targetArray[2].size() == 13 && GAME1.targetArray[3].size() == 13){
+                        JOptionPane.showMessageDialog(Solitaire.this,"Congratulation. You won the game.","WIN",JOptionPane.INFORMATION_MESSAGE);
+                    }
                 } 
                 else if(workingNum!=-1){
                     GAME1.workingToTarget(workingNum,1);
@@ -427,6 +444,9 @@ public class Solitaire extends /*JFrame*/ JPanel {
                         target2.setBackground(Color.lightGray);
                         target2.revalidate();//prekreslenie?
                     }
+                    if(GAME1.targetArray[0].size()==13 && GAME1.targetArray[1].size() == 13 && GAME1.targetArray[2].size() == 13 && GAME1.targetArray[3].size() == 13){
+                        JOptionPane.showMessageDialog(Solitaire.this,"Congratulation. You won the game.","WIN",JOptionPane.INFORMATION_MESSAGE);
+                    }
                 }
 
                 //getContentPane().repaint();
@@ -448,6 +468,8 @@ public class Solitaire extends /*JFrame*/ JPanel {
                         gameDeckUp.revalidate();
                     }
                     else{
+                        gameDeckUp.setIcon(null);
+                        gameDeckUp.setOpaque(true);
                         gameDeckUp.setBackground(Color.lightGray);
                         gameDeckUp.revalidate();
                     }
@@ -464,6 +486,9 @@ public class Solitaire extends /*JFrame*/ JPanel {
                     }
                     //getContentPane().repaint();
                     revalidate();
+                    if(GAME1.targetArray[0].size()==13 && GAME1.targetArray[1].size() == 13 && GAME1.targetArray[2].size() == 13 && GAME1.targetArray[3].size() == 13){
+                        JOptionPane.showMessageDialog(Solitaire.this,"Congratulation. You won the game.","WIN",JOptionPane.INFORMATION_MESSAGE);
+                    }
 
                 }
                 else if(workingNum!=-1){
@@ -522,6 +547,9 @@ public class Solitaire extends /*JFrame*/ JPanel {
                         target3.setBackground(Color.lightGray);
                         target3.revalidate();//prekreslenie?
                     }
+                    if(GAME1.targetArray[0].size()==13 && GAME1.targetArray[1].size() == 13 && GAME1.targetArray[2].size() == 13 && GAME1.targetArray[3].size() == 13){
+                        JOptionPane.showMessageDialog(Solitaire.this,"Congratulation. You won the game.","WIN",JOptionPane.INFORMATION_MESSAGE);
+                    }
                 }
 
                 //getContentPane().repaint();
@@ -543,6 +571,8 @@ public class Solitaire extends /*JFrame*/ JPanel {
                         gameDeckUp.revalidate();
                     }
                     else{
+                        gameDeckUp.setIcon(null);
+                        gameDeckUp.setOpaque(true);
                         gameDeckUp.setBackground(Color.lightGray);
                         gameDeckUp.revalidate();
                     }
@@ -559,6 +589,9 @@ public class Solitaire extends /*JFrame*/ JPanel {
                     }
                     //getContentPane().repaint();
                     revalidate();
+                    if(GAME1.targetArray[0].size()==13 && GAME1.targetArray[1].size() == 13 && GAME1.targetArray[2].size() == 13 && GAME1.targetArray[3].size() == 13){
+                        JOptionPane.showMessageDialog(Solitaire.this,"Congratulation. You won the game.","WIN",JOptionPane.INFORMATION_MESSAGE);
+                    }
                 }
             else if(workingNum!=-1){
                     GAME1.workingToTarget(workingNum,3);
@@ -615,6 +648,9 @@ public class Solitaire extends /*JFrame*/ JPanel {
                         target4.setOpaque(true);
                         target4.setBackground(Color.lightGray);
                         target4.revalidate();//prekreslenie?
+                    }
+                    if(GAME1.targetArray[0].size()==13 && GAME1.targetArray[1].size() == 13 && GAME1.targetArray[2].size() == 13 && GAME1.targetArray[3].size() == 13){
+                        JOptionPane.showMessageDialog(Solitaire.this,"Congratulation. You won the game.","WIN",JOptionPane.INFORMATION_MESSAGE);
                     }
                 }
 
@@ -1000,7 +1036,7 @@ public class Solitaire extends /*JFrame*/ JPanel {
 
         //add buttons
         JButton save = new JButton("Save game");
-        save.setBounds((int)(scale*10),(int)(scale*5),(int)(scale*140),(int)(scale*30));
+        save.setBounds((int)(scale*10),(int)(scale*5),(int)(scale*250),(int)(scale*30));
         save.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -1025,7 +1061,7 @@ public class Solitaire extends /*JFrame*/ JPanel {
         });
 
         JButton load = new JButton("Load game");
-        load.setBounds((int)(scale*160),(int)(scale*5),(int)(scale*140),(int)(scale*30));
+        load.setBounds((int)(scale*270),(int)(scale*5),(int)(scale*250),(int)(scale*30));
         load.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -1161,7 +1197,7 @@ public class Solitaire extends /*JFrame*/ JPanel {
 
         });
         JButton undo = new JButton("Undo");
-        undo.setBounds((int)(scale*310),(int)(scale*5),(int)(scale*80),(int)(scale*30));
+        undo.setBounds((int)(scale*530),(int)(scale*5),(int)(scale*170),(int)(scale*30));
         undo.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -1285,7 +1321,7 @@ public class Solitaire extends /*JFrame*/ JPanel {
 
         });
         JButton hint = new JButton("Hint");
-        hint.setBounds((int)(scale*400),(int)(scale*5),(int)(scale*80),(int)(scale*30));
+        hint.setBounds((int)(scale*710),(int)(scale*5),(int)(scale*170),(int)(scale*30));
         hint.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -1303,7 +1339,7 @@ public class Solitaire extends /*JFrame*/ JPanel {
 
         });
         JButton newGame = new JButton("New game");
-        newGame.setBounds((int)(scale*490),(int)(scale*5),(int)(scale*140),(int)(scale*30));
+        newGame.setBounds((int)(scale*890),(int)(scale*5),(int)(scale*250),(int)(scale*30));
         newGame.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -1503,6 +1539,8 @@ public class Solitaire extends /*JFrame*/ JPanel {
                                 gameDeckUp.revalidate();
                             }
                             else{
+                                gameDeckUp.setIcon(null);
+                                gameDeckUp.setOpaque(true);
                                 gameDeckUp.setBackground(Color.lightGray);
                                 gameDeckUp.revalidate();
                             }
@@ -1523,6 +1561,19 @@ public class Solitaire extends /*JFrame*/ JPanel {
                             System.out.println("gecii");*/
                             gameUpFlag=0;
                             //GAME1.gameDeckUpToWorking(asdf.getIndex());
+                            /*if(GAME1.workingArray[asdf.getIndex()].isEmpty()){
+                                guiCard tmp = new guiCard();
+                                tmp.setIndex(asdf.getIndex());
+                                tmp.setOpaque(true);
+                                tmp.setBackground(Color.lightGray);
+                                tmp.setBounds(0,0,(int)(scale*125),(int)(scale*181));//pozicia v ramci layeredpane
+                                tmp.addMouseListener(new CustomMouseListener());
+                                tmp.revalidate();
+                                workingStacks[asdf.getIndex()].add(tmp,new Integer(1),0);
+                                workingStacks[asdf.getIndex()].repaint();
+                            }*/
+
+
                             for(int k=0;k<GAME1.workingArray[asdf.getIndex()].size();k++){
                                 guiCard tmp2 = new guiCard();
                                 int i = asdf.getIndex();
