@@ -1557,6 +1557,13 @@ public class Solitaire extends  JPanel {
                     board.remove(gridPanel[0][0]);
                     whereIsGame[0][0]=false;
                     Solitaire.games--;
+             		for(int m = 0; m < 2; m++) {
+                    	for(int n = 0; n < 2; n++) {
+                      		if(whereIsGame[m][n]==true){
+   								gridPanel[m][n].revalidate();
+                      		}
+                      	}
+                    }
                     board.getContentPane().repaint();
                 }
 
@@ -1569,6 +1576,13 @@ public class Solitaire extends  JPanel {
                 board.remove(gridPanel[0][1]);
                 whereIsGame[0][1]=false;
                 Solitaire.games--;
+                for(int m = 0; m < 2; m++) {
+                	for(int n = 0; n < 2; n++) {
+                  		if(whereIsGame[m][n]==true){
+								gridPanel[m][n].revalidate();
+                  		}
+                  	}
+                }
                 board.getContentPane().repaint();
             }
             }
@@ -1580,6 +1594,13 @@ public class Solitaire extends  JPanel {
                 board.remove(gridPanel[1][0]);
                 whereIsGame[1][0]=false;
                 Solitaire.games--;
+                for(int m = 0; m < 2; m++) {
+                	for(int n = 0; n < 2; n++) {
+                  		if(whereIsGame[m][n]==true){
+								gridPanel[m][n].revalidate();
+                  		}
+                  	}
+                }
                 board.getContentPane().repaint();
             }
             }
@@ -1591,6 +1612,13 @@ public class Solitaire extends  JPanel {
                 board.remove(gridPanel[1][1]);
                 whereIsGame[1][1]=false;
                 Solitaire.games--;
+                for(int m = 0; m < 2; m++) {
+                	for(int n = 0; n < 2; n++) {
+                  		if(whereIsGame[m][n]==true){
+								gridPanel[m][n].revalidate();
+                  		}
+                  	}
+                }
                 board.getContentPane().repaint();
             }
             }
