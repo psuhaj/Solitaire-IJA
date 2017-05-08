@@ -112,7 +112,13 @@ public class Solitaire extends  JPanel {
 
 		
         gameDeck.setOpaque(true);
-        gameDeck.setBackground(Color.red);
+        
+        if(GAME1.GameDeck.isEmpty()){
+        	gameDeck.setBackground(Color.lightGray);
+        }
+        else{
+        	gameDeck.setBackground(Color.red);
+        }
         if(!GAME1.GameDeckUp.isEmpty()){
              gameDeckUp.setIcon(new ImageIcon(new ImageIcon(GAME1.GameDeckUp.get().getCardImage()).getImage().getScaledInstance((int)(scale*125), (int)(scale*181), Image.SCALE_SMOOTH)));                 
         }
@@ -259,6 +265,7 @@ public class Solitaire extends  JPanel {
                         tmp.addMouseListener(new CustomMouseListener());
                         workingStacks[workingNum].add(tmp,new Integer(1),0);
                         workingStacks[workingNum].repaint();
+                        tmp.revalidate();
                     }
 
                     for(int k=0;k<GAME1.workingArray[workingNum].size();k++){
@@ -359,6 +366,7 @@ public class Solitaire extends  JPanel {
                         tmp.addMouseListener(new CustomMouseListener());
                         workingStacks[workingNum].add(tmp,new Integer(1),0);
                         workingStacks[workingNum].repaint();
+                    	tmp.revalidate();
                     }
 
                     for(int k=0;k<GAME1.workingArray[workingNum].size();k++){
@@ -460,6 +468,7 @@ public class Solitaire extends  JPanel {
                         tmp.addMouseListener(new CustomMouseListener());
                         workingStacks[workingNum].add(tmp,new Integer(1),0);
                         workingStacks[workingNum].repaint();
+                        tmp.revalidate();
                     }
 
                     for(int k=0;k<GAME1.workingArray[workingNum].size();k++){
@@ -560,6 +569,7 @@ public class Solitaire extends  JPanel {
                         tmp.addMouseListener(new CustomMouseListener());
                         workingStacks[workingNum].add(tmp,new Integer(1),0);
                         workingStacks[workingNum].repaint();
+                        tmp.revalidate();
                     }
 
                     for(int k=0;k<GAME1.workingArray[workingNum].size();k++){
@@ -669,6 +679,8 @@ public class Solitaire extends  JPanel {
             tmp.setBackground(Color.lightGray);
             tmp.setBounds(0,0,(int)(scale*125),(int)(scale*181));//pozicia v ramci layeredpane
             workingStacks[i].add(tmp,new Integer(1),0);
+            tmp.addMouseListener(new CustomMouseListener()); 
+            tmp.revalidate();
             //vykreslenie karticiek
             for(int j = 0;j<GAME1.workingArray[i].size();j++){//prejdeme vsetky karty v stacku a vykreslime potrebne
                 guiCard tmp2 = new guiCard();
