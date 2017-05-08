@@ -21,7 +21,6 @@ lib:
 
 zip: dir clean
 	@mkdir $(archiv_name)
-	@ant doc
 	@cp -r -t $(archiv_name) $(folders) $(files)
 	@zip -q -r $(archiv_name).zip $(archiv_name)
 	@rm -rf $(archiv_name)
