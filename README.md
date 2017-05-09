@@ -1,6 +1,7 @@
 # Klondike (Solitaire)
 ## Term project for course Java Programming Language (IJA)
 ### © Peter Šuhaj & Adrián Tóth
+##### Rating: 90/90
 &nbsp;
 How to run:
 ~~~sh
