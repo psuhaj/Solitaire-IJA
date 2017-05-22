@@ -13,4 +13,5 @@ ant run
 
 Cards images: https://github.com/europ/Solitaire
 
-Video about project developement: https://youtu.be/dqVucAeml1M
+Video about project developement
+[![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/dqVucAeml1M/0.jpg)](http://www.youtube.com/watch?v=dqVucAeml1M)
