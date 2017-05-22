@@ -9,7 +9,6 @@ ant dir
 ant compile
 ant run
 ~~~
-(![Image of Solitaire](https://github.com/peter2141/Solitaire-IJA/blob/master/Solitaire.png))
+![Image of Solitaire](https://github.com/peter2141/Solitaire-IJA/blob/master/Solitaire.png)
 ###### [Cards images](https://github.com/europ/Solitaire)
-&nbsp;
 ###### [Video about project developement](https://youtu.be/dqVucAeml1M)
