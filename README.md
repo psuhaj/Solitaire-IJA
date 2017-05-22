@@ -10,8 +10,12 @@ ant compile
 ant run
 ~~~
 ![Image of Solitaire](https://github.com/peter2141/Solitaire-IJA/blob/master/Solitaire.png)
+
 Cards images: https://github.com/europ/Solitaire
+
+
 
 ---
 [![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/dqVucAeml1M/0.jpg)](http://www.youtube.com/watch?v=dqVucAeml1M)
+
 Video about project developement: https://youtu.be/dqVucAeml1M
