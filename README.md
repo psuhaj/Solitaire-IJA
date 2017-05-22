@@ -12,4 +12,5 @@ ant run
 ![Image of Solitaire](https://github.com/peter2141/Solitaire-IJA/blob/master/Solitaire.png)
 
 Cards images: https://github.com/europ/Solitaire
+
 Video about project developement: https://youtu.be/dqVucAeml1M
