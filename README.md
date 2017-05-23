@@ -1,4 +1,4 @@
-# Klondike (Solitaire)
+# [Klondike (Solitaire)](https://goo.gl/Qe3G4B)
 ## Term project for [course](https://www.fit.vutbr.cz/study/courses/index.php.en?id=11446) Java Programming Language (IJA) 2016/2017
 ### © Peter Šuhaj & Adrián Tóth
 ##### Rating: 90/90 points
