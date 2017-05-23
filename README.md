@@ -1,5 +1,5 @@
 # Klondike (Solitaire)
-## Term project for [course](https://www.fit.vutbr.cz/study/courses/index.php?id=11446) Java Programming Language (IJA) 2016/2017
+## Term project for [course](https://www.fit.vutbr.cz/study/courses/index.php.en?id=11446) Java Programming Language (IJA) 2016/2017
 ### © Peter Šuhaj & Adrián Tóth
 ##### Rating: 90/90 points
 &nbsp;
