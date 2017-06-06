@@ -9,7 +9,7 @@ Error() {
 }
 
 if [ -d "$destination/$file1" ]; then
-    cards_count=$(ls -l $destination/$file1 | wc -l)
+    cards_count=$(ls -l $destination/$file1 | grep \.png | wc -l)
     if [ $cards_count -ne 52 ]; then
         rm -rf $destination/$file1
     else
