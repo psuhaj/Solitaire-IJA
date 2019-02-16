@@ -36,6 +36,8 @@ ant run
 <div align="center">
   <a href="http://www.youtube.com/watch?v=dqVucAeml1M">
     <img src="http://img.youtube.com/vi/dqVucAeml1M/0.jpg" alt="video about project development">
+    <br>
+    https://youtu.be/dqVucAeml1M
   </a>
 </div>
 
