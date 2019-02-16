@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+
+<project name="Ant-Test" default="main" basedir=".">
+
+	<property name="src.dir" location="src"/>
+	<property name="build.dir" location="build"/>
+	<property name="test.dir" location="src"/>
+
+	<property name="build.sysclasspath" value="last"/>
+
+	<path id="junit.class.path">
+		<pathelement location="lib/hamcrest-core-1.3.jar"/>
+		<pathelement location="lib/junit-4.12.jar"/>
+		<pathelement location="${build.dir}"/>
+	</path>
+
+	<target name="clean">
+		<delete includeEmptyDirs="true">
+			<fileset dir="${build.dir}">
+				<include name="*/**"/>
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="compile">
+		<javac srcdir="${src.dir}" destdir="${build.dir}">
+			<classpath refid="junit.class.path"/>
+		</javac>
+	</target>
+
+	<target name="run" depends="compile">
+		<junit printsummary="on" fork="true" haltonfailure="yes">
+			<classpath refid="junit.class.path" />
+			<batchtest>
+				<fileset dir="${src.dir}">
+					<include name="**/*Test*.java" />
+				</fileset>
+			</batchtest>
+		</junit>
+	</target>
+
+</project>
