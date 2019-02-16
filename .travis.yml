@@ -1,0 +1,12 @@
+sudo: false
+
+language: java
+jdk: oraclejdk8
+install: ant deps
+
+script:
+  - cd solitaire
+  - ant dir
+  - ant compile
+  - if [ `ls -1 lib/cards | wc -l` -ne 52 ]; then echo "lib/cards does not contain required 52 cards!"; fi
+  - if [ ! -f dest-client/ija-client.jar ]; then echo "dest-client/ija-client.jar not found!"; fi
