@@ -1,5 +1,7 @@
 # [IJA - Java Programming Language](https://www.fit.vutbr.cz/study/courses/index.php.en?id=11446)
 
+[![Build Status](https://travis-ci.org/peter2141/Solitaire-IJA.svg?branch=master)](https://travis-ci.org/peter2141/Solitaire-IJA)
+
 ## © Peter Šuhaj & Adrián Tóth
 
 **Description**:<br>
